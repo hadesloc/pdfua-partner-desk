@@ -64,7 +64,7 @@
         clause: "5",
         severity: "HIGH",
         title: "Missing ISO 14289-1 (PDF/UA-1) XMP Conformance Metadata (pdfuaid:part=1)",
-        wcag: "ISO 14289-1 §5 · PAC 2026 & veraPDF Conformance Gate",
+        wcag: "ISO 14289-1 §5 · Automated PDF/UA-1 Conformance Gate",
         failed_checks: 1,
         impact: "Automated ADA Title II, municipal, and procurement validators reject the PDF as non-certified."
       });
@@ -173,7 +173,7 @@
       filename: filename,
       file_size_bytes: u8.length,
       is_compliant: isCompliant,
-      engine: "Instant In-Browser Structural PDF/UA-1 Inspector (Zero-Upload Local Scan)",
+      engine: "In-Browser Structural PDF/UA-1 Inspector (Zero-Upload Local Scan)",
       failed_rules: failedRules,
       failed_checks: failedChecks,
       elapsed_seconds: 0.05,
@@ -222,7 +222,6 @@
     const statusEl = root.querySelector(".chk-status");
     const errEl = root.querySelector(".chk-error");
     const resEl = root.querySelector(".chk-results");
-    let lastReport = null;
 
     if (!dz || !inp) return;
 
@@ -247,7 +246,7 @@
       errEl.style.display = "none";
       resEl.style.display = "none";
       if (file.size > MAX_BYTES) {
-        errEl.innerHTML = "<strong>File exceeds 20 MB free checker cap.</strong> <a href='" + esc(cfg.formUrl) + "' target='_blank' rel='noopener'>Submit your 50–500 page PDF link for a free offline workstation audit &rarr;</a>";
+        errEl.innerHTML = "<strong>File exceeds 20 MB free checker cap.</strong> <a href='" + esc(cfg.formUrl) + "' target='_blank' rel='noopener'>Submit larger PDFs via our sample intake form &rarr;</a>";
         errEl.style.display = "block";
         return;
       }
@@ -274,10 +273,9 @@
           const buf = await file.arrayBuffer();
           data = localInspectPdfBuffer(buf, file.name || "document.pdf", cfg);
         }
-        lastReport = data;
         renderData(data);
       } catch (err) {
-        errEl.textContent = "Validation Error: " + (err && err.message ? err.message : String(err));
+        errEl.textContent = "Validation error: " + (err && err.message ? err.message : String(err));
         errEl.style.display = "block";
       } finally {
         statusEl.style.display = "none";
@@ -292,26 +290,26 @@
         : ((q.fixed_package_usd <= 195 && cfg.checkout195) ? cfg.checkout195 : ((d.cta && d.cta.upwork_catalog_url) || cfg.upworkUrl));
 
       const checks = [
-        [st.is_tagged, "Tagged Structure (/StructTreeRoot)"],
+        [st.is_tagged, "Tagged structure (/StructTreeRoot)"],
         [st.has_pdfua_id, "PDF/UA-1 XMP ID (pdfuaid:part=1)"],
-        [Boolean(st.language), "Natural Language (" + (st.language || "Missing") + ")"],
-        [st.has_title && st.display_doc_title, "Document Title & DisplayDocTitle"],
-        [(st.figures_missing_alt || 0) === 0, "Figures Alt-Text (" + (st.figures_missing_alt || 0) + " missing /Alt)"],
-        [(st.form_fields_missing_tu || 0) === 0, "Form Tooltips (" + (st.form_fields_total || 0) + " fields, " + (st.form_fields_missing_tu || 0) + " missing /TU)"],
-        [!st.likely_scanned_ocr, st.likely_scanned_ocr ? "Scanned Image PDF (Needs OCR)" : "Searchable Text Layer Present"],
-        [!st.is_cryptographically_signed, st.is_cryptographically_signed ? "Signature Lock Detected" : "Lossless Remediation Ready"]
+        [Boolean(st.language), "Natural language (" + (st.language || "Missing") + ")"],
+        [st.has_title && st.display_doc_title, "Document title & DisplayDocTitle"],
+        [(st.figures_missing_alt || 0) === 0, "Figures alt text (" + (st.figures_missing_alt || 0) + " missing /Alt)"],
+        [(st.form_fields_missing_tu || 0) === 0, "Form tooltips (" + (st.form_fields_total || 0) + " fields, " + (st.form_fields_missing_tu || 0) + " missing /TU)"],
+        [!st.likely_scanned_ocr, st.likely_scanned_ocr ? "Scanned image PDF (needs OCR)" : "Searchable text layer present"],
+        [!st.is_cryptographically_signed, st.is_cryptographically_signed ? "Signature lock detected" : "Lossless remediation ready"]
       ];
 
       const issuesHtml = (!d.findings || d.findings.length === 0)
-        ? "<div class='chk-issue' style='border-color:rgba(34,197,94,0.5);'><strong style='color:#86efac;'>✅ 0 Automated Structural Rule Failures Detected</strong><p style='margin:6px 0 0; color:#cbd5e1;'>Verify semantic alt-text accuracy and reading order in PAC 2026 &amp; NVDA prior to formal legal publication.</p></div>"
+        ? "<div class='chk-issue' style='border-left-color:var(--pass-ink);'><strong style='color:var(--pass-ink);'>0 automated structural rule failures detected</strong><p style='margin-top:4px; font-size:0.875rem;'>Verify semantic alt-text accuracy and screen-reader reading order in NVDA prior to publication.</p></div>"
         : d.findings.map((f) =>
             "<div class='chk-issue'>" +
               "<div style='display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center;'>" +
-                "<strong>Clause " + esc(f.clause) + " — " + esc(f.title) + "</strong>" +
-                "<span class='pill " + (f.severity === "CRITICAL" ? "pill-warn" : "pill-brand") + "'>" + esc(f.severity) + " · " + Number(f.failed_checks || 1).toLocaleString("en-US") + " checks</span>" +
+                "<strong style='color:var(--text); font-size:0.9375rem;'>Clause " + esc(f.clause) + " — " + esc(f.title) + "</strong>" +
+                "<span class='status-pill " + (f.severity === "CRITICAL" ? "status-fail" : "status-neutral") + "'>" + esc(f.severity) + " &middot; " + Number(f.failed_checks || 1).toLocaleString("en-US") + " checks</span>" +
               "</div>" +
-              "<div class='mono' style='color:#7dd3fc; margin-top:4px;'>" + esc(f.wcag) + "</div>" +
-              "<p style='margin:6px 0 0; color:#cbd5e1; font-size:0.92rem;'><strong>ADA / Screen-Reader Impact:</strong> " + esc(f.impact) + "</p>" +
+              "<div class='mono' style='color:var(--accent-ink); margin-top:4px; font-size:0.8125rem;'>" + esc(f.wcag) + "</div>" +
+              "<p style='margin-top:6px; font-size:0.875rem;'><strong>Screen-reader impact:</strong> " + esc(f.impact) + "</p>" +
             "</div>"
           ).join("");
 
@@ -319,33 +317,30 @@
         "<div class='card' style='margin-top:20px;'>" +
           "<div style='display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center;'>" +
             "<div>" +
-              "<span class='pill " + (d.is_compliant ? "pill-ok" : "pill-warn") + "'>" + (d.is_compliant ? "PASS · PDF/UA-1 READY" : "NON-COMPLIANT · ACTION REQUIRED") + "</span>" +
-              "<h3 style='margin:8px 0 2px;'>" + esc(d.filename) + " (" + q.pages + (q.pages === 1 ? " page" : " pages") + ")</h3>" +
-              "<div class='mono' style='color:var(--muted);'>" + esc(d.engine) + "</div>" +
+              "<span class='status-pill " + (d.is_compliant ? "status-pass" : "status-fail") + "'>" + (d.is_compliant ? "Pass · PDF/UA-1" : "Non-compliant · " + d.failed_rules + " failed rules") + "</span>" +
+              "<h3 style='margin-top:8px;'>" + esc(d.filename) + " (" + q.pages + (q.pages === 1 ? " page" : " pages") + ")</h3>" +
+              "<div class='mono' style='color:var(--text-muted); font-size:0.75rem; margin-top:2px;'>" + esc(d.engine) + "</div>" +
             "</div>" +
-            "<button type='button' class='btn btn-secondary chk-dl-btn'>Download HTML Audit Report &darr;</button>" +
+            "<button type='button' class='btn btn-secondary btn-sm chk-dl-btn'>Download HTML report</button>" +
           "</div>" +
-          "<div class='kpi-grid' style='margin:16px 0;'>" +
-            "<div class='card' style='padding:16px; background:var(--bg-soft);'><div class='kpi-lbl'>Failed Rules</div><div class='kpi-val' style='color:" + (d.is_compliant ? "var(--ok)" : "var(--danger)") + ";'>" + d.failed_rules + "</div><div class='kpi-sub'>" + Number(d.failed_checks || 0).toLocaleString("en-US") + " failed checks</div></div>" +
-            "<div class='card' style='padding:16px; background:var(--bg-soft);'><div class='kpi-lbl'>Complexity Tier</div><div class='kpi-val brand' style='font-size:1.2rem;'>" + esc(q.tier_label) + "</div><div class='kpi-sub'>" + q.pages + " total pages</div></div>" +
-            "<div class='card' style='padding:16px; background:var(--bg-soft);'><div class='kpi-lbl'>Direct Turnkey Fix</div><div class='kpi-val'>" + fmt(q.fixed_package_usd) + "</div><div class='kpi-sub'>100% Green veraPDF + PAC 2026 + NVDA</div></div>" +
-            "<div class='card' style='padding:16px; background:var(--bg-soft);'><div class='kpi-lbl'>Agency Wholesale</div><div class='kpi-val brand'>" + fmt(q.wholesale_total_usd) + "</div><div class='kpi-sub'>US Retail Value: " + fmt(q.retail_total_usd) + "</div></div>" +
+          "<div class='kpi-grid'>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Failed rules</div><div class='kpi-val " + (d.is_compliant ? "pass" : "fail") + "'>" + d.failed_rules + "</div><div class='kpi-sub'>" + Number(d.failed_checks || 0).toLocaleString("en-US") + " failed checks</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Document tier</div><div class='kpi-val' style='font-size:1.05rem;'>" + esc(q.tier_label) + "</div><div class='kpi-sub'>" + q.pages + " total pages</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Turnkey package</div><div class='kpi-val accent'>" + fmt(q.fixed_package_usd) + "</div><div class='kpi-sub'>veraPDF 1.30.3 + NVDA QA</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Agency wholesale</div><div class='kpi-val'>" + fmt(q.wholesale_total_usd) + "</div><div class='kpi-sub'>Typical US retail: " + fmt(q.retail_total_usd) + "</div></div>" +
           "</div>" +
-          "<div class='chk-grid'>" + checks.map(([ok, lbl]) => "<div class='chk-badge'>" + (ok ? "✅ " : "❌ ") + esc(lbl) + "</div>").join("") + "</div>" +
-          "<div class='quote-box' style='margin-top:20px;'>" +
-            "<div>" +
-              "<span class='pill pill-ok'>100% Pixel-Identical Layout Guaranteed</span>" +
-              "<h3 style='margin:10px 0 6px;'>Fix '" + esc(d.filename) + "' (" + q.pages + "p) for " + fmt(q.fixed_package_usd) + " Direct — or " + fmt(q.wholesale_total_usd) + " Agency Wholesale</h3>" +
-              "<p style='margin:0 0 16px; color:#cbd5e1;'>Delivered with 0 failed ISO 14289-1 rules in veraPDF 1.30, PAC 2026 report, and human NVDA screen-reader walkthrough. First 3–10 page sample proof is FREE in 24 hours.</p>" +
+          "<div class='chk-grid'>" + checks.map(([ok, lbl]) => "<div class='chk-badge'><strong style='color:" + (ok ? "var(--pass-ink)" : "var(--fail-ink)") + ";'>" + (ok ? "Pass:" : "Issue:") + "</strong> " + esc(lbl) + "</div>").join("") + "</div>" +
+          "<div class='callout-panel' style='margin-top:16px;'>" +
+            "<h4 style='font-size:1.0625rem; margin-bottom:6px;'>Remediate '" + esc(d.filename) + "' (" + q.pages + "p) — " + fmt(q.fixed_package_usd) + " turnkey or " + fmt(q.wholesale_total_usd) + " wholesale</h4>" +
+            "<p style='font-size:0.875rem; margin-bottom:14px;'>Delivered with pixel-identical visual layout, 0 failed ISO 14289-1 rules in veraPDF 1.30.3, NVDA reading-order QA, and SHA-256 manifest. Complimentary 24h sample available.</p>" +
+            "<div class='cta-group'>" +
+              "<a class='btn btn-primary' href='" + esc(checkoutHref) + "' target='_blank' rel='noopener'>Order remediation (" + fmt(q.fixed_package_usd) + ")</a>" +
+              "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.google_form_url) || cfg.formUrl) + "' target='_blank' rel='noopener'>Request free 24h sample</a>" +
+              "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.mailto_url) || ("mailto:" + cfg.email)) + "'>Email quote breakdown</a>" +
             "</div>" +
-            "<div class='cta-row'>" +
-              "<a class='btn btn-primary' href='" + esc(checkoutHref) + "' target='_blank' rel='noopener'>Order Turnkey Fix (" + fmt(q.fixed_package_usd) + ") &rarr;</a>" +
-              "<a class='btn btn-brand' href='" + esc((d.cta && d.cta.google_form_url) || cfg.formUrl) + "' target='_blank' rel='noopener'>Request Free 24h Sample Fix</a>" +
-              "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.mailto_url) || ("mailto:" + cfg.email)) + "'>Email Exact Quote Breakdown</a>" +
-            "</div>" +
-            (checkoutHref && checkoutHref.indexOf("gumroad.com") !== -1 ? "<div class='mor-note' style='text-align:left; margin-top:10px;'>🔒 Secure checkout by Gumroad</div>" : "") +
+            (checkoutHref && checkoutHref.indexOf("gumroad.com") !== -1 ? "<div class='checkout-caption' style='text-align:left; margin-top:8px;'>Secure checkout by Gumroad</div>" : "") +
           "</div>" +
-          "<h4 style='margin:22px 0 8px;'>Plain-English ADA Title II / Section 508 Diagnostic Findings</h4>" +
+          "<h4 style='margin:20px 0 8px; font-size:0.9375rem;'>Diagnostic clause findings</h4>" +
           issuesHtml +
         "</div>";
 

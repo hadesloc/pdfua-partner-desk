@@ -10,52 +10,58 @@
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<header class="topbar">
-  <div class="container topbar-inner">
+<header class="site-header">
+  <div class="container header-inner">
     <a class="brand" href="../">
-      <span class="brand-dot" aria-hidden="true"></span>
+      <span class="brand-mark" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.5H4a1.5 1.5 0 0 0-1.5 1.5v10A1.5 1.5 0 0 0 4 14.5h8a1.5 1.5 0 0 0 1.5-1.5V6L9 1.5z"/><path d="M5.5 9.5l1.8 1.8 3.4-3.6"/></svg></span>
       <span>PDF/UA Partner Desk</span>
     </a>
     <nav class="nav-links" aria-label="Primary navigation">
-      <a href="../#free-checker">Free Checker</a>
-      <a href="../#pricing">Pricing</a>
-      <a href="../terms/">Terms &amp; Refunds</a>
-      <a href="mailto:halocrypto101@gmail.com" class="btn btn-primary">Contact Desk</a>
+      <a href="../#free-checker" class="nav-hide-mobile">Free checker</a>
+      <a href="../#pricing" class="nav-hide-xs">Pricing</a>
+      <a href="../terms/" class="nav-hide-mobile">Terms &amp; SLA</a>
+      <a href="mailto:halocrypto101@gmail.com" class="btn btn-primary btn-sm">Contact desk</a>
     </nav>
   </div>
 </header>
 
-<main id="main-content" tabindex="-1" class="container legal-doc" style="padding-top:44px; padding-bottom:36px; max-width:900px;">
-  <span class="pill pill-ok">Last Updated: November 2026</span>
-  <h1 style="margin:14px 0 12px;">Privacy &amp; Document Data Handling Policy</h1>
-  <p><strong>PDF/UA Partner Desk</strong> (operated by <strong>Loc Nguyen</strong>, independent document accessibility specialist based in Vietnam; contact: <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a>) is built around minimal data collection and strict document confidentiality.</p>
+<main id="main-content" tabindex="-1">
+  <section class="page-hero">
+    <div class="container" style="max-width:820px;">
+      <span class="eyebrow">Last updated: November 2026</span>
+      <h1>Privacy &amp; Document Data Handling Policy</h1>
+      <p class="hero-lead"><strong>PDF/UA Partner Desk</strong> (operated by <strong>Loc Nguyen</strong>, independent document accessibility specialist based in Vietnam; contact: <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a>) is built around minimal data collection and strict document confidentiality.</p>
+    </div>
+  </section>
 
-  <h2>1. Free Self-Serve PDF/UA Checker (Zero File Retention)</h2>
-  <ul>
-    <li><strong>Ephemeral Validation Only:</strong> When you upload a PDF (up to 20 MB) to our free online <code>veraPDF 1.30.3</code> checker, the file is written to an isolated temporary directory solely for the duration of the check (typically 1–5 seconds) and deleted immediately inside a <code>finally</code> cleanup block before the HTTP response completes (<code>files_retained: 0</code>).</li>
-    <li><strong>In-Browser Fallback Mode:</strong> When our client-side binary inspector runs directly in your browser, your PDF bytes never leave your device.</li>
-    <li><strong>No Model Training:</strong> Uploaded documents are never stored in permanent cloud buckets, sold, shared, or used to train machine-learning models.</li>
-  </ul>
+  <div class="container legal-doc">
+    <h2>1. Free Self-Serve PDF/UA Checker (Zero File Retention)</h2>
+    <ul>
+      <li><strong>Ephemeral Validation Only:</strong> When you upload a PDF (up to 20 MB) to our free online <code>veraPDF 1.30.3</code> checker, the file is written to an isolated temporary directory solely for the duration of the check (typically 1–5 seconds) and deleted immediately inside a <code>finally</code> cleanup block before the HTTP response completes (<code>files_retained: 0</code>).</li>
+      <li><strong>In-Browser Fallback Mode:</strong> When our client-side binary inspector runs directly in your browser, your PDF bytes never leave your device.</li>
+      <li><strong>No Model Training:</strong> Uploaded documents are never stored in permanent cloud buckets, sold, shared, or used to train machine-learning models.</li>
+    </ul>
 
-  <h2>2. Remediation Projects &amp; Sample Submissions</h2>
-  <ul>
-    <li><strong>Local Workstation Processing:</strong> Paid remediation batches and complimentary proof samples are processed on an access-controlled Windows workstation using local accessibility engineering tools (<code>pikepdf</code>, <code>veraPDF 1.30.3</code>, <code>PAC 2026</code>, <code>NVDA</code>, and offline <code>RapidOCR ONNX</code>).</li>
-    <li><strong>Retention &amp; Deletion Window:</strong> Project working files and QA bundles are retained for <strong>30 days</strong> after delivery solely to support our 14-day free redo guarantee, or purged immediately upon written request to <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a>.</li>
-    <li><strong>White-Label NDA Support:</strong> We sign mutual Non-Disclosure Agreements (NDAs) for agency white-label partners and never contact an agency's end client without explicit authorization.</li>
-  </ul>
+    <h2>2. Remediation Projects &amp; Sample Submissions</h2>
+    <ul>
+      <li><strong>Local Workstation Processing:</strong> Paid remediation batches and complimentary proof samples are processed on an access-controlled Windows workstation using local accessibility engineering tools (<code>pikepdf</code>, <code>veraPDF 1.30.3</code>, <code>NVDA</code>, and offline <code>RapidOCR ONNX</code>).</li>
+      <li><strong>Retention &amp; Deletion Window:</strong> Project working files and QA bundles are retained for <strong>30 days</strong> after delivery solely to support our 14-day free redo guarantee, or purged immediately upon written request to <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a>.</li>
+      <li><strong>White-Label NDA Support:</strong> We sign mutual Non-Disclosure Agreements (NDAs) for agency white-label partners and never contact an agency's end client without explicit authorization.</li>
+    </ul>
 
-  <h2>3. Billing, Analytics &amp; Contact Information</h2>
-  <ul>
-    <li><strong>Merchant-of-Record Checkout:</strong> Card and online payments are processed directly by PCI-compliant checkout or escrow platforms (such as Gumroad or Upwork). PDF/UA Partner Desk never sees or stores raw payment card numbers.</li>
-    <li><strong>No Invasive Tracking Cookies:</strong> Our static storefront on GitHub Pages uses zero third-party advertising trackers or behavioral profiling pixels.</li>
-    <li><strong>Contact &amp; Data Requests:</strong> If you email us or submit our Google Form (<a href="https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform" target="_blank" rel="noopener">Sample Intake Form</a>), we use your name, organization, and email address exclusively to deliver your audit/quote and fulfill your order. Email <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a> anytime to request complete deletion of correspondence or project files.</li>
-  </ul>
+    <h2>3. Billing, Analytics &amp; Contact Information</h2>
+    <ul>
+      <li><strong>Merchant-of-Record Checkout:</strong> Card and online payments are processed directly by PCI-compliant checkout or escrow platforms (such as Gumroad or Upwork). PDF/UA Partner Desk never sees or stores raw payment card numbers.</li>
+      <li><strong>No Invasive Tracking Cookies:</strong> Our static storefront uses zero third-party advertising trackers, external font beacons, or behavioral profiling pixels.</li>
+      <li><strong>Contact &amp; Data Requests:</strong> If you email us or submit our <a href="https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform" target="_blank" rel="noopener">Sample Intake Form</a>, we use your name, organization, and email address exclusively to deliver your audit/quote and fulfill your order. Email <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a> anytime to request complete deletion of correspondence or project files.</li>
+    </ul>
+  </div>
 </main>
 
-<footer>
-  <div class="container">
-    <p><strong>PDF/UA Partner Desk</strong> &middot; Operated by Loc Nguyen (Vietnam) &middot; <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a></p>
-    <p><a href="../">Storefront Home</a> &middot; <a href="../terms/">Terms, Turnaround SLA &amp; Refund Policy</a> &middot; <a href="../pdf-ua-checker-free/">Free PDF/UA Checker</a></p>
+<footer class="site-footer">
+  <div class="container footer-bottom" style="border-top:0; padding-top:0;">
+    <span><strong>PDF/UA Partner Desk</strong> &middot; Loc Nguyen (Vietnam) &middot; <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a></span>
+    <span><a href="../">Home</a> &middot; <a href="../terms/">Terms &amp; SLA</a> &middot; <a href="../pdf-ua-checker-free/">Free Checker</a></span>
   </div>
 </footer>
 </body>
