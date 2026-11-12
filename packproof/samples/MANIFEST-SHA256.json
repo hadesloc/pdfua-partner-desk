@@ -1,0 +1,39 @@
+{
+  "schema": "packproof.annex7_manifest.v1",
+  "package_id": "PPWR-A7-DEMO-POUCH-250G-V1",
+  "generated_at": "2026-11-12T03:35:45Z",
+  "regulation": "Regulation (EU) 2025/40 (PPWR) — Annex VII & Annex VIII",
+  "is_draft": false,
+  "unit_code": "DEMO-POUCH-250G",
+  "declaration_number": "PPWR-DOC-DEMO-POUCH-250G-V1",
+  "retention_years": 5,
+  "market_surveillance_sla_days": 10,
+  "bundle_tree_sha256": "91fa9ae60c725345b85b354469ab9c5b7023da40381c0ebc99c3f1d876c51430",
+  "files": [
+    {
+      "archive_path": "01-EU-Declaration-of-Conformity-Annex-VIII.pdf",
+      "role": "annex_viii_eu_declaration_of_conformity_pdf",
+      "size_bytes": 200568,
+      "sha256": "60538fcad290274c7b2fd6917089a506c061812784576f6bb82df72769544b21"
+    },
+    {
+      "archive_path": "02-Technical-Documentation-Index-Annex-VII.pdf",
+      "role": "annex_vii_technical_documentation_index_pdf",
+      "size_bytes": 203782,
+      "sha256": "54a60dd035ccf31b25f0bea03d22c1ca98db9085567827b676ca77e652e9f29e"
+    },
+    {
+      "archive_path": "03-BOM-Snapshot.json",
+      "role": "bom_snapshot_json",
+      "size_bytes": 2930,
+      "sha256": "62e48227699425f3b152d28ff0ffa82150b70eeaffc0caea44e9d096f9025f6d"
+    },
+    {
+      "archive_path": "04-Verified-Evidence-Summary.json",
+      "role": "verified_evidence_summary_json",
+      "size_bytes": 1993,
+      "sha256": "f8a92e1c9f5f84138230863bc9231ddc1dc93a07b1fde0d71b7b0fa6d1c1e19d"
+    }
+  ],
+  "disclaimer": "Compliance engineering assistance tool output — not legal advice. Issued under the sole responsibility of the named economic operator; verify current applicability dates, delegated acts, and national enforcement rules against Official Journal Regulation (EU) 2025/40 (ELI: http://data.europa.eu/eli/reg/2025/40/oj)."
+}
