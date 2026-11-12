@@ -359,7 +359,7 @@
             "<style>body{font-family:sans-serif;max-width:920px;margin:32px auto;padding:0 20px;color:#0f172a;line-height:1.5}table{width:100%;border-collapse:collapse;margin:18px 0}th,td{border:1px solid #cbd5e1;padding:10px;text-align:left;vertical-align:top}th{background:#f1f5f9}</style></head><body>" +
             "<h1>ADA Title II &amp; ISO 14289-1 (PDF/UA-1) Diagnostic Report</h1>" +
             "<p><strong>Document:</strong> " + esc(d.filename) + " (" + q.pages + " pages) &middot; <strong>Quote:</strong> " + fmt(q.wholesale_total_usd) + " Agency Wholesale / " + fmt(q.fixed_package_usd) + " Direct</p>" +
-            "<table><thead><tr><th>Clause</th><th>Issue &amp; WCAG Criterion</th><th>User Impact</th></tr></thead><tbody>" + rows + "</tbody></table>" +
+            "<table><thead><tr><th scope='col'>Clause</th><th scope='col'>Issue &amp; WCAG Criterion</th><th scope='col'>User Impact</th></tr></thead><tbody>" + rows + "</tbody></table>" +
             "<p><strong>Remediation Desk:</strong> Loc Nguyen — PDF/UA Partner Desk (" + esc(cfg.email) + ")</p></body></html>";
           const blob = new Blob([docHtml], { type: "text/html;charset=utf-8" });
           const a = document.createElement("a");

@@ -10,6 +10,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Free Section 508 PDF Checker — WCAG 2.1 AA, Fillable AcroForms, Tables & Scanned OCR", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://hadesloc.github.io/pdfua-partner-desk/section-508-pdf-checker/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does your checker detect fillable AcroForm and scanned OCR barriers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The checker inspects /AcroForm field dictionaries for missing /TU tooltips, checks /Tabs /S keyboard focus binding, and flags image-only scanned PDFs that lack searchable text operators."}}, {"@type": "Question", "name": "Can you remediate cryptographically signed government PDFs?", "acceptedAnswer": {"@type": "Answer", "text": "Modifying the tag tree of a cryptographically signed PDF invalidates its byte-range signature hash. We either remediate your unsigned source PDF prior to final signing or strip an obsolete signature lock upon client authorization so your team can re-sign the compliant PDF/UA file."}}, {"@type": "Question", "name": "How fast can we test a sample file?", "acceptedAnswer": {"@type": "Answer", "text": "Submit any 3–10 page non-confidential PDF via our intake form or email halocrypto101@gmail.com for a complimentary 24-hour remediated proof sample with 0 failed veraPDF rules."}}]}]}</script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div class="urgency-bar">
   <div class="container urgency-inner">
     <span class="pill pill-warn">DOJ 28 CFR Part 35 Active</span>
@@ -20,10 +21,10 @@
 <header class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="../">
-      <span class="brand-dot"></span>
+      <span class="brand-dot" aria-hidden="true"></span>
       <span>PDF/UA Partner Desk</span>
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Primary navigation">
       <a href="../pdf-ua-checker-free/">PDF/UA Checker</a>
       <a href="../ada-title-ii-april-2026-pdf-deadline/">ADA Title II Guide</a>
       <a href="../section-508-pdf-checker/">Section 508 Checker</a>
@@ -33,27 +34,27 @@
   </div>
 </header>
 
-<main class="container" style="padding-top:44px; padding-bottom:36px;">
+<main id="main-content" tabindex="-1" class="container" style="padding-top:44px; padding-bottom:36px;">
   <span class="pill pill-brand">Revised Section 508 (36 CFR Part 1194) &amp; Section 504</span>
   <h1 style="font-size:clamp(1.9rem,3.6vw,2.85rem); line-height:1.16; margin:14px 0 14px;">Free Online <span>Section 508 &amp; AcroForm</span> PDF Accessibility Checker</h1>
-  <p style="color:#cbd5e1; max-width:820px; font-size:1.06rem; margin:0 0 28px;">Instantly check federal, higher-education (Section 504), healthcare, and contractor PDFs for Revised Section 508 structural tags, fillable form /TU tooltips, table header scopes, and searchable text layers.</p>
+  <p style="color:#e2e8f0; max-width:820px; font-size:1.06rem; margin:0 0 28px;">Instantly check federal, higher-education (Section 504), healthcare, and contractor PDFs for Revised Section 508 structural tags, fillable form /TU tooltips, table header scopes, and searchable text layers.</p>
 
   <div data-pdfua-checker
      data-checker-api="https://pdfua-ada-checker.onrender.com"
      data-form-url="https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform"
      data-upwork-url="https://www.upwork.com/services/product/2120536307204819908"
-     data-checkout65-url="https://www.creem.io/payment/prod_1ro2PKpF1QJQFmoZytUQR1"
-     data-checkout195-url="https://www.creem.io/payment/prod_6Ox9BnrneJMxVIXRXipyAD"
+     data-checkout65-url="https://buy.polar.sh/polar_cl_C3deLclnq4kNrRs9ZZ3IGrSpa9iUNW2VSdSCJ3ac4RF"
+     data-checkout195-url="https://buy.polar.sh/polar_cl_lLK2oTyroQXetdd9LuiAsJ5l6wWxegeyYg6904Ioayg"
      data-email="halocrypto101@gmail.com">
   <div class="section-head">
     <span class="pill pill-ok">100% Free Self-Serve Validator &middot; Zero File Retention</span>
     <h2>Upload a Form, Report, or Scanned PDF for a Free Section 508 Check</h2>
     <p>Drop any PDF (up to 20 MB) for an instant pass/fail diagnostic in plain English plus an exact turnkey or white-label wholesale remediation quote.</p>
   </div>
-  <div class="chk-dropzone" tabindex="0" role="button" aria-label="Upload PDF file up to 20 megabytes">
-    <input type="file" class="chk-file-input" accept="application/pdf,.pdf" style="display:none">
-    <div style="font-size:2rem; margin-bottom:6px;">📄</div>
-    <h3 style="margin:4px 0 6px; font-size:1.25rem;">Drop your PDF here or click to run instant accessibility check</h3>
+  <input type="file" class="chk-file-input" accept="application/pdf,.pdf" aria-label="Select PDF file up to 20 megabytes" tabindex="-1" style="display:none">
+  <div class="chk-dropzone" tabindex="0" role="button" aria-label="Upload PDF file up to 20 megabytes for instant accessibility validation">
+    <div style="font-size:2rem; margin-bottom:6px;" aria-hidden="true">📄</div>
+    <div style="margin:4px 0 6px; font-size:1.25rem; font-weight:700; color:var(--ink);">Drop your PDF here or click to run instant accessibility check</div>
     <p style="margin:0 0 16px; color:var(--muted); font-size:0.92rem;">Checks Tags (/StructTreeRoot), PDF/UA-1 XMP ID, Title, Language, Alt-Text, Table Headers, AcroForm /TU Tooltips &amp; Scanned OCR</p>
     <span class="btn btn-brand">Select PDF File (Max 20 MB)</span>
     <div class="chk-privacy">
@@ -63,14 +64,14 @@
     </div>
   </div>
   <a class="btn btn-secondary" href="https://pdfua-ada-checker.onrender.com" target="_blank" rel="noopener" style="margin-top:12px;">Open Full Cloud veraPDF 1.30 Engine &nearr;</a>
-  <div class="chk-status" style="display:none; margin-top:16px; text-align:center; font-weight:700; color:#7dd3fc;">⏳ Inspecting PDF/UA-1 structure, tags, metadata, forms &amp; fonts...</div>
-  <div class="chk-error" style="display:none; margin-top:16px; padding:14px 18px; border-radius:12px; background:rgba(248,113,113,0.16); border:1px solid var(--danger); color:#fecaca;"></div>
+  <div class="chk-status" role="status" aria-live="polite" style="display:none; margin-top:16px; text-align:center; font-weight:700; color:#7dd3fc;">⏳ Inspecting PDF/UA-1 structure, tags, metadata, forms &amp; fonts...</div>
+  <div class="chk-error" role="alert" style="display:none; margin-top:16px; padding:14px 18px; border-radius:12px; background:rgba(248,113,113,0.16); border:1px solid var(--danger); color:#fecaca;"></div>
   <div class="chk-results" style="display:none;"></div>
 </div>
 
   
       <div class="card" style="margin-top:24px;">
-        <h3>Why Fillable PDF Forms &amp; Complex Financial Tables Fail Section 508 QA</h3>
+        <h2 style="font-size:1.35rem; margin:0 0 12px;">Why Fillable PDF Forms &amp; Complex Financial Tables Fail Section 508 QA</h2>
         <ul class="check-list">
           <li><strong>Untagged Widget Annotations:</strong> Interactive text boxes, checkboxes, and radio buttons lack <code>&lt;Form&gt;</code> structure parents and <code>/OBJR</code> object references.</li>
           <li><strong>Missing <code>/TU</code> Spoken Tooltips:</strong> Visual labels sit next to boxes on screen, but screen readers announce blank fields without explicit <code>/TU</code> descriptions.</li>
@@ -94,8 +95,8 @@
   <div class="quote-box" style="margin-top:24px;">
     <div>
       <span class="pill pill-ok">Zero-Risk Proof Pilot</span>
-      <h3 style="margin:10px 0 6px;">Have a Failing PDF Backlog? Test a Free 24-Hour Sample Remediation</h3>
-      <p style="margin:0 0 16px; color:#cbd5e1;">Send one 3–10 page PDF or public domain URL. We return a bit-identical ISO 14289-1 (PDF/UA-1) remediated file with 0 failed veraPDF rules plus an itemized wholesale quote.</p>
+      <h2 style="margin:10px 0 6px; font-size:1.35rem;">Have a Failing PDF Backlog? Test a Free 24-Hour Sample Remediation</h2>
+      <p style="margin:0 0 16px; color:#e2e8f0;">Send one 3–10 page PDF or public domain URL. We return a bit-identical ISO 14289-1 (PDF/UA-1) remediated file with 0 failed veraPDF rules plus an itemized wholesale quote.</p>
     </div>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform" target="_blank" rel="noopener">Request Free 24h Sample PDF &rarr;</a>
@@ -110,9 +111,12 @@
     <p><strong>Loc Nguyen — PDF/UA Partner Desk</strong> &middot; Direct Engineering Desk: <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a></p>
     <p style="margin:10px 0;">
       <a href="../">Partner Storefront</a> &middot;
+      <a href="../#about">About Loc Nguyen</a> &middot;
       <a href="../pdf-ua-checker-free/">Free PDF/UA-1 Checker</a> &middot;
       <a href="../ada-title-ii-april-2026-pdf-deadline/">ADA Title II April 2026 Deadline</a> &middot;
-      <a href="../section-508-pdf-checker/">Section 508 PDF Checker</a>
+      <a href="../section-508-pdf-checker/">Section 508 PDF Checker</a> &middot;
+      <a href="../privacy/">Privacy Policy</a> &middot;
+      <a href="../terms/">Terms &amp; Refund Policy</a>
     </p>
     <p>Technical Assistance &amp; Scope Notice: Automated validation checks technical conformance criteria and is provided as an engineering assistance tool, not legal counsel.</p>
   </div>

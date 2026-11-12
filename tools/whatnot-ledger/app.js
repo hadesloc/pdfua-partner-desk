@@ -11,7 +11,7 @@
     columnMap: {},
     analysis: null,
     checkoutConfig: {
-      whatnotCatchup99Url: "https://www.creem.io/payment/prod_UCZtevirTbptRRKowCWTy",
+      whatnotCatchup99Url: "https://buy.polar.sh/polar_cl_mUL2IDaGUfRafdHjUIV7XE3URTKUKdJV7KtmX0KXPIc",
       whatnotSellerPro45Url: "",
       whatnotCpa129Url: "",
       fallbackFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform",
@@ -473,7 +473,7 @@
       downloadBlob("clearstream-qbo-preview-batch1.csv", csv, "text/csv;charset=utf-8");
     });
 
-    // Gated full exports -> Polar/Creem checkout drawer
+    // Gated full exports -> Polar.sh checkout drawer
     [
       "btn-full-xero",
       "btn-full-qbo",
