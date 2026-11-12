@@ -226,6 +226,10 @@
 
     if (!dz || !inp) return;
 
+    if (cfg.apiUrl) {
+      fetch(cfg.apiUrl.replace(/\/+$/, "") + "/api/health", { mode: "cors", cache: "no-store" }).catch(() => {});
+    }
+
     dz.addEventListener("click", () => inp.click());
     dz.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); inp.click(); } });
     dz.addEventListener("dragover", (e) => { e.preventDefault(); dz.classList.add("dragover"); });
@@ -253,7 +257,7 @@
         if (cfg.apiUrl) {
           try {
             const ctrl = new AbortController();
-            const timer = setTimeout(() => ctrl.abort(), 32000);
+            const timer = setTimeout(() => ctrl.abort(), 55000);
             const resp = await fetch(cfg.apiUrl.replace(/\/+$/, "") + "/api/check", {
               method: "POST",
               headers: { "Content-Type": "application/pdf", "X-Filename": encodeURIComponent(file.name || "document.pdf") },
