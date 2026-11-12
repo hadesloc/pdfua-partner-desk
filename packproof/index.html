@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="disclaimer-banner">
     <div class="container disclaimer-inner">
       <span><strong>Regulatory Scope Notice:</strong> PackProof EU is a compliance engineering &amp; document-structuring assistance tool — <strong>not legal, regulatory, or customs advice</strong>. Always verify current obligations against official EUR-Lex texts.</span>
@@ -18,7 +19,7 @@
   <header class="topbar">
     <div class="container topbar-inner">
       <div class="brand">
-        <span class="brand-dot"></span>
+        <span class="brand-dot" aria-hidden="true"></span>
         <span>PackProof EU <small>PPWR Reg. (EU) 2025/40</small></span>
       </div>
       <nav class="nav-links" aria-label="Primary navigation">
@@ -31,7 +32,7 @@
     </div>
   </header>
 
-  <main class="container">
+  <main id="main-content" tabindex="-1" class="container">
     <section class="hero">
       <div class="hero-grid">
         <div>
@@ -52,7 +53,7 @@
 
         <div class="card card-alt">
           <span class="pill pill-warn">Why €29 Form Generators Leave Importers Exposed</span>
-          <h3>Signing Annex VIII Takes 15 Minutes. Chasing Component Proof Takes 6 Weeks.</h3>
+          <h2 class="subhead-h2">Signing Annex VIII Takes 15 Minutes. Chasing Component Proof Takes 6 Weeks.</h2>
           <ul class="rule-list">
             <li><strong>Own-Brand &amp; Non-EU Import Duty:</strong> When you place private-label goods or non-EU packaging on the EU market, conformity documentation duties sit directly with the EU brand/importer.</li>
             <li><strong>The &ldquo;ISO 9001&rdquo; Factory Trap:</strong> Suppliers routinely upload ISO 9001 certificates, business licenses, or expired electronics RoHS sheets that omit packaging Cr(VI) or food-contact Total Fluorine.</li>
@@ -258,7 +259,10 @@
             <div class="price-tag">€49 <span>one-time</span></div>
             <p class="muted-text">Up to 5 packaging SKUs: OCR lab-report sanity check + compiled <strong>PDF/A-2b &amp; PDF/UA-1</strong> Annex VIII EU Declaration of Conformity + Annex VII Technical File Index + SHA-256 Evidence ZIP.</p>
           </div>
-          <a id="btn-buy-starter49" class="btn btn-primary" href="https://buy.polar.sh/polar_cl_sWi9L43fW5V5e8u6jqVWWpZxTs4PuSdYKI79a1Z3mNJ" target="_blank" rel="noopener">Order €49 Starter Pack</a>
+          <div>
+            <a id="btn-buy-starter49" class="btn btn-primary" href="https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack" target="_blank" rel="noopener">Order €49 Starter Pack</a>
+            <div class="mor-note">🔒 Secure checkout by Gumroad</div>
+          </div>
         </div>
 
         <div class="price-card">

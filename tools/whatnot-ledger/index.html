@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="disclaimer-banner">
     <div class="container disclaimer-inner">
       <span><strong>Privacy &amp; Scope Notice:</strong> 100% client-side browser tool — CSV files and buyer PII never leave your device. Workflow &amp; bookkeeping formatting assistance tool, <strong>not legal, tax, or accounting advice</strong>.</span>
@@ -18,7 +19,7 @@
   <header class="topbar">
     <div class="container topbar-inner">
       <div class="brand">
-        <span class="brand-dot"></span>
+        <span class="brand-dot" aria-hidden="true"></span>
         <span>ClearStream Ledger <small>for Whatnot &rarr; Xero / QBO</small></span>
       </div>
       <nav class="nav-links" aria-label="Primary navigation">
@@ -30,7 +31,7 @@
     </div>
   </header>
 
-  <main class="container">
+  <main id="main-content" tabindex="-1" class="container">
     <section class="hero" id="scanner">
       <div class="hero-grid">
         <div>
@@ -50,7 +51,7 @@
           <div id="csv-dropzone" class="dropzone" role="region" aria-label="Drop Whatnot CSV files">
             <div class="dropzone-title">Drop Whatnot CSV File(s) Here</div>
             <div class="dropzone-sub">Drop Weekly Orders, Ledger Statements, or Carrier Adjustments CSVs (multi-file supported)</div>
-            <input type="file" id="csv-file-input" accept=".csv,.tsv,.txt" multiple class="hidden">
+            <input type="file" id="csv-file-input" aria-label="Select Whatnot CSV files" accept=".csv,.tsv,.txt" multiple class="hidden">
             <div class="cta-row">
               <button type="button" id="btn-browse-csv" class="btn btn-primary">Select CSV File(s)</button>
               <button type="button" id="btn-load-sample" class="btn btn-secondary">Load Realistic Q4 Sample CSV</button>
@@ -68,7 +69,7 @@
     <section id="mapper-panel" class="card hidden" aria-label="CSV Column Mapper">
       <div class="section-header">
         <div>
-          <h3>Interactive CSV Column Mapper</h3>
+          <h2 class="subhead-h2">Interactive CSV Column Mapper</h2>
           <p class="kpi-sub">Auto-detected from your CSV headers. Re-assign any column below if your region or export version uses different column names — totals update live.</p>
         </div>
       </div>
@@ -111,12 +112,12 @@
           <table>
             <thead>
               <tr>
-                <th>Order &amp; Tracking</th>
-                <th>Charge &amp; 45d Deadline</th>
-                <th>Countdown</th>
-                <th>Label vs Carrier Weight</th>
-                <th>Diagnostic &amp; Recommended Action</th>
-                <th class="num">Charged</th>
+                <th scope="col">Order &amp; Tracking</th>
+                <th scope="col">Charge &amp; 45d Deadline</th>
+                <th scope="col">Countdown</th>
+                <th scope="col">Label vs Carrier Weight</th>
+                <th scope="col">Diagnostic &amp; Recommended Action</th>
+                <th scope="col" class="num">Charged</th>
               </tr>
             </thead>
             <tbody id="adjustments-tbody"></tbody>
@@ -148,16 +149,16 @@
           <table>
             <thead>
               <tr>
-                <th>Payout Batch</th>
-                <th>Settlement Date</th>
-                <th class="num">Rows</th>
-                <th class="num">Gross Sales</th>
-                <th class="num">Commission</th>
-                <th class="num">Processing</th>
-                <th class="num">Labels + APV</th>
-                <th class="num">Refunds</th>
-                <th class="num">Net Clearing</th>
-                <th>Status</th>
+                <th scope="col">Payout Batch</th>
+                <th scope="col">Settlement Date</th>
+                <th scope="col" class="num">Rows</th>
+                <th scope="col" class="num">Gross Sales</th>
+                <th scope="col" class="num">Commission</th>
+                <th scope="col" class="num">Processing</th>
+                <th scope="col" class="num">Labels + APV</th>
+                <th scope="col" class="num">Refunds</th>
+                <th scope="col" class="num">Net Clearing</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody id="batches-tbody"></tbody>
@@ -170,11 +171,11 @@
           <table>
             <thead>
               <tr>
-                <th>Xero Code</th>
-                <th>QuickBooks Online Account</th>
-                <th>Journal Line Description</th>
-                <th class="num">Debits</th>
-                <th class="num">Credits</th>
+                <th scope="col">Xero Code</th>
+                <th scope="col">QuickBooks Online Account</th>
+                <th scope="col">Journal Line Description</th>
+                <th scope="col" class="num">Debits</th>
+                <th scope="col" class="num">Credits</th>
               </tr>
             </thead>
             <tbody id="journal-preview-tbody"></tbody>
@@ -227,7 +228,10 @@
             <div class="price-tag">$99 <span>one-time</span></div>
             <p class="kpi-sub">Reconcile up to 12 full months of 2026 Whatnot Seller Hub CSVs into clean monthly/payout-batch Xero Manual Journals or QBO Journal Entries + open 45-day USPS appeal packet.</p>
           </div>
-          <button type="button" id="btn-pricing-catchup" class="btn btn-primary">Get Full Export — $99 One-Time</button>
+          <div>
+            <button type="button" id="btn-pricing-catchup" class="btn btn-primary">Get Full Export — $99 One-Time</button>
+            <div class="mor-note">🔒 Secure checkout by Gumroad</div>
+          </div>
         </div>
 
         <div class="price-card">
@@ -256,15 +260,16 @@
   <div id="checkout-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-panel">
       <div class="section-header">
-        <h3 id="modal-title">Unlock Full Multi-Batch Xero / QBO &amp; USPS Appeal Exports</h3>
+        <h2 id="modal-title" class="subhead-h2">Unlock Full Multi-Batch Xero / QBO &amp; USPS Appeal Exports</h2>
         <button type="button" id="btn-close-modal" class="btn btn-secondary btn-sm">Close</button>
       </div>
       <p id="modal-checkout-note" class="kpi-sub"></p>
       <div class="cta-row cta-row-left">
-        <a id="modal-checkout-catchup" class="btn btn-success" href="https://buy.polar.sh/polar_cl_mUL2IDaGUfRafdHjUIV7XE3URTKUKdJV7KtmX0KXPIc" target="_blank" rel="noopener">Checkout Now — $99 Catch-Up Pass</a>
+        <a id="modal-checkout-catchup" class="btn btn-success" href="https://pdfuapartnerdesk.gumroad.com/l/whatnot-clearing-journal" target="_blank" rel="noopener">Checkout Now — $99 Catch-Up Pass</a>
         <a id="modal-checkout-seller" class="btn btn-primary" href="#">Seller Pro ($45/mo)</a>
         <a id="modal-checkout-cpa" class="btn btn-secondary" href="#">CPA Practice ($129/mo)</a>
       </div>
+      <div class="mor-note mor-note-left">🔒 Secure checkout by Gumroad</div>
       <hr>
       <p class="kpi-sub">
         <strong>CPA / Bookkeeping Firm?</strong> Request a free full-export walkthrough on your first Whatnot client CSV via our <a id="modal-fallback-form" href="https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform" target="_blank" rel="noopener">Partner Intake Form</a> or email <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a>.

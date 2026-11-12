@@ -6,7 +6,7 @@
 
   const state = {
     checkoutConfig: {
-      ppwrStarter49Url: "https://buy.polar.sh/polar_cl_sWi9L43fW5V5e8u6jqVWWpZxTs4PuSdYKI79a1Z3mNJ",
+      ppwrStarter49Url: "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
       ppwrGrowth69Url: "",
       ppwrPro129Url: "",
       fallbackFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform",

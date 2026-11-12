@@ -343,6 +343,7 @@
               "<a class='btn btn-brand' href='" + esc((d.cta && d.cta.google_form_url) || cfg.formUrl) + "' target='_blank' rel='noopener'>Request Free 24h Sample Fix</a>" +
               "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.mailto_url) || ("mailto:" + cfg.email)) + "'>Email Exact Quote Breakdown</a>" +
             "</div>" +
+            (checkoutHref && checkoutHref.indexOf("gumroad.com") !== -1 ? "<div class='mor-note' style='text-align:left; margin-top:10px;'>🔒 Secure checkout by Gumroad</div>" : "") +
           "</div>" +
           "<h4 style='margin:22px 0 8px;'>Plain-English ADA Title II / Section 508 Diagnostic Findings</h4>" +
           issuesHtml +

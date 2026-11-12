@@ -263,6 +263,13 @@ details.faq-acc[open] summary::after { content: "−"; }
 details.faq-acc p { margin: 12px 0 0; color: #e2e8f0; font-size: 0.95rem; }
 .legal-doc h2 { margin-top: 28px; margin-bottom: 10px; font-size: 1.35rem; }
 .legal-doc p, .legal-doc li { color: #e2e8f0; }
+.mor-note {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.4;
+}
 footer {
   border-top: 1px solid var(--line);
   padding: 34px 0 48px;

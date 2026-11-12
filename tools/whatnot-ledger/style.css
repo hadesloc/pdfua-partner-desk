@@ -5,7 +5,7 @@
   --card-alt: #1a2f56;
   --line: #284272;
   --ink: #f8fafc;
-  --muted: #94a3b8;
+  --muted: #b5c5db;
   --brand: #38bdf8;
   --brand-strong: #0284c7;
   --ok: #22c55e;
@@ -25,8 +25,28 @@ body {
   color: var(--ink);
   line-height: 1.55;
 }
-a { color: var(--brand); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
+.nav-links a:not(.btn), .btn { text-decoration: none; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 9999;
+  background: var(--brand);
+  color: #04101d;
+  font-weight: 800;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.skip-link:focus { left: 12px; }
+.subhead-h2 { font-size: 1.15rem; margin: 0 0 6px; }
+.mor-note { margin-top: 8px; font-size: 0.78rem; color: var(--muted); text-align: center; line-height: 1.4; }
+.mor-note-left { text-align: left; }
 .hidden { display: none !important; }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 22px; }
