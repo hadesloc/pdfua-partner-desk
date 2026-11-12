@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /deals/
+Sitemap: https://hadesloc.github.io/pdfua-partner-desk/sitemap.xml
