@@ -11,7 +11,7 @@
     columnMap: {},
     analysis: null,
     checkoutConfig: {
-      whatnotCatchup99Url: "",
+      whatnotCatchup99Url: "https://www.creem.io/payment/prod_UCZtevirTbptRRKowCWTy",
       whatnotSellerPro45Url: "",
       whatnotCpa129Url: "",
       fallbackFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform",

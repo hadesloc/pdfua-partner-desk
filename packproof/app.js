@@ -6,7 +6,7 @@
 
   const state = {
     checkoutConfig: {
-      ppwrStarter49Url: "",
+      ppwrStarter49Url: "https://www.creem.io/payment/prod_Dj5aU3PbM9Kmevam96h59",
       ppwrGrowth69Url: "",
       ppwrPro129Url: "",
       fallbackFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform",
