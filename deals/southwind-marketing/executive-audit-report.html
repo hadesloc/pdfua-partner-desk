@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADA Title II &amp; WCAG 2.1 AA PDF Compliance Audit &mdash; City of Dublin, OH</title>
+  <style>
+    :root {
+      --navy: #0f172a;
+      --slate: #334155;
+      --muted: #64748b;
+      --border: #cbd5e1;
+      --bg-soft: #f8fafc;
+      --crimson: #b91c1c;
+      --crimson-bg: #fef2f2;
+      --emerald: #047857;
+      --emerald-bg: #ecfdf5;
+      --amber-bg: #fffbeb;
+      --amber-border: #f59e0b;
+      --accent: #1d4ed8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--navy);
+      background: #ffffff;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    .container { max-width: 1060px; margin: 0 auto; }
+    header.hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 28px 32px;
+      border-radius: 12px;
+      margin-bottom: 22px;
+    }
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 11px;
+      font-weight: 700;
+      color: #93c5fd;
+      margin-bottom: 6px;
+    }
+    header.hero h1 { margin: 0 0 6px 0; font-size: 24px; line-height: 1.25; }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 13px;
+      color: #e2e8f0;
+      margin-top: 12px;
+    }
+    .deadline-banner {
+      background: var(--amber-bg);
+      border-left: 5px solid var(--amber-border);
+      border-top: 1px solid #fde68a;
+      border-right: 1px solid #fde68a;
+      border-bottom: 1px solid #fde68a;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 22px;
+    }
+    .deadline-banner h2 { margin: 0 0 6px 0; font-size: 15px; color: #92400e; }
+    .deadline-banner p { margin: 0; color: #78350f; font-size: 13.5px; }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .kpi-label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; }
+    .kpi-value { font-size: 24px; font-weight: 800; margin: 4px 0; color: var(--navy); word-break: break-word; }
+    .kpi-value.danger { color: var(--crimson); }
+    .kpi-value.accent { color: var(--accent); }
+    .kpi-value.success { color: var(--emerald); }
+    .kpi-sub { font-size: 12px; color: var(--slate); }
+    h2.section-title {
+      font-size: 17px;
+      margin: 26px 0 10px 0;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
+      color: var(--navy);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 9px 11px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    td.num, th.num { text-align: right; white-space: nowrap; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 12px; }
+    .muted { color: var(--muted); font-size: 12px; margin-top: 3px; }
+    .url-line { font-size: 11.5px; margin-top: 3px; word-break: break-all; }
+    .url-line a { color: var(--accent); text-decoration: none; }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+    .badge-fail { background: var(--crimson-bg); color: var(--crimson); border: 1px solid #fecaca; }
+    .badge-pass { background: var(--emerald-bg); color: var(--emerald); border: 1px solid #a7f3d0; }
+    .callout-sample {
+      background: #eff6ff;
+      border: 2px solid #3b82f6;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 22px 0;
+      page-break-inside: avoid;
+    }
+    .callout-kicker {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .callout-sample h3 { margin: 0 0 8px 0; font-size: 16px; color: #1e3a8a; }
+    .callout-sample p { margin: 6px 0; font-size: 13.5px; color: var(--slate); }
+    footer.disclaimer {
+      margin-top: 28px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    @media print {
+      @page { size: letter; margin: 0.5in; }
+      body { padding: 0; font-size: 11.5px; }
+      header.hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .deadline-banner, .kpi-card, th, .badge, .callout-sample {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      tr { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="kicker">Executive ADA Title II &amp; WCAG 2.1 Level AA PDF Compliance Audit</div>
+      <h1>Organization: City of Dublin, OH</h1>
+      <div>Public Domain Audit: https://dublinohiousa.gov</div>
+      <div class="hero-meta">
+        <span><strong>Audit Date:</strong> 2026-11-13</span>
+        <span><strong>Technical Standard:</strong> ISO 14289-1 (PDF/UA-1) &amp; WCAG 2.1 AA</span>
+        <span><strong>Validator Engine:</strong> veraPDF PDF/UA-1 + Structural Inspection</span>
+      </div>
+    </header>
+
+    <section class="deadline-banner" aria-label="DOJ Regulatory Mandate Briefing">
+      <h2>Regulatory Mandate: U.S. Department of Justice 28 CFR Part 35 (ADA Title II Rule)</h2>
+      <p>
+        Under the DOJ Final Rule on Web and Mobile Application Accessibility (<strong>28 CFR Part 35</strong>),
+        public-facing PDF documents posted by state and local governments, universities, community colleges, and special districts
+        must conform to <strong>WCAG 2.1 Level AA</strong>:
+        <strong>April 24, 2026</strong> (entities serving &ge;50,000 population, currently enforceable) and
+        <strong>April 26, 2027</strong> (municipalities &lt;50,000 population &amp; special districts).
+        Active forms, agendas, budgets, and visitor guides that fail screen-reader accessibility require full structural remediation.
+      </p>
+    </section>
+
+    <section class="kpi-grid" aria-label="Audit Summary Metrics">
+      <div class="kpi-card">
+        <div class="kpi-label">Portfolio Scanned</div>
+        <div class="kpi-value">15 PDFs</div>
+        <div class="kpi-sub">296 total pages analyzed</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Failing PDF/UA-1</div>
+        <div class="kpi-value danger">100.0%</div>
+        <div class="kpi-sub">15 of 15 documents non-compliant</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">High-Risk Barriers</div>
+        <div class="kpi-value">8 Untagged</div>
+        <div class="kpi-sub">0 Scanned OCR &bull; 0 AcroForms</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Est. Market Agency Value</div>
+        <div class="kpi-value">$2,032.00</div>
+        <div class="kpi-sub">Standard US retail ($5&ndash;$15/page)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Partner Remediation Quote</div>
+        <div class="kpi-value success">$776.00</div>
+        <div class="kpi-sub">Saves $1,256.00 (61.8% partner margin)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Recommended Free Proof</div>
+        <div class="kpi-value accent" style="font-size:16px;">2026-Annual-Report.pdf</div>
+        <div class="kpi-sub">6 pages &bull; Structured Data Tables</div>
+      </div>
+    </section>
+
+    
+        <section class="callout-sample">
+          <div class="callout-kicker">COMPLIMENTARY PROOF-OF-QUALITY PILOT OFFER</div>
+          <h3>Free &ldquo;100% Green PAC 2026 + NVDA&rdquo; Proof Sample: <code>2026-Annual-Report.pdf</code> (6 pages)</h3>
+          <p>Ideal 6-page structured data tables document failing 9 PDF/UA-1 rule(s). Fast to remediate (&lt;15 min, $0.0054 AI cost) into a 100% Green PAC 2026 + NVDA proof sample worth $48.00 at agency retail rates.</p>
+          
+          <p class="sample-deliverables">
+            <strong>Included at $0 cost before any commitment:</strong> Remediated PDF preserving 100% original visual layout,
+            before/after <code>veraPDF</code> ISO 14289-1 XML verification, <strong>PAC 2026</strong> screen-reader preview &amp; green compliance report,
+            and human <strong>NVDA</strong> assistive technology navigation log bound by SHA-256 hash.
+          </p>
+        </section>
+        
+
+    <h2 class="section-title">1. Top ISO 14289-1 (PDF/UA-1) Clauses Violated Across Portfolio</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:16%;">Clause</th>
+          <th style="width:36%;">Technical Failure</th>
+          <th style="width:36%;">Screen Reader / ADA User Impact</th>
+          <th class="num" style="width:12%;">Affected PDFs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class='mono'><strong>ISO 14289-1 &sect;7.1</strong></td><td><strong>Untagged Content, Missing Document Title, or Unmarked Artifacts</strong><div class='muted'>Content shall be marked as Artifact or tagged as real content</div></td><td>Blind users hear decorative headers/footers mixed into body text or cannot identify document title.</td><td class='num'><span class='badge badge-fail'>15 / 15</span></td></tr>
+<tr><td class='mono'><strong>ISO 14289-1 &sect;5</strong></td><td><strong>Missing PDF/UA-1 Conformance Metadata</strong><div class='muted'>The PDF/UA version and conformance level of a file shall be specified using the PDF/UA Identification extension schema</div></td><td>Compliance gateways and assistive tools cannot verify ISO 14289-1 accessibility conformance.</td><td class='num'><span class='badge badge-fail'>14 / 15</span></td></tr>
+<tr><td class='mono'><strong>ISO 14289-1 &sect;7.21.4.1</strong></td><td><strong>Unembedded Fonts Used in Page Rendering</strong><div class='muted'>The font programs for all fonts used for rendering within a conforming file shall be embedded within that file, as defined in ISO 32000-1:2008, 9.9</div></td><td>Visual glyphs may fail to render consistently across low-vision magnification and reader platforms.</td><td class='num'><span class='badge badge-fail'>12 / 15</span></td></tr>
+<tr><td class='mono'><strong>ISO 14289-1 &sect;6.2</strong></td><td><strong>Missing MarkInfo / Tagged PDF Flag</strong><div class='muted'>The document catalog dictionary shall include a MarkInfo dictionary containing an entry, Marked, whose value shall be true</div></td><td>Screen readers treat the file as untagged and fall back to raw heuristic reading order.</td><td class='num'><span class='badge badge-fail'>10 / 15</span></td></tr>
+<tr><td class='mono'><strong>ISO 14289-1 &sect;7.2</strong></td><td><strong>Missing Natural Language (/Lang) or Broken List/Structure Hierarchy</strong><div class='muted'>Table rows shall have the same number of columns (taking into account column spans)</div></td><td>Text-to-speech engines use the wrong pronunciation rules or misread nested list items (LI/LBody).</td><td class='num'><span class='badge badge-fail'>8 / 15</span></td></tr>
+<tr><td class='mono'><strong>ISO 14289-1 &sect;7.21.4.2</strong></td><td><strong>Incomplete Embedded Font CIDSet Stream</strong><div class='muted'>If the FontDescriptor dictionary of an embedded CID font contains a CIDSet stream, then it shall identify all CIDs which are present in the font program, regardless of whether a CID in the font is referenced or used by the PDF or not</div></td><td>Strict PDF/UA-1 and PAC 2026 validators reject the font descriptor due to mismatched glyph inventory.</td><td class='num'><span class='badge badge-fail'>8 / 15</span></td></tr>
+<tr><td class='mono'><strong>ISO 14289-1 &sect;7.3</strong></td><td><strong>Figures &amp; Graphics Missing Alternative Text (/Alt)</strong><div class='muted'>Figure tags shall include an alternative representation or replacement text that represents the contents marked with the Figure tag as noted in ISO 32000-1:2008, 14.7.2, Table 323</div></td><td>Screen readers skip informational charts, seals, and diagrams or announce &#x27;unlabeled graphic&#x27; (WCAG 1.1.1).</td><td class='num'><span class='badge badge-fail'>7 / 15</span></td></tr>
+<tr><td class='mono'><strong>ISO 14289-1 &sect;7.18.5</strong></td><td><strong>Hyperlinks Missing Alternate Descriptions (/Contents)</strong><div class='muted'>Links shall contain an alternate description via their Contents key as described in ISO 32000-1:2008, 14.9.3</div></td><td>Screen readers read raw cryptic URLs instead of meaningful link purpose (WCAG 2.4.4).</td><td class='num'><span class='badge badge-fail'>5 / 15</span></td></tr>
+<tr><td class='mono'><strong>ISO 14289-1 &sect;7.18.1</strong></td><td><strong>Annotations Missing Accessible Descriptions (/Contents or /Alt)</strong><div class='muted'>An annotation (except Widget annotations or hidden annotations, or those having rectangle outside the crop-box) shall have either Contents key or an Alt entry in the enclosing structure element</div></td><td>Interactive page annotations are announced without meaningful labels to keyboard/screen-reader users.</td><td class='num'><span class='badge badge-fail'>5 / 15</span></td></tr>
+<tr><td class='mono'><strong>ISO 14289-1 &sect;7.10</strong></td><td><strong>Untagged Content, Missing Document Title, or Unmarked Artifacts</strong><div class='muted'>Each optional content configuration dictionary that forms the value of the D key, or that is an element in the array that forms the value of the Configs key in the OCProperties dictionary, shall contain the Name key</div></td><td>Blind users hear decorative headers/footers mixed into body text or cannot identify document title.</td><td class='num'><span class='badge badge-fail'>3 / 15</span></td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="section-title">2. Commercial Remediation Tier &amp; Partner Pricing Summary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Document Complexity Tier</th>
+          <th class="num">PDFs</th>
+          <th class="num">Pages</th>
+          <th class="num">Market Retail Est.</th>
+          <th class="num">Partner Wholesale Quote</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Simple Text &amp; Headings</strong><div class='muted'>Born-digital text documents, memos, agendas, and standard layout guides.</div></td><td class='num'>4</td><td class='num'>112</td><td class='num'>$5.00/pg ($560.00)</td><td class='num'><strong>$2.00/pg ($224.00)</strong></td></tr>
+<tr><td><strong>Structured Data Tables</strong><div class='muted'>Budgets, fee schedules, financial disclosures, and multi-column tables.</div></td><td class='num'>11</td><td class='num'>184</td><td class='num'>$8.00/pg ($1,472.00)</td><td class='num'><strong>$3.00/pg ($552.00)</strong></td></tr>
+        <tr>
+          <td><strong>Total Portfolio Remediation Scope</strong></td>
+          <td class="num"><strong>15</strong></td>
+          <td class="num"><strong>296</strong></td>
+          <td class="num"><strong>$2,032.00</strong></td>
+          <td class="num"><strong>$776.00</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="section-title">3. File-by-File PDF/UA-1 &amp; WCAG 2.1 AA Audit Schedule</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:34%;">Document &amp; Source URL</th>
+          <th class="num" style="width:7%;">Pages</th>
+          <th style="width:17%;">Detected Attributes</th>
+          <th style="width:20%;">veraPDF Status &amp; Clauses</th>
+          <th style="width:12%;">Pricing Tier</th>
+          <th class="num" style="width:10%;">Partner Quote</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>2015-NCS-Dashboard.pdf</strong></td><td class='num'>4</td><td>Tagged, Tables</td><td><span class='badge badge-fail'>FAIL (8 rules)</span><div class='muted mono'>&sect;5, &sect;7.21.4.1, &sect;7.1, &sect;7.5, &sect;7.2&hellip;</div></td><td>Structured Data Tables</td><td class='num'><strong>$12.00</strong></td></tr>
+<tr><td><strong>2015-NCS-Technical-Appendices-Dublin.pdf</strong></td><td class='num'>49</td><td>Tagged, Tables</td><td><span class='badge badge-fail'>FAIL (17 rules)</span><div class='muted mono'>&sect;7.2, &sect;7.1, &sect;7.9, &sect;5, &sect;7.21.4.1&hellip;</div></td><td>Structured Data Tables</td><td class='num'><strong>$147.00</strong></td></tr>
+<tr><td><strong>2026-Annual-Report.pdf</strong></td><td class='num'>6</td><td>Untagged, Tables</td><td><span class='badge badge-fail'>FAIL (9 rules)</span><div class='muted mono'>&sect;7.2, &sect;7.10, &sect;6.2, &sect;5, &sect;7.1&hellip;</div></td><td>Structured Data Tables</td><td class='num'><strong>$18.00</strong></td></tr>
+<tr><td><strong>Culture-Playbook-FINAL.pdf</strong></td><td class='num'>20</td><td>Tagged</td><td><span class='badge badge-fail'>FAIL (8 rules)</span><div class='muted mono'>&sect;7.10, &sect;7.21.4.2, &sect;6.2, &sect;7.1, &sect;7.3&hellip;</div></td><td>Simple Text &amp; Headings</td><td class='num'><strong>$40.00</strong></td></tr>
+<tr><td><strong>dublin-ohio-revised-charter.pdf</strong></td><td class='num'>17</td><td>Untagged, Tables</td><td><span class='badge badge-fail'>FAIL (8 rules)</span><div class='muted mono'>&sect;7.2, &sect;6.2, &sect;7.1, &sect;5, &sect;7.21.4.1</div></td><td>Structured Data Tables</td><td class='num'><strong>$51.00</strong></td></tr>
+<tr><td><strong>NCS-Presentation-Dublin-2025.pdf</strong></td><td class='num'>27</td><td>Tagged</td><td><span class='badge badge-fail'>FAIL (4 rules)</span><div class='muted mono'>&sect;7.21.4.1, &sect;7.3, &sect;7.1, &sect;5</div></td><td>Simple Text &amp; Headings</td><td class='num'><strong>$54.00</strong></td></tr>
+<tr><td><strong>The-National-Community-Survey-2025.pdf</strong></td><td class='num'>33</td><td>Untagged, Tables</td><td><span class='badge badge-fail'>FAIL (9 rules)</span><div class='muted mono'>&sect;7.10, &sect;7.1, &sect;7.2, &sect;6.2, &sect;5&hellip;</div></td><td>Structured Data Tables</td><td class='num'><strong>$99.00</strong></td></tr>
+<tr><td><strong>The-NCS-Community-Livability-Report-Dublin-2015.pdf</strong></td><td class='num'>17</td><td>Tagged</td><td><span class='badge badge-fail'>FAIL (13 rules)</span><div class='muted mono'>&sect;7.3, &sect;7.18.5, &sect;7.21.4.1, &sect;7.2, &sect;7.18.3&hellip;</div></td><td>Simple Text &amp; Headings</td><td class='num'><strong>$34.00</strong></td></tr>
+<tr><td><strong>The-NCS-Community-Livability-Report-Dublin-FINAL-2018.pdf</strong></td><td class='num'>15</td><td>Untagged, Tables</td><td><span class='badge badge-fail'>FAIL (10 rules)</span><div class='muted mono'>&sect;7.18.1, &sect;7.1, &sect;5, &sect;7.21.4.1, &sect;7.18.5&hellip;</div></td><td>Structured Data Tables</td><td class='num'><strong>$45.00</strong></td></tr>
+<tr><td><strong>The-NCS-Dashboard-Dublin-FINAL-2018.pdf</strong></td><td class='num'>4</td><td>Untagged, Tables</td><td><span class='badge badge-fail'>FAIL (8 rules)</span><div class='muted mono'>&sect;7.1, &sect;6.2, &sect;5, &sect;7.21.4.2, &sect;7.21.4.1</div></td><td>Structured Data Tables</td><td class='num'><strong>$12.00</strong></td></tr>
+<tr><td><strong>The-NCS-Geographic-Crosstabs-Dublin-2015.pdf</strong></td><td class='num'>12</td><td>Tagged, Tables</td><td><span class='badge badge-fail'>FAIL (7 rules)</span><div class='muted mono'>&sect;7.21.4.1, &sect;7.5, &sect;7.1, &sect;7.3, &sect;7.2</div></td><td>Structured Data Tables</td><td class='num'><strong>$36.00</strong></td></tr>
+<tr><td><strong>The-NCS-Geographic-Crosstabs-Dublin-FINAL-2018.pdf</strong></td><td class='num'>10</td><td>Untagged, Tables</td><td><span class='badge badge-fail'>FAIL (8 rules)</span><div class='muted mono'>&sect;5, &sect;7.1, &sect;6.2, &sect;7.21.4.2, &sect;7.21.4.1</div></td><td>Structured Data Tables</td><td class='num'><strong>$30.00</strong></td></tr>
+<tr><td><strong>The-NCS-Open-end-Report-Dublin-FINAL-2018.pdf</strong></td><td class='num'>25</td><td>Untagged, Tables</td><td><span class='badge badge-fail'>FAIL (11 rules)</span><div class='muted mono'>&sect;7.21.4.2, &sect;7.1, &sect;5, &sect;7.18.1, &sect;6.2&hellip;</div></td><td>Structured Data Tables</td><td class='num'><strong>$75.00</strong></td></tr>
+<tr><td><strong>The-NCS-Technical-Appendices-Dublin-FINAL-2018.pdf</strong></td><td class='num'>48</td><td>Tagged</td><td><span class='badge badge-fail'>FAIL (14 rules)</span><div class='muted mono'>&sect;7.18.1, &sect;7.18.5, &sect;7.2, &sect;7.21.4.2, &sect;5&hellip;</div></td><td>Simple Text &amp; Headings</td><td class='num'><strong>$96.00</strong></td></tr>
+<tr><td><strong>The-NCS-Trends-over-Time-Dublin-FINAL-2018.pdf</strong></td><td class='num'>9</td><td>Untagged, Tables</td><td><span class='badge badge-fail'>FAIL (8 rules)</span><div class='muted mono'>&sect;7.1, &sect;7.21.4.2, &sect;6.2, &sect;5, &sect;7.21.4.1</div></td><td>Structured Data Tables</td><td class='num'><strong>$27.00</strong></td></tr>
+      </tbody>
+    </table>
+
+    <footer class="disclaimer">
+      <strong>Methodology &amp; Scope Notice:</strong> Automated checks were executed locally using the
+      <code>veraPDF</code> ISO 14289-1:2014 (PDF/UA-1) validation profile alongside structural tag, font, AcroForm,
+      and text-layer coverage inspection. Passing automated validator rules is necessary but not sufficient on its own for
+      WCAG 2.1 AA compliance; our production remediation workflow pairs deterministic PDF/UA-1 engineering with human
+      verification of logical reading order, heading semantics, table header scope, contextual alt-text, color contrast,
+      PAC 2026 checks, and live NVDA screen-reader testing. This technical audit report is provided for accessibility
+      remediation planning and does not constitute legal advice.
+    </footer>
+  </div>
+</body>
+</html>
