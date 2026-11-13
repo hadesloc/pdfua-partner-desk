@@ -11,7 +11,7 @@
     columnMap: {},
     analysis: null,
     checkoutConfig: {
-      whatnotCatchup99Url: "https://pdfuapartnerdesk.gumroad.com/l/whatnot-clearing-journal",
+      whatnotCatchup99Url: "https://pdfuapartnerdesk.gumroad.com/l/whatnot-clearing-journal?wanted=true",
       whatnotSellerPro45Url: "",
       whatnotCpa129Url: "",
       fallbackFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform",
@@ -479,7 +479,6 @@
       "btn-full-qbo",
       "btn-full-appeals",
       "btn-gate-cta",
-      "btn-pricing-catchup",
       "btn-pricing-seller",
       "btn-pricing-cpa"
     ].forEach((id) => {
@@ -496,5 +495,102 @@
   document.addEventListener("DOMContentLoaded", function () {
     loadCheckoutConfig();
     initEvents();
+  });
+})();
+
+
+/* CRO_WHATNOT_UPGRADE */
+(function () {
+  "use strict";
+  function copyWithFallback(text, onDone) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { onDone(true); }).catch(function () { fallbackCopy(text, onDone); });
+    } else {
+      fallbackCopy(text, onDone);
+    }
+  }
+  function fallbackCopy(text, onDone) {
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "readonly");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      onDone(Boolean(ok));
+    } catch (_e) {
+      onDone(false);
+    }
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var email = "halocrypto101@gmail.com";
+    var sampleBtn = document.getElementById("btn-load-sample");
+    var rowsKpi = document.getElementById("kpi-rows");
+    if (sampleBtn && (!rowsKpi || rowsKpi.textContent === "0")) {
+      sampleBtn.click();
+    }
+    var dropzone = document.getElementById("csv-dropzone");
+    var fileInput = document.getElementById("csv-file-input");
+    if (dropzone && fileInput) {
+      dropzone.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          fileInput.click();
+        }
+      });
+    }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        var modal = document.getElementById("checkout-modal");
+        if (modal && !modal.classList.contains("hidden")) {
+          modal.classList.add("hidden");
+        }
+      }
+    });
+    function buildWhatnotBrief() {
+      var rows = rowsKpi ? rowsKpi.textContent : "0";
+      var net = (document.getElementById("kpi-net-payout") || {}).textContent || "$0.00";
+      var recov = (document.getElementById("kpi-recoverable") || {}).textContent || "$0.00";
+      return [
+        "To: " + email,
+        "Subject: ClearStream Ledger — CPA / Custom Multi-Batch Inquiry",
+        "",
+        "Hello ClearStream Ledger Desk,",
+        "",
+        "Please share custom batch / CPA onboarding details:",
+        "Browser diagnostic preview: " + rows + " audited rows | Net clearing: " + net + " | Open 45d USPS APV: " + recov,
+        "Accounting software target: [Xero / QuickBooks Online]",
+        "Approximate shops or months: "
+      ].join("\n");
+    }
+    var copyBtn = document.getElementById("btn-copy-whatnot-inquiry");
+    var copyStatus = document.getElementById("whatnot-copy-status");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function () {
+        copyWithFallback(buildWhatnotBrief(), function (ok) {
+          if (copyStatus) {
+            copyStatus.textContent = ok
+              ? "Copied CPA / batch inquiry brief and email (" + email + ") to clipboard."
+              : "Email us directly at " + email + " for CPA or custom batch onboarding.";
+          }
+        });
+      });
+    }
+    var modalCopyBtn = document.getElementById("btn-modal-copy-email");
+    var modalStatus = document.getElementById("modal-copy-status");
+    if (modalCopyBtn) {
+      modalCopyBtn.addEventListener("click", function () {
+        copyWithFallback(buildWhatnotBrief(), function (ok) {
+          if (modalStatus) {
+            modalStatus.textContent = ok
+              ? "Copied inquiry brief and email (" + email + ") to clipboard."
+              : "Email us directly at " + email + ".";
+          }
+        });
+      });
+    }
   });
 })();

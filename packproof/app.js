@@ -6,7 +6,7 @@
 
   const state = {
     checkoutConfig: {
-      ppwrStarter49Url: "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      ppwrStarter49Url: "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack?wanted=true",
       ppwrGrowth69Url: "",
       ppwrPro129Url: "",
       fallbackFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform",
@@ -224,5 +224,78 @@
     loadCheckoutConfig();
     initEvents();
     loadDemoValidSgs();
+  });
+})();
+
+
+/* CRO_PACKPROOF_UPGRADE */
+(function () {
+  "use strict";
+  function copyWithFallback(text, onDone) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { onDone(true); }).catch(function () { fallbackCopy(text, onDone); });
+    } else {
+      fallbackCopy(text, onDone);
+    }
+  }
+  function fallbackCopy(text, onDone) {
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "readonly");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      onDone(Boolean(ok));
+    } catch (_e) {
+      onDone(false);
+    }
+  }
+  function decodeMailtoHref(href, fallbackEmail) {
+    if (!href || href.indexOf("mailto:") !== 0) return "To: " + fallbackEmail;
+    var qIdx = href.indexOf("?");
+    var toAddr = decodeURIComponent(qIdx >= 0 ? href.slice(7, qIdx) : href.slice(7)) || fallbackEmail;
+    var params = new URLSearchParams(qIdx >= 0 ? href.slice(qIdx + 1) : "");
+    var subj = params.get("subject") || "PackProof EU Inquiry";
+    var body = params.get("body") || "";
+    return "To: " + toAddr + "\nSubject: " + subj + "\n\n" + body;
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var email = "halocrypto101@gmail.com";
+    var copyIntakeBtn = document.getElementById("btn-copy-intake-brief");
+    var intakeTrigger = document.getElementById("intake-mailto-trigger");
+    var intakeStatus = document.getElementById("intake-copy-status");
+    if (copyIntakeBtn && intakeTrigger) {
+      copyIntakeBtn.addEventListener("click", function () {
+        var payload = decodeMailtoHref(intakeTrigger.getAttribute("href"), email);
+        copyWithFallback(payload, function (ok) {
+          if (intakeStatus) {
+            intakeStatus.textContent = ok
+              ? "Copied ticket brief and email (" + email + ") to clipboard. Paste into any email client and attach your PDF."
+              : "Send your PDF directly to " + email + " with the reference code shown above.";
+          }
+        });
+      });
+    }
+    var copyBatchBtn = document.getElementById("btn-copy-packproof-batch");
+    var batchMailto = document.getElementById("btn-packproof-batch-mailto");
+    var batchStatus = document.getElementById("packproof-batch-copy-status");
+    if (copyBatchBtn) {
+      copyBatchBtn.addEventListener("click", function () {
+        var payload = batchMailto
+          ? decodeMailtoHref(batchMailto.getAttribute("href"), email)
+          : ("To: " + email + "\nSubject: PackProof EU Custom Multi-SKU Quote");
+        copyWithFallback(payload, function (ok) {
+          if (batchStatus) {
+            batchStatus.textContent = ok
+              ? "Copied batch inquiry brief and email (" + email + ") to clipboard."
+              : "Email us directly at " + email + " for custom multi-SKU pricing.";
+          }
+        });
+      });
+    }
   });
 })();

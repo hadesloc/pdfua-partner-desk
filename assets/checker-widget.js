@@ -212,13 +212,16 @@
       apiUrl: (root.getAttribute("data-checker-api") || "").trim(),
       formUrl: root.getAttribute("data-form-url") || "",
       upworkUrl: root.getAttribute("data-upwork-url") || "https://www.upwork.com/services/product/2120536307204819908",
-      checkout65: root.getAttribute("data-checkout65-url") || "",
-      checkout195: root.getAttribute("data-checkout195-url") || "",
+      fiverrUrl: root.getAttribute("data-fiverr-url") || "https://www.fiverr.com/s/L34o2B0",
+      freelancerUrl: root.getAttribute("data-freelancer-url") || "https://www.freelancer.com/service/pdf/ada-title-ii-wcag-aa-and-pdf-ua-remediation",
+      checkout65: root.getAttribute("data-checkout65-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages?wanted=true",
+      checkout195: root.getAttribute("data-checkout195-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-30-pages?wanted=true",
       email: root.getAttribute("data-email") || "halocrypto101@gmail.com"
     };
 
     const dz = root.querySelector(".chk-dropzone");
     const inp = root.querySelector(".chk-file-input");
+    const demoBtn = root.querySelector(".chk-demo-btn");
     const statusEl = root.querySelector(".chk-status");
     const errEl = root.querySelector(".chk-error");
     const resEl = root.querySelector(".chk-results");
@@ -227,6 +230,92 @@
 
     if (cfg.apiUrl) {
       fetch(cfg.apiUrl.replace(/\/+$/, "") + "/api/health", { mode: "cors", cache: "no-store" }).catch(() => {});
+    }
+
+    if (demoBtn) {
+      demoBtn.addEventListener("click", () => {
+        errEl.style.display = "none";
+        const demoSubject = "Fix PDF/UA-1 Issues — FY2026-Municipal-Fee-Schedule.pdf (14 pages)";
+        const demoBody = [
+          "Hi Loc,",
+          "",
+          "I ran 'FY2026-Municipal-Fee-Schedule.pdf' (14 pages) through the Free PDF/UA & ADA Title II Checker.",
+          "- Detected Tier: Structured Data Tables & Reports",
+          "- Failed Clauses: 6.2 / 7.1, 5, 7.5, 7.18.3",
+          "- Partner Wholesale Quote: $42.00 (or Turnkey Package: $195.00)",
+          "",
+          "Please share turnaround details (or run a free 24h sample proof)."
+        ].join("\n");
+        renderData({
+          filename: "FY2026-Municipal-Fee-Schedule.pdf",
+          file_size_bytes: 418304,
+          is_compliant: false,
+          engine: "Sample Diagnostic Preview · veraPDF 1.30.3 (ISO 14289-1:2014)",
+          failed_rules: 4,
+          failed_checks: 96,
+          elapsed_seconds: 0.42,
+          structure: {
+            pages: 14,
+            is_tagged: false,
+            has_pdfua_id: false,
+            language: "en-US",
+            has_title: false,
+            display_doc_title: false,
+            figures_missing_alt: 2,
+            form_fields_total: 0,
+            form_fields_missing_tu: 0,
+            likely_scanned_ocr: false,
+            is_cryptographically_signed: false
+          },
+          findings: [
+            {
+              clause: "6.2 / 7.1",
+              severity: "CRITICAL",
+              title: "Untagged PDF — Missing Logical Structure Tree (/StructTreeRoot)",
+              wcag: "WCAG 2.1 SC 1.3.1 Info & Relationships · 1.3.2 Meaningful Sequence (Level A)",
+              failed_checks: 68,
+              impact: "Screen readers (NVDA, JAWS, VoiceOver) cannot distinguish headings, fee tables, or running headers/footers."
+            },
+            {
+              clause: "7.5",
+              severity: "CRITICAL",
+              title: "Data Tables Missing Explicit Header Cell Scope (/Scope Column / Row)",
+              wcag: "WCAG 2.1 SC 1.3.1 Info & Relationships — Data Tables",
+              failed_checks: 24,
+              impact: "Blind residents hear raw dollar figures without column or row context across multi-page municipal fee tables."
+            },
+            {
+              clause: "5",
+              severity: "HIGH",
+              title: "Missing ISO 14289-1 (PDF/UA-1) XMP Conformance Metadata (pdfuaid:part=1)",
+              wcag: "ISO 14289-1 §5 · Automated PDF/UA-1 Conformance Gate",
+              failed_checks: 1,
+              impact: "Automated ADA Title II and procurement validators flag the document as non-certified."
+            },
+            {
+              clause: "7.3",
+              severity: "CRITICAL",
+              title: "Figures / Seals Missing Alternative Text (/Alt)",
+              wcag: "WCAG 2.1 SC 1.1.1 Non-text Content (Level A)",
+              failed_checks: 3,
+              impact: "Department seal and rate chart graphics announce as unlabeled images."
+            }
+          ],
+          quote: {
+            pages: 14,
+            tier_label: "Structured Data Tables & Reports",
+            wholesale_total_usd: 42.0,
+            retail_total_usd: 112.0,
+            agency_net_margin_usd: 70.0,
+            fixed_package_usd: 195.0
+          },
+          cta: {
+            upwork_catalog_url: cfg.checkout195 || cfg.upworkUrl,
+            google_form_url: cfg.formUrl,
+            mailto_url: "mailto:" + encodeURIComponent(cfg.email) + "?subject=" + encodeURIComponent(demoSubject) + "&body=" + encodeURIComponent(demoBody)
+          }
+        });
+      });
     }
 
     dz.addEventListener("click", () => inp.click());
@@ -285,9 +374,12 @@
     function renderData(d) {
       const q = d.quote || {};
       const st = d.structure || {};
-      const checkoutHref = (q.fixed_package_usd <= 65 && cfg.checkout65)
+      let checkoutHref = (q.fixed_package_usd <= 65 && cfg.checkout65)
         ? cfg.checkout65
         : ((q.fixed_package_usd <= 195 && cfg.checkout195) ? cfg.checkout195 : ((d.cta && d.cta.upwork_catalog_url) || cfg.upworkUrl));
+      if (checkoutHref && checkoutHref.indexOf("gumroad.com/l/") !== -1 && checkoutHref.indexOf("wanted=") === -1) {
+        checkoutHref += (checkoutHref.indexOf("?") === -1 ? "?" : "&") + "wanted=true";
+      }
 
       const checks = [
         [st.is_tagged, "Tagged structure (/StructTreeRoot)"],
@@ -299,6 +391,21 @@
         [!st.likely_scanned_ocr, st.likely_scanned_ocr ? "Scanned image PDF (needs OCR)" : "Searchable text layer present"],
         [!st.is_cryptographically_signed, st.is_cryptographically_signed ? "Signature lock detected" : "Lossless remediation ready"]
       ];
+
+      const clausesSummary = (d.findings || []).map((f) => f.clause).join(", ") || "None";
+      const copyBriefText = [
+        "To: " + cfg.email,
+        "Subject: Fix PDF/UA-1 Issues — " + d.filename + " (" + q.pages + " pages)",
+        "",
+        "Hi Loc,",
+        "",
+        "Please lock in our remediation quote or run a complimentary 24-hour proof sample:",
+        "- File: " + d.filename + " (" + q.pages + " pages)",
+        "- Detected Tier: " + (q.tier_label || "Standard"),
+        "- Failed Clauses: " + clausesSummary + " (" + d.failed_rules + " rules / " + Number(d.failed_checks || 0) + " checks)",
+        "- Agency Wholesale Quote: " + fmt(q.wholesale_total_usd) + " (US Retail Value: " + fmt(q.retail_total_usd) + ")",
+        "- Fixed Turnkey Option: " + fmt(q.fixed_package_usd)
+      ].join("\n");
 
       const issuesHtml = (!d.findings || d.findings.length === 0)
         ? "<div class='chk-issue' style='border-left-color:var(--pass-ink);'><strong style='color:var(--pass-ink);'>0 automated structural rule failures detected</strong><p style='margin-top:4px; font-size:0.875rem;'>Verify semantic alt-text accuracy and screen-reader reading order in NVDA prior to publication.</p></div>"
@@ -335,16 +442,42 @@
             "<p style='font-size:0.875rem; margin-bottom:14px;'>Delivered with pixel-identical visual layout, 0 failed ISO 14289-1 rules in veraPDF 1.30.3, NVDA reading-order QA, and SHA-256 manifest. Complimentary 24h sample available.</p>" +
             "<div class='cta-group'>" +
               "<a class='btn btn-primary' href='" + esc(checkoutHref) + "' target='_blank' rel='noopener'>Order remediation (" + fmt(q.fixed_package_usd) + ")</a>" +
+              "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.mailto_url) || ("mailto:" + cfg.email)) + "'>Email wholesale quote</a>" +
+              "<button type='button' class='btn btn-secondary chk-copy-quote-btn'>Copy quote brief &amp; email</button>" +
               "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.google_form_url) || cfg.formUrl) + "' target='_blank' rel='noopener'>Request free 24h sample</a>" +
-              "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.mailto_url) || ("mailto:" + cfg.email)) + "'>Email quote breakdown</a>" +
             "</div>" +
-            (checkoutHref && checkoutHref.indexOf("gumroad.com") !== -1 ? "<div class='checkout-caption' style='text-align:left; margin-top:8px;'>Secure checkout by Gumroad</div>" : "") +
+            "<div class='copy-toast chk-copy-toast' role='status' aria-live='polite'></div>" +
+            (checkoutHref && checkoutHref.indexOf("gumroad.com") !== -1 ? "<div class='checkout-caption' style='text-align:left; margin-top:8px;'>Secure instant card checkout by Gumroad</div>" : "") +
+            "<div class='escrow-strip'><span>Marketplace escrow rails:</span>" +
+              "<a class='escrow-pill' href='" + esc(cfg.fiverrUrl) + "' target='_blank' rel='noopener'>Fiverr Escrow</a>" +
+              "<a class='escrow-pill' href='" + esc(cfg.freelancerUrl) + "' target='_blank' rel='noopener'>Freelancer Escrow</a>" +
+              "<a class='escrow-pill' href='" + esc(cfg.upworkUrl) + "' target='_blank' rel='noopener'>Upwork Catalog</a>" +
+            "</div>" +
           "</div>" +
           "<h4 style='margin:20px 0 8px; font-size:0.9375rem;'>Diagnostic clause findings</h4>" +
           issuesHtml +
         "</div>";
 
       resEl.style.display = "block";
+      const copyQuoteBtn = resEl.querySelector(".chk-copy-quote-btn");
+      const copyToastEl = resEl.querySelector(".chk-copy-toast");
+      if (copyQuoteBtn) {
+        copyQuoteBtn.addEventListener("click", () => {
+          const done = () => {
+            if (copyToastEl) {
+              copyToastEl.textContent = "Copied diagnostic quote & " + cfg.email + " — paste into Gmail, Outlook Web, or Slack.";
+              copyToastEl.classList.add("visible");
+            }
+            copyQuoteBtn.textContent = "Copied quote & email!";
+            setTimeout(() => { copyQuoteBtn.textContent = "Copy quote brief & email"; }, 2200);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(copyBriefText).then(done).catch(() => {});
+          } else {
+            done();
+          }
+        });
+      }
       const dlBtn = resEl.querySelector(".chk-dl-btn");
       if (dlBtn) {
         dlBtn.addEventListener("click", () => {
