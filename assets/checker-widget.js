@@ -145,7 +145,8 @@
     const wholesaleTotal = Math.max(35.0, Math.round(pages * wRate * 100) / 100);
     const retailTotal = Math.max(65.0, Math.round(pages * rRate * 100) / 100);
     let fixedUsd = wholesaleTotal;
-    if (formCount === 0 && !likelyScanned && tableCount === 0 && pages <= 12) fixedUsd = 65.0;
+    if (formCount === 0 && !likelyScanned && pages <= 5) fixedUsd = 19.0;
+    else if (formCount === 0 && !likelyScanned && tableCount === 0 && pages <= 12) fixedUsd = 65.0;
     else if (formCount === 0 && !likelyScanned && pages <= 30) fixedUsd = 195.0;
     else if ((likelyScanned && pages <= 35) || (formCount > 0 && pages <= 25)) fixedUsd = 390.0;
 
@@ -200,7 +201,7 @@
         fixed_package_usd: fixedUsd
       },
       cta: {
-        upwork_catalog_url: fixedUsd <= 65 && cfg.checkout65 ? cfg.checkout65 : (fixedUsd <= 195 && cfg.checkout195 ? cfg.checkout195 : cfg.upworkUrl),
+        upwork_catalog_url: fixedUsd <= 19 && cfg.checkout19 ? cfg.checkout19 : (fixedUsd <= 65 && cfg.checkout65 ? cfg.checkout65 : (fixedUsd <= 195 && cfg.checkout195 ? cfg.checkout195 : cfg.upworkUrl)),
         google_form_url: cfg.formUrl,
         mailto_url: mailtoUrl
       }
@@ -214,6 +215,7 @@
       upworkUrl: root.getAttribute("data-upwork-url") || "https://www.upwork.com/services/product/2120536307204819908",
       fiverrUrl: root.getAttribute("data-fiverr-url") || "https://www.fiverr.com/s/L34o2B0",
       freelancerUrl: root.getAttribute("data-freelancer-url") || "https://www.freelancer.com/service/pdf/ada-title-ii-wcag-aa-and-pdf-ua-remediation",
+      checkout19: root.getAttribute("data-checkout19-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages?wanted=true",
       checkout65: root.getAttribute("data-checkout65-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages?wanted=true",
       checkout195: root.getAttribute("data-checkout195-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-30-pages?wanted=true",
       email: root.getAttribute("data-email") || "halocrypto101@gmail.com"
@@ -225,6 +227,41 @@
     const statusEl = root.querySelector(".chk-status");
     const errEl = root.querySelector(".chk-error");
     const resEl = root.querySelector(".chk-results");
+    const leadMailtoEl = root.querySelector(".chk-lead-mailto");
+    const leadCopyBtn = root.querySelector(".chk-lead-copy");
+    const leadToastEl = root.querySelector(".chk-lead-toast");
+    const leadContextEl = root.querySelector(".chk-lead-context");
+    let currentLeadBrief = [
+      "To: " + cfg.email,
+      "Subject: Free Clause Report + 1 Remediated Sample Page ($0)",
+      "",
+      "Hi Loc,",
+      "",
+      "Please send a free veraPDF 1.30.3 clause report + 1 remediated sample page ($0 cost):",
+      "- PDF Filename or Public URL: ",
+      "- Organization / Agency: ",
+      "- Target Deadline: "
+    ].join("\n");
+
+    if (leadCopyBtn) {
+      leadCopyBtn.addEventListener("click", () => {
+        const done = () => {
+          if (leadToastEl) {
+            leadToastEl.textContent = "Copied $0 sample & clause-report request (" + cfg.email + ") — paste into Gmail, Outlook Web, or Slack and attach your PDF.";
+            leadToastEl.classList.add("visible");
+          }
+          const orig = leadCopyBtn.getAttribute("data-orig-label") || leadCopyBtn.textContent;
+          leadCopyBtn.setAttribute("data-orig-label", orig);
+          leadCopyBtn.textContent = "Copied $0 request & email!";
+          setTimeout(() => { leadCopyBtn.textContent = orig; }, 2200);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(currentLeadBrief).then(done).catch(done);
+        } else {
+          done();
+        }
+      });
+    }
 
     if (!dz || !inp) return;
 
@@ -374,9 +411,14 @@
     function renderData(d) {
       const q = d.quote || {};
       const st = d.structure || {};
-      let checkoutHref = (q.fixed_package_usd <= 65 && cfg.checkout65)
-        ? cfg.checkout65
-        : ((q.fixed_package_usd <= 195 && cfg.checkout195) ? cfg.checkout195 : ((d.cta && d.cta.upwork_catalog_url) || cfg.upworkUrl));
+      const effectivePkgUsd = (q.pages >= 1 && q.pages <= 5 && !st.likely_scanned_ocr && (st.form_fields_total || 0) === 0)
+        ? 19.0
+        : q.fixed_package_usd;
+      let checkoutHref = (effectivePkgUsd <= 19 && cfg.checkout19)
+        ? cfg.checkout19
+        : ((effectivePkgUsd <= 65 && cfg.checkout65)
+          ? cfg.checkout65
+          : ((effectivePkgUsd <= 195 && cfg.checkout195) ? cfg.checkout195 : ((d.cta && d.cta.upwork_catalog_url) || cfg.upworkUrl)));
       if (checkoutHref && checkoutHref.indexOf("gumroad.com/l/") !== -1 && checkoutHref.indexOf("wanted=") === -1) {
         checkoutHref += (checkoutHref.indexOf("?") === -1 ? "?" : "&") + "wanted=true";
       }
@@ -393,6 +435,25 @@
       ];
 
       const clausesSummary = (d.findings || []).map((f) => f.clause).join(", ") || "None";
+      const leadSubj = "Free Clause Report + 1 Remediated Sample Page ($0) — " + d.filename + " (" + d.failed_rules + " failed rules)";
+      const leadBody = [
+        "Hi Loc,",
+        "",
+        "Please send the full veraPDF 1.30.3 clause report + 1 remediated sample page ($0 cost) for:",
+        "- Scanned File: " + d.filename + " (" + q.pages + " pages)",
+        "- Diagnostic Result: " + d.failed_rules + " failed rules / " + Number(d.failed_checks || 0) + " failed checks (Clauses: " + clausesSummary + ")",
+        "- Detected Tier: " + (q.tier_label || "Standard"),
+        "",
+        "I have attached the PDF (or public URL) to this email."
+      ].join("\n");
+      currentLeadBrief = "To: " + cfg.email + "\nSubject: " + leadSubj + "\n\n" + leadBody;
+      if (leadMailtoEl) {
+        leadMailtoEl.setAttribute("href", "mailto:" + encodeURIComponent(cfg.email) + "?subject=" + encodeURIComponent(leadSubj) + "&body=" + encodeURIComponent(leadBody));
+      }
+      if (leadContextEl) {
+        leadContextEl.textContent = "Ready for '" + d.filename + "' (" + d.failed_rules + " failed rules across " + q.pages + "p): get a full clause breakdown + 1 remediated sample page at 0 failed rules ($0 cost) within 24h.";
+      }
+
       const copyBriefText = [
         "To: " + cfg.email,
         "Subject: Fix PDF/UA-1 Issues — " + d.filename + " (" + q.pages + " pages)",
@@ -404,7 +465,7 @@
         "- Detected Tier: " + (q.tier_label || "Standard"),
         "- Failed Clauses: " + clausesSummary + " (" + d.failed_rules + " rules / " + Number(d.failed_checks || 0) + " checks)",
         "- Agency Wholesale Quote: " + fmt(q.wholesale_total_usd) + " (US Retail Value: " + fmt(q.retail_total_usd) + ")",
-        "- Fixed Turnkey Option: " + fmt(q.fixed_package_usd)
+        "- Fixed Turnkey Option: " + fmt(effectivePkgUsd)
       ].join("\n");
 
       const issuesHtml = (!d.findings || d.findings.length === 0)
@@ -433,18 +494,18 @@
           "<div class='kpi-grid'>" +
             "<div class='audit-metric'><div class='kpi-lbl'>Failed rules</div><div class='kpi-val " + (d.is_compliant ? "pass" : "fail") + "'>" + d.failed_rules + "</div><div class='kpi-sub'>" + Number(d.failed_checks || 0).toLocaleString("en-US") + " failed checks</div></div>" +
             "<div class='audit-metric'><div class='kpi-lbl'>Document tier</div><div class='kpi-val' style='font-size:1.05rem;'>" + esc(q.tier_label) + "</div><div class='kpi-sub'>" + q.pages + " total pages</div></div>" +
-            "<div class='audit-metric'><div class='kpi-lbl'>Turnkey package</div><div class='kpi-val accent'>" + fmt(q.fixed_package_usd) + "</div><div class='kpi-sub'>veraPDF 1.30.3 + NVDA QA</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Turnkey package</div><div class='kpi-val accent'>" + fmt(effectivePkgUsd) + "</div><div class='kpi-sub'>veraPDF 1.30.3 + NVDA QA</div></div>" +
             "<div class='audit-metric'><div class='kpi-lbl'>Agency wholesale</div><div class='kpi-val'>" + fmt(q.wholesale_total_usd) + "</div><div class='kpi-sub'>Typical US retail: " + fmt(q.retail_total_usd) + "</div></div>" +
           "</div>" +
           "<div class='chk-grid'>" + checks.map(([ok, lbl]) => "<div class='chk-badge'><strong style='color:" + (ok ? "var(--pass-ink)" : "var(--fail-ink)") + ";'>" + (ok ? "Pass:" : "Issue:") + "</strong> " + esc(lbl) + "</div>").join("") + "</div>" +
           "<div class='callout-panel' style='margin-top:16px;'>" +
-            "<h4 style='font-size:1.0625rem; margin-bottom:6px;'>Remediate '" + esc(d.filename) + "' (" + q.pages + "p) — " + fmt(q.fixed_package_usd) + " turnkey or " + fmt(q.wholesale_total_usd) + " wholesale</h4>" +
-            "<p style='font-size:0.875rem; margin-bottom:14px;'>Delivered with pixel-identical visual layout, 0 failed ISO 14289-1 rules in veraPDF 1.30.3, NVDA reading-order QA, and SHA-256 manifest. Complimentary 24h sample available.</p>" +
+            "<h4 style='font-size:1.0625rem; margin-bottom:6px;'>Remediate '" + esc(d.filename) + "' (" + q.pages + "p) — " + fmt(effectivePkgUsd) + " turnkey or " + fmt(q.wholesale_total_usd) + " wholesale</h4>" +
+            "<p style='font-size:0.875rem; margin-bottom:14px;'>Delivered with pixel-identical visual layout, 0 failed ISO 14289-1 rules in veraPDF 1.30.3, NVDA reading-order QA, and SHA-256 manifest. $19 Express Fix available for 1–5p PDFs.</p>" +
             "<div class='cta-group'>" +
-              "<a class='btn btn-primary' href='" + esc(checkoutHref) + "' target='_blank' rel='noopener'>Order remediation (" + fmt(q.fixed_package_usd) + ")</a>" +
+              "<a class='btn btn-primary' href='" + esc(checkoutHref) + "' target='_blank' rel='noopener'>Order remediation (" + fmt(effectivePkgUsd) + ")</a>" +
+              "<a class='btn btn-secondary' href='" + esc(cfg.checkout19) + "' target='_blank' rel='noopener'>$19 Express (1–5p)</a>" +
               "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.mailto_url) || ("mailto:" + cfg.email)) + "'>Email wholesale quote</a>" +
               "<button type='button' class='btn btn-secondary chk-copy-quote-btn'>Copy quote brief &amp; email</button>" +
-              "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.google_form_url) || cfg.formUrl) + "' target='_blank' rel='noopener'>Request free 24h sample</a>" +
             "</div>" +
             "<div class='copy-toast chk-copy-toast' role='status' aria-live='polite'></div>" +
             (checkoutHref && checkoutHref.indexOf("gumroad.com") !== -1 ? "<div class='checkout-caption' style='text-align:left; margin-top:8px;'>Secure instant card checkout by Gumroad</div>" : "") +

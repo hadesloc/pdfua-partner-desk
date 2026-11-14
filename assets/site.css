@@ -1086,15 +1086,37 @@ select {
   margin-top: 8px;
 }
 
-.rail-grid-2 .btn {
+.rail-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.rail-grid-2 .btn,
+.rail-grid-3 .btn {
   white-space: normal;
   text-align: center;
-  padding: 8px 12px;
+  padding: 8px 10px;
   font-size: var(--ts-xs);
 }
 
-@media (max-width: 520px) {
-  .rail-grid-2 { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 580px) {
+  .rail-grid-2,
+  .rail-grid-3 { grid-template-columns: minmax(0, 1fr); }
+}
+
+.ci-code-pre {
+  margin: 0;
+  padding: var(--sp-4);
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  overflow-x: auto;
 }
 
 .escrow-strip {

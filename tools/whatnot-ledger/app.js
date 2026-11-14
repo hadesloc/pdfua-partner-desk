@@ -594,3 +594,167 @@
     }
   });
 })();
+
+
+/* CRO_WHATNOT_V2_VARIANCE */
+(function () {
+  "use strict";
+  function parseMoneyNum(el) {
+    if (!el) return 0;
+    var n = parseFloat(String(el.value || "0").replace(/,/g, ""));
+    return isFinite(n) ? n : 0;
+  }
+  function fmtUsd(n) {
+    var sign = n < 0 ? "-" : "";
+    var abs = Math.abs(Math.round(n * 100) / 100);
+    var parts = abs.toFixed(2).split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return sign + "$" + parts[0] + "." + parts[1];
+  }
+  function writeClipboard(text, cb) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { cb(true); }).catch(function () { cb(false); });
+    } else {
+      cb(false);
+    }
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var email = "halocrypto101@gmail.com";
+    var inGross = document.getElementById("var-1099k-gross");
+    var inBank = document.getElementById("var-bank-deposits");
+    var inFees = document.getElementById("var-fees");
+    var inShip = document.getElementById("var-shipping");
+    var inRef = document.getElementById("var-refunds");
+    var outGap = document.getElementById("var-out-gross-gap");
+    var outDed = document.getElementById("var-out-deductions");
+    var outExp = document.getElementById("var-out-expected-payout");
+    var outVar = document.getElementById("var-out-variance");
+    var outStat = document.getElementById("var-out-status");
+    var varMailto = document.getElementById("btn-variance-mailto");
+
+    function buildVarianceSummary() {
+      var gross = parseMoneyNum(inGross);
+      var bank = parseMoneyNum(inBank);
+      var fees = parseMoneyNum(inFees);
+      var ship = parseMoneyNum(inShip);
+      var ref = parseMoneyNum(inRef);
+      var ded = fees + ship + ref;
+      var exp = gross - ded;
+      var diff = Math.round((exp - bank) * 100) / 100;
+      return [
+        "To: " + email,
+        "Subject: 2026 Whatnot Form 1099-K vs. Bank Payout Tie-Out Brief",
+        "",
+        "Hello ClearStream Ledger Desk,",
+        "",
+        "2026 Form 1099-K Variance Summary:",
+        "- 1099-K Gross (Box 1a): " + fmtUsd(gross),
+        "- Net Bank Deposits: " + fmtUsd(bank),
+        "- Documented Deductions (Fees + Shipping/APV + Refunds): " + fmtUsd(ded),
+        "- Expected 1050 Clearing Payout: " + fmtUsd(exp),
+        "- Unexplained Variance: " + fmtUsd(diff),
+        "",
+        "Target Ledger: [QuickBooks Online / Xero]"
+      ].join("\n");
+    }
+
+    function recalcVariance() {
+      if (!inGross || !outVar) return;
+      var gross = parseMoneyNum(inGross);
+      var bank = parseMoneyNum(inBank);
+      var fees = parseMoneyNum(inFees);
+      var ship = parseMoneyNum(inShip);
+      var ref = parseMoneyNum(inRef);
+      var grossGap = gross - bank;
+      var ded = fees + ship + ref;
+      var expected = gross - ded;
+      var variance = Math.round((expected - bank) * 100) / 100;
+
+      if (outGap) outGap.textContent = fmtUsd(grossGap);
+      if (outDed) outDed.textContent = fmtUsd(ded);
+      if (outExp) outExp.textContent = fmtUsd(expected);
+      outVar.textContent = fmtUsd(variance);
+      if (Math.abs(variance) < 0.005) {
+        outVar.className = "kpi-value ok";
+        if (outStat) outStat.textContent = "Reconciled to $0.00 — Schedule C / 1120 tie-out ready";
+      } else {
+        outVar.className = "kpi-value warn";
+        if (outStat) outStat.textContent = "Unexplained gap detected — check cross-month payout cutoffs & 45d USPS APV";
+      }
+      if (varMailto) {
+        var bodyLines = buildVarianceSummary().split("\n").slice(3).join("\n");
+        varMailto.setAttribute(
+          "href",
+          "mailto:" + encodeURIComponent(email) +
+            "?subject=" + encodeURIComponent("2026 Whatnot Form 1099-K vs. Bank Payout Tie-Out (" + fmtUsd(variance) + " variance)") +
+            "&body=" + encodeURIComponent(bodyLines)
+        );
+      }
+    }
+
+    [inGross, inBank, inFees, inShip, inRef].forEach(function (inp) {
+      if (inp) {
+        inp.addEventListener("input", recalcVariance);
+        inp.addEventListener("change", recalcVariance);
+      }
+    });
+
+    var btnBalanced = document.getElementById("btn-var-preset-balanced");
+    if (btnBalanced) {
+      btnBalanced.addEventListener("click", function () {
+        if (inGross) inGross.value = "48500.00";
+        if (inBank) inBank.value = "36420.00";
+        if (inFees) inFees.value = "6185.00";
+        if (inShip) inShip.value = "4615.00";
+        if (inRef) inRef.value = "1280.00";
+        recalcVariance();
+      });
+    }
+    var btnGap = document.getElementById("btn-var-preset-gap");
+    if (btnGap) {
+      btnGap.addEventListener("click", function () {
+        if (inGross) inGross.value = "48500.00";
+        if (inBank) inBank.value = "35000.00";
+        if (inFees) inFees.value = "6185.00";
+        if (inShip) inShip.value = "4614.50";
+        if (inRef) inRef.value = "1280.00";
+        recalcVariance();
+      });
+    }
+
+    var btnCopyVar = document.getElementById("btn-copy-variance-summary");
+    var varCopyStat = document.getElementById("variance-copy-status");
+    if (btnCopyVar) {
+      btnCopyVar.addEventListener("click", function () {
+        writeClipboard(buildVarianceSummary(), function (ok) {
+          if (varCopyStat) {
+            varCopyStat.textContent = ok
+              ? "Copied 1099-K variance summary and email (" + email + ") to clipboard."
+              : "Email your variance summary directly to " + email + ".";
+          }
+        });
+      });
+    }
+
+    var btnCopyAudit = document.getElementById("btn-copy-whatnot-audit");
+    var auditStat = document.getElementById("whatnot-audit-copy-status");
+    var auditMailto = document.getElementById("btn-whatnot-audit-mailto");
+    if (btnCopyAudit) {
+      btnCopyAudit.addEventListener("click", function () {
+        var href = auditMailto ? (auditMailto.getAttribute("href") || "") : "";
+        var qIdx = href.indexOf("?");
+        var params = new URLSearchParams(qIdx >= 0 ? href.slice(qIdx + 1) : "");
+        var payload = "To: " + email + "\nSubject: " + (params.get("subject") || "Free 1-Month Whatnot Payout-to-1099-K Sample Audit ($0)") + "\n\n" + (params.get("body") || "");
+        writeClipboard(payload, function (ok) {
+          if (auditStat) {
+            auditStat.textContent = ok
+              ? "Copied $0 1-month audit brief and email (" + email + ") to clipboard."
+              : "Email 1 month of CSVs directly to " + email + " for your free sample audit.";
+          }
+        });
+      });
+    }
+
+    recalcVariance();
+  });
+})();

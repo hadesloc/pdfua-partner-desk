@@ -20,6 +20,7 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#scanner" class="nav-hide-mobile">CSV scanner</a>
+        <a href="#variance-calculator" class="nav-hide-mobile">1099-K calculator</a>
         <a href="#sample-output" class="nav-hide-mobile">Sample output</a>
         <a href="#how-it-works" class="nav-hide-mobile">How it works</a>
         <a href="#pricing" class="nav-hide-mobile">Pricing</a>
@@ -220,6 +221,84 @@
             <button type="button" id="btn-gate-cta" class="btn btn-secondary">Unlock options ($45 / $99 / $129)</button>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="variance-calculator">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Q4 Tax-Prep Tie-Out &middot; 100% Client-Side Math</span>
+          <h2>2026 Form 1099-K vs. Bank Payout Variance Calculator</h2>
+          <p class="section-sub">Check why Whatnot Form 1099-K Box 1a gross receipts exceed net bank deposits—and spot unexplained cross-period payout cutoffs or unbooked 45-day USPS APV adjustments before filing Schedule C / 1120.</p>
+        </div>
+        <div class="cta-row">
+          <button type="button" id="btn-var-preset-balanced" class="btn btn-secondary btn-sm">Demo: $0.00 reconciled</button>
+          <button type="button" id="btn-var-preset-gap" class="btn btn-secondary btn-sm">Demo: $1,420.50 cutoff gap</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="mapping-grid" style="margin-top:0; margin-bottom:20px;">
+          <div class="field-group">
+            <label for="var-1099k-gross">1099-K Gross (Box 1a, $)</label>
+            <input id="var-1099k-gross" type="number" step="0.01" min="0" value="48500.00">
+          </div>
+          <div class="field-group">
+            <label for="var-bank-deposits">Net Bank Deposits ($)</label>
+            <input id="var-bank-deposits" type="number" step="0.01" min="0" value="36420.00">
+          </div>
+          <div class="field-group">
+            <label for="var-fees">Marketplace &amp; Payment Fees ($)</label>
+            <input id="var-fees" type="number" step="0.01" min="0" value="6185.00">
+          </div>
+          <div class="field-group">
+            <label for="var-shipping">Buyer-Paid Shipping &amp; APV ($)</label>
+            <input id="var-shipping" type="number" step="0.01" min="0" value="4615.00">
+          </div>
+          <div class="field-group">
+            <label for="var-refunds">Refunds &amp; Giveaways ($)</label>
+            <input id="var-refunds" type="number" step="0.01" min="0" value="1280.00">
+          </div>
+        </div>
+        <div class="kpi-grid" style="margin-bottom:16px;">
+          <div class="kpi-box">
+            <div class="kpi-label">1099-K vs. Bank Deposit Gap</div>
+            <div id="var-out-gross-gap" class="kpi-value brand">$12,080.00</div>
+            <div class="kpi-sub">Box 1a Gross minus Bank Deposits</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-label">Documented Deductions</div>
+            <div id="var-out-deductions" class="kpi-value">$12,080.00</div>
+            <div class="kpi-sub">Fees + Shipping/APV + Refunds</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-label">Expected Clearing Payout</div>
+            <div id="var-out-expected-payout" class="kpi-value">$36,420.00</div>
+            <div class="kpi-sub">1050 Whatnot Clearing target</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-label">Unexplained 1099-K Variance</div>
+            <div id="var-out-variance" class="kpi-value ok">$0.00</div>
+            <div id="var-out-status" class="kpi-sub">Reconciled to $0.00 — Schedule C / 1120 tie-out ready</div>
+          </div>
+        </div>
+        <div class="cta-row cta-row-left">
+          <a id="btn-variance-buy99" class="btn btn-primary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/l/whatnot-clearing-journal?wanted=true" target="_blank" rel="noopener">Order $99 2026 Catch-Up Pass</a>
+          <a id="btn-variance-mailto" class="btn btn-secondary btn-sm" href="mailto:halocrypto101%40gmail.com?subject=2026%20Whatnot%20Form%201099-K%20vs.%20Bank%20Payout%20Tie-Out%20Brief&amp;body=Hello%20ClearStream%20Ledger%20Desk%2C%0A%0AWe%20ran%20the%202026%20Form%201099-K%20vs.%20Bank%20Payout%20Variance%20Calculator%20and%20want%20to%20reconcile%20our%20Whatnot%20payout%20batches%3A%0A1099-K%20Gross%20%28Box%201a%29%3A%20%2448%2C500.00%0ANet%20Bank%20Deposits%3A%20%2436%2C420.00%0ATarget%20Ledger%3A%20%5BQuickBooks%20Online%20/%20Xero%5D%0A">Email Variance Tie-Out Brief</a>
+          <button type="button" id="btn-copy-variance-summary" class="btn btn-secondary btn-sm" data-email="halocrypto101@gmail.com">Copy variance summary &amp; email</button>
+        </div>
+        <p id="variance-copy-status" class="kpi-sub" role="status" aria-live="polite" style="margin-top:8px; margin-bottom:0;"></p>
+      </div>
+      <div class="card card-alt" id="whatnot-free-audit-card">
+        <span class="pill pill-ok" style="margin-bottom:8px;">$0 CPA &amp; Seller Proof</span>
+        <h3 style="margin-bottom:6px;">Free 1-Month Whatnot Payout-to-1099-K Sample Audit by Email ($0)</h3>
+        <p class="kpi-sub" style="margin-top:0; margin-bottom:12px;">QBO ProAdvisor, Xero bookkeeper, or high-volume seller? Send 1 month of Seller Hub Weekly Orders + Statements CSVs (buyer PII columns optional/stripped) and receive a complimentary 1-month balanced 1050 Clearing Journal + 45-day USPS APV recovery scorecard within 24 hours.</p>
+        <div class="cta-row cta-row-left">
+          <a id="btn-whatnot-audit-mailto" class="btn btn-primary btn-sm" href="mailto:halocrypto101%40gmail.com?subject=Free%201-Month%20Whatnot%20Payout-to-1099-K%20Sample%20Audit%20%28%240%29&amp;body=Hello%20ClearStream%20Ledger%20Desk%2C%0A%0APlease%20run%20a%20complimentary%20%28%240%29%201-month%20Whatnot%20Payout-to-1099-K%20sample%20reconciliation%20audit%20and%20email%20balanced%20Xero/QBO%20proof%20journals%3A%0A%0ABookkeeping%20Firm%20/%20Seller%20Shop%3A%20%0ATarget%20Ledger%3A%20%5BQuickBooks%20Online%20/%20Xero%5D%0AApprox.%202026%20Gross%201099-K%20Volume%3A%20%0A%28Attach%201%20non-PII%20Seller%20Hub%20Weekly%20Orders%20/%20Statements%20CSV%20or%20request%20anonymized%20walkthrough%29%0A">Request Free 1-Month Sample Audit ($0)</a>
+          <button type="button" id="btn-copy-whatnot-audit" class="btn btn-secondary btn-sm" data-email="halocrypto101@gmail.com">Copy $0 audit brief &amp; email (halocrypto101@gmail.com)</button>
+          <a id="btn-whatnot-audit-form" class="btn btn-secondary btn-sm" href="https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform" target="_blank" rel="noopener">Submit via Partner Form</a>
+        </div>
+        <p id="whatnot-audit-copy-status" class="kpi-sub" role="status" aria-live="polite" style="margin-top:8px; margin-bottom:0;"></p>
+        <p class="kpi-sub" style="margin-top:8px; margin-bottom:0; font-size:0.78rem;">Client-side bookkeeping &amp; reconciliation formatting assistance — not tax, CPA, or legal advice.</p>
       </div>
     </section>
 

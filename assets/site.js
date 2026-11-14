@@ -125,19 +125,28 @@
     }
 
     const fastNoteEl = document.getElementById("calc-fast-checkout-note");
+    const btn19 = document.getElementById("btn-calc-gumroad-19");
     const btn65 = document.getElementById("btn-calc-gumroad-65");
     const btn195 = document.getElementById("btn-calc-gumroad-195");
     if (fastNoteEl) {
-      if (pages > 0 && pages <= 12 && vals.tables === 0 && vals.ocr === 0 && vals.forms === 0) {
+      if (pages >= 1 && pages <= 5) {
+        fastNoteEl.textContent = "Instant card checkout match: $19 Express Fix (1–5 pages, 24h)";
+        if (btn19) { btn19.classList.add("btn-primary"); btn19.classList.remove("btn-secondary"); }
+        if (btn65) { btn65.classList.add("btn-secondary"); btn65.classList.remove("btn-primary"); }
+        if (btn195) { btn195.classList.add("btn-secondary"); btn195.classList.remove("btn-primary"); }
+      } else if (pages > 0 && pages <= 12 && vals.tables === 0 && vals.ocr === 0 && vals.forms === 0) {
         fastNoteEl.textContent = "Instant card checkout match: $65 Starter (up to 12 text pages)";
+        if (btn19) { btn19.classList.add("btn-secondary"); btn19.classList.remove("btn-primary"); }
         if (btn65) { btn65.classList.add("btn-primary"); btn65.classList.remove("btn-secondary"); }
         if (btn195) { btn195.classList.add("btn-secondary"); btn195.classList.remove("btn-primary"); }
       } else if (pages > 0 && pages <= 30 && vals.ocr === 0 && vals.forms === 0) {
         fastNoteEl.textContent = "Instant card checkout match: $195 Standard (up to 30 report/table pages)";
+        if (btn19) { btn19.classList.add("btn-secondary"); btn19.classList.remove("btn-primary"); }
         if (btn195) { btn195.classList.add("btn-primary"); btn195.classList.remove("btn-secondary"); }
         if (btn65) { btn65.classList.add("btn-secondary"); btn65.classList.remove("btn-primary"); }
       } else {
         fastNoteEl.textContent = "1-click card checkout for single pilot packages:";
+        if (btn19) { btn19.classList.add("btn-secondary"); btn19.classList.remove("btn-primary"); }
         if (btn65) { btn65.classList.add("btn-secondary"); btn65.classList.remove("btn-primary"); }
         if (btn195) { btn195.classList.add("btn-secondary"); btn195.classList.remove("btn-primary"); }
       }
@@ -261,6 +270,31 @@
       });
     });
   });
+
+  const ciCopyBtn = document.getElementById("btn-copy-ci-yaml");
+  if (ciCopyBtn) {
+    ciCopyBtn.addEventListener("click", () => {
+      const codeEl = document.getElementById("ci-yaml-snippet");
+      const statusEl = document.getElementById("ci-yaml-copy-status");
+      const yamlText = codeEl ? codeEl.textContent : "";
+      if (!yamlText) return;
+      const onCopied = () => {
+        if (statusEl) {
+          statusEl.textContent = "Copied .github/workflows/pdf-accessibility.yml to clipboard.";
+          statusEl.classList.add("visible");
+        }
+        const orig = ciCopyBtn.getAttribute("data-orig-label") || ciCopyBtn.textContent;
+        ciCopyBtn.setAttribute("data-orig-label", orig);
+        ciCopyBtn.textContent = "Copied workflow YAML!";
+        setTimeout(() => { ciCopyBtn.textContent = orig; }, 2200);
+      };
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+        navigator.clipboard.writeText(yamlText).then(onCopied).catch(onCopied);
+      } else {
+        onCopied();
+      }
+    });
+  }
 
   if (document.getElementById("num-simple")) {
     recalc();

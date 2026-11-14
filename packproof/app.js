@@ -299,3 +299,31 @@
     }
   });
 })();
+
+
+/* CRO_PACKPROOF_V2_AUDIT */
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    var email = "halocrypto101@gmail.com";
+    var auditCopyBtn = document.getElementById("btn-copy-packproof-audit");
+    var auditMailto = document.getElementById("btn-packproof-audit-mailto");
+    var auditStatus = document.getElementById("packproof-audit-copy-status");
+    if (!auditCopyBtn) return;
+    auditCopyBtn.addEventListener("click", function () {
+      var href = auditMailto ? (auditMailto.getAttribute("href") || "") : "";
+      var qIdx = href.indexOf("?");
+      var params = new URLSearchParams(qIdx >= 0 ? href.slice(qIdx + 1) : "");
+      var payload = "To: " + email + "\nSubject: " + (params.get("subject") || "Free 1-PDF Lab Report Article 5 Sanity Audit ($0)") + "\n\n" + (params.get("body") || "");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(payload).then(function () {
+          if (auditStatus) auditStatus.textContent = "Copied $0 lab audit brief & email (" + email + ") to clipboard.";
+        }).catch(function () {
+          if (auditStatus) auditStatus.textContent = "Email 1 lab PDF directly to " + email + " for your free 24h audit.";
+        });
+      } else if (auditStatus) {
+        auditStatus.textContent = "Email 1 lab PDF directly to " + email + " for your free 24h audit.";
+      }
+    });
+  });
+})();
