@@ -296,6 +296,31 @@
     });
   }
 
+  const pipCopyBtn = document.getElementById("btn-copy-pip-wheel");
+  if (pipCopyBtn) {
+    pipCopyBtn.addEventListener("click", () => {
+      const pipEl = document.getElementById("pip-wheel-snippet");
+      const statusEl = document.getElementById("ci-yaml-copy-status");
+      const cmdText = pipEl ? pipEl.textContent : "";
+      if (!cmdText) return;
+      const onPipCopied = () => {
+        if (statusEl) {
+          statusEl.textContent = "Copied pip install command for pdfa11y v0.5.0 wheel to clipboard.";
+          statusEl.classList.add("visible");
+        }
+        const orig = pipCopyBtn.getAttribute("data-orig-label") || pipCopyBtn.textContent;
+        pipCopyBtn.setAttribute("data-orig-label", orig);
+        pipCopyBtn.textContent = "Copied pip command!";
+        setTimeout(() => { pipCopyBtn.textContent = orig; }, 2200);
+      };
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+        navigator.clipboard.writeText(cmdText).then(onPipCopied).catch(onPipCopied);
+      } else {
+        onPipCopied();
+      }
+    });
+  }
+
   if (document.getElementById("num-simple")) {
     recalc();
   }

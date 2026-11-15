@@ -362,17 +362,20 @@
       <div class="card" id="github-action-ci" style="margin-top:var(--sp-5);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
           <div style="max-width:64ch;">
-            <span class="eyebrow">Open-Source DevOps Gate &middot; Apache-2.0</span>
-            <h3 style="font-size:1.25rem; margin-bottom:6px;">Automate PDF/UA Checks in GitHub Actions ($0 Open-Source CI)</h3>
+            <span class="eyebrow">Open-Source Ecosystem (`v1.2.0`) &middot; GitHub Action, WordPress Plugin &amp; Python CLI</span>
+            <h3 style="font-size:1.25rem; margin-bottom:6px;">Scan PDFs Free in WordPress, Python (`pip`) or GitHub Actions ($0)</h3>
             <p style="font-size:0.875rem; margin:0;">
-              Block inaccessible PDFs on every pull request using our open-source composite GitHub Action powered by <code>veraPDF 1.30.3</code> (ISO 14289-1 / ADA Title II / Section 508) with zero file retention and Markdown PR summaries.
+              Audit WordPress <code>wp-content/uploads</code> media libraries locally with our pure-PHP admin scanner (<code>Tools &rarr; PDF/UA &amp; ADA Scanner</code>), install the <code>pdfa11y</code> Python CLI wheel, or block inaccessible PDFs on pull requests via <code>veraPDF 1.30.3</code>.
             </p>
           </div>
           <div class="cta-group" style="margin-top:0;">
+            <a id="btn-download-wp-plugin" class="btn btn-primary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.2.0/pdfua-ada-media-scanner.zip" target="_blank" rel="noopener">Download WordPress Plugin (.zip)</a>
+            <button type="button" id="btn-copy-pip-wheel" class="btn btn-secondary btn-sm">Copy pip install</button>
             <button type="button" id="btn-copy-ci-yaml" class="btn btn-secondary btn-sm">Copy workflow YAML</button>
-            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/tag/v1.2.0" target="_blank" rel="noopener">Release v1.2.0 &rarr;</a>
           </div>
         </div>
+        <pre class="ci-code-pre" style="margin-bottom:8px;"><code id="pip-wheel-snippet">pip install https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.2.0/pdf_accessibility_local-0.5.0-py3-none-any.whl</code></pre>
         <pre class="ci-code-pre"><code id="ci-yaml-snippet">- name: Check PDFs for PDF/UA-1 &amp; ADA Title II compliance
   uses: hadesloc/pdfua-ada-checker@v1
   with:
@@ -492,7 +495,8 @@
           </div>
           <div class="cta-group" style="margin-top:0;">
             <a id="btn-free-starter-kit" class="btn btn-primary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/l/compliance-starter-kit?wanted=true" target="_blank" rel="noopener">Download Free Open-Source CLI Starter Kit ($0+)</a>
-            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases" target="_blank" rel="noopener">GitHub Release ZIP &rarr;</a>
+            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.2.0/pdfua-ada-media-scanner.zip" target="_blank" rel="noopener">WordPress Scanner Plugin (.zip)</a>
+            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/tag/v1.2.0" target="_blank" rel="noopener">GitHub Release v1.2.0 &rarr;</a>
           </div>
         </div>
         <details class="faq-item" id="storefront-zip-details" style="margin-top:14px;">
@@ -694,6 +698,8 @@
           <li><a href="section-508-pdf-checker/">Section 508 PDF Checker</a></li>
           <li><a href="packproof/">PackProof EU (PPWR)</a></li>
           <li><a href="tools/whatnot-ledger/">ClearStream Ledger</a></li>
+          <li><a href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.2.0/pdfua-ada-media-scanner.zip" target="_blank" rel="noopener">WordPress PDF/UA Scanner</a></li>
+          <li><a href="https://dev.to/pdfuapartnerdesk" target="_blank" rel="noopener">Engineering Guides (Dev.to)</a></li>
         </ul>
       </div>
       <div class="footer-col">
