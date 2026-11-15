@@ -1,0 +1,218 @@
+{
+  "promo_code": "EARLY50",
+  "total_partner_demos": 20,
+  "tiktok_partner_demos_count": 10,
+  "packproof_oem_demos_count": 10,
+  "demos": [
+    {
+      "lead_id": "TTBK-NOV15-01",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "Ring Tax",
+      "slug": "ring-tax",
+      "demo_path": "tools/tiktok-1099k/partners/ring-tax/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/ring-tax/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "TTBK-NOV15-02",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "BELAY Financial Solutions",
+      "slug": "belay-financial-solutions",
+      "demo_path": "tools/tiktok-1099k/partners/belay-financial-solutions/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/belay-financial-solutions/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "TTBK-NOV15-03",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "GreenTarget Ecommerce Accounting",
+      "slug": "greentarget-ecommerce-accounting",
+      "demo_path": "tools/tiktok-1099k/partners/greentarget-ecommerce-accounting/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/greentarget-ecommerce-accounting/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "TTBK-NOV15-04",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "The Cozy Bookkeeper",
+      "slug": "the-cozy-bookkeeper",
+      "demo_path": "tools/tiktok-1099k/partners/the-cozy-bookkeeper/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/the-cozy-bookkeeper/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "TTBK-NOV15-05",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "Blue Light CPA",
+      "slug": "blue-light-cpa",
+      "demo_path": "tools/tiktok-1099k/partners/blue-light-cpa/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/blue-light-cpa/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "TTBK-NOV15-06",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "ECommerce Accounting LLC",
+      "slug": "ecommerce-accounting-llc",
+      "demo_path": "tools/tiktok-1099k/partners/ecommerce-accounting-llc/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/ecommerce-accounting-llc/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "TTBK-NOV15-07",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "Fiskal",
+      "slug": "fiskal",
+      "demo_path": "tools/tiktok-1099k/partners/fiskal/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/fiskal/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "TTBK-NOV15-08",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "Reconciled",
+      "slug": "reconciled",
+      "demo_path": "tools/tiktok-1099k/partners/reconciled/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/reconciled/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "TTBK-NOV15-09",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "AccuLink CPA",
+      "slug": "acculink-cpa",
+      "demo_path": "tools/tiktok-1099k/partners/acculink-cpa/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/acculink-cpa/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "TTBK-NOV15-10",
+      "segment": "tiktok_ecommerce_bookkeepers",
+      "recipient_name": "Northhall",
+      "slug": "northhall",
+      "demo_path": "tools/tiktok-1099k/partners/northhall/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/partners/northhall/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-01",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "Direct Eco Green",
+      "slug": "direct-eco-green",
+      "demo_path": "packproof/demos/direct-eco-green/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/direct-eco-green/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-02",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "IPSC Vietnam",
+      "slug": "ipsc-vietnam",
+      "demo_path": "packproof/demos/ipsc-vietnam/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/ipsc-vietnam/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-03",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "Vietnam Boxes JSC",
+      "slug": "vietnam-boxes-jsc",
+      "demo_path": "packproof/demos/vietnam-boxes-jsc/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/vietnam-boxes-jsc/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-04",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "New Life Packaging (Newlifepack)",
+      "slug": "new-life-packaging",
+      "demo_path": "packproof/demos/new-life-packaging/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/new-life-packaging/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-05",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "In7 Packaging (Công ty CP In số 7)",
+      "slug": "in7-packaging",
+      "demo_path": "packproof/demos/in7-packaging/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/in7-packaging/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-06",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "King Can Industry Co., Ltd.",
+      "slug": "king-can-industry",
+      "demo_path": "packproof/demos/king-can-industry/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/king-can-industry/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-07",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "DY Advanced Materials Inc.",
+      "slug": "dy-advanced-materials",
+      "demo_path": "packproof/demos/dy-advanced-materials/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/dy-advanced-materials/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-08",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "Formosa Flexible Packaging Corp.",
+      "slug": "formosa-flexible-packaging",
+      "demo_path": "packproof/demos/formosa-flexible-packaging/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/formosa-flexible-packaging/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-09",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "Car Tong Co., Ltd.",
+      "slug": "car-tong",
+      "demo_path": "packproof/demos/car-tong/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/car-tong/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    },
+    {
+      "lead_id": "OEM-NOV14-10",
+      "segment": "oem_export_packaging_ppwr",
+      "recipient_name": "Santa Press Co., Ltd.",
+      "slug": "santa-press",
+      "demo_path": "packproof/demos/santa-press/",
+      "demo_url": "https://hadesloc.github.io/pdfua-partner-desk/packproof/demos/santa-press/",
+      "checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack",
+      "secondary_checkout_url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack",
+      "promo_code": "EARLY50"
+    }
+  ]
+}

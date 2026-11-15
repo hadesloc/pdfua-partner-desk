@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /deals/
+Disallow: /tools/tiktok-1099k/partners/
+Disallow: /packproof/demos/
 Sitemap: https://hadesloc.github.io/pdfua-partner-desk/sitemap.xml

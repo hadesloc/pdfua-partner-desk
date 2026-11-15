@@ -362,19 +362,23 @@
       <div class="card" id="github-action-ci" style="margin-top:var(--sp-5);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
           <div style="max-width:64ch;">
-            <span class="eyebrow">Open-Source Ecosystem (`v1.2.0`) &middot; GitHub Action, WordPress Plugin &amp; Python CLI</span>
-            <h3 style="font-size:1.25rem; margin-bottom:6px;">Scan PDFs Free in WordPress, Python (`pip`) or GitHub Actions ($0)</h3>
+            <span class="eyebrow">Open-Source Ecosystem (`v1.3.0`) &middot; Firefox MV3, Node CLI, WordPress, Python &amp; GitHub Action</span>
+            <h3 style="font-size:1.25rem; margin-bottom:6px;">Scan PDFs Free in Firefox, Node (`npx`), WordPress, Python (`pip`) or GitHub Actions ($0)</h3>
             <p style="font-size:0.875rem; margin:0;">
-              Audit WordPress <code>wp-content/uploads</code> media libraries locally with our pure-PHP admin scanner (<code>Tools &rarr; PDF/UA &amp; ADA Scanner</code>), install the <code>pdfa11y</code> Python CLI wheel, or block inaccessible PDFs on pull requests via <code>veraPDF 1.30.3</code>.
+              Inspect active-tab PDFs locally with our Firefox MV3 extension, run zero-dependency <code>pdfua-ada-scanner</code> in Node.js, audit WordPress <code>wp-content/uploads</code>, install the <code>pdfa11y</code> Python wheel, or block inaccessible PDFs on PRs via <code>veraPDF 1.30.3</code>.
             </p>
           </div>
           <div class="cta-group" style="margin-top:0;">
-            <a id="btn-download-wp-plugin" class="btn btn-primary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.2.0/pdfua-ada-media-scanner.zip" target="_blank" rel="noopener">Download WordPress Plugin (.zip)</a>
+            <a id="btn-download-wp-plugin" class="btn btn-primary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.2.0/pdfua-ada-media-scanner.zip" target="_blank" rel="noopener">WordPress Plugin (.zip)</a>
+            <a id="btn-download-firefox-ext" class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.3.0/pdfua-ada-page-scanner-firefox-mv3.zip" target="_blank" rel="noopener">Firefox Extension (.zip)</a>
+            <a id="btn-download-free-sheets" class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.3.0/Free-1099K-and-PPWR-Spreadsheet-Templates.zip" target="_blank" rel="noopener">Free Spreadsheets (.xlsx)</a>
+            <button type="button" id="btn-copy-npm-tgz" class="btn btn-secondary btn-sm">Copy npm install</button>
             <button type="button" id="btn-copy-pip-wheel" class="btn btn-secondary btn-sm">Copy pip install</button>
             <button type="button" id="btn-copy-ci-yaml" class="btn btn-secondary btn-sm">Copy workflow YAML</button>
-            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/tag/v1.2.0" target="_blank" rel="noopener">Release v1.2.0 &rarr;</a>
+            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/tag/v1.3.0" target="_blank" rel="noopener">Release v1.3.0 &rarr;</a>
           </div>
         </div>
+        <pre class="ci-code-pre" style="margin-bottom:8px;"><code id="npm-tgz-snippet">npm install -g https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.3.0/pdfua-ada-scanner-1.3.0.tgz</code></pre>
         <pre class="ci-code-pre" style="margin-bottom:8px;"><code id="pip-wheel-snippet">pip install https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.2.0/pdf_accessibility_local-0.5.0-py3-none-any.whl</code></pre>
         <pre class="ci-code-pre"><code id="ci-yaml-snippet">- name: Check PDFs for PDF/UA-1 &amp; ADA Title II compliance
   uses: hadesloc/pdfua-ada-checker@v1
@@ -392,6 +396,23 @@
         <span class="eyebrow">Transparent pricing</span>
         <h2>Fixed-price packages or per-page agency wholesale</h2>
         <p>Order a single document package online, or partner at wholesale per-page rates ($35 minimum batch) for larger backlogs.</p>
+      </div>
+
+      <div class="card" id="early50-promo-banner" style="margin-bottom:var(--sp-4); background:var(--pass-soft); border-color:var(--pass-bdr);">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;">
+          <div style="max-width:66ch;">
+            <span class="status-pill status-pass" style="margin-bottom:6px;">Launch Offer &middot; First 10 Orders</span>
+            <h3 style="font-size:1.125rem; margin-bottom:4px;">Promo Code <code>EARLY50</code> — 50% Off Self-Serve Software Suites</h3>
+            <p style="font-size:0.875rem; margin:0;">
+              Apply <strong><code>EARLY50</code></strong> at Gumroad checkout for <strong>50% off</strong> the first 10 licenses across all paid self-serve kits (<strong>$9.50</strong> Express &middot; <strong>$32.50</strong> Studio Pro &middot; <strong>$97.50</strong> Agency Pro &middot; <strong>$39.50</strong> <a href="tools/tiktok-1099k/">TikTok/eBay/Etsy 1099-K Suite</a>), backed by our 30-day money-back guarantee.
+            </p>
+          </div>
+          <div class="cta-group" style="margin-top:0;">
+            <button type="button" id="btn-storefront-copy-early50" class="btn btn-primary btn-sm" data-copy-brief="EARLY50" data-copy-label="Copied EARLY50!" data-copy-status-id="early50-copy-toast">Copy Code EARLY50</button>
+            <a class="btn btn-secondary btn-sm" href="tools/tiktok-1099k/">Multi-Channel 1099-K ($39.50) &rarr;</a>
+          </div>
+        </div>
+        <div id="early50-copy-toast" class="copy-toast" role="status" aria-live="polite"></div>
       </div>
 
       <div class="card" id="express-19-tier" style="margin-bottom:var(--sp-4); background:var(--accent-soft); border-color:var(--accent-bdr);">
@@ -487,16 +508,17 @@
       <div class="card" id="storefront-self-serve-preview" style="margin-top:var(--sp-4); margin-bottom:var(--sp-4);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
           <div style="max-width:64ch;">
-            <span class="eyebrow">24/7 Instant ZIP Fulfillment &middot; 100% Local Offline Execution</span>
+            <span class="eyebrow">24/7 Instant ZIP Fulfillment &middot; Code EARLY50 for 50% Off First 10 Orders</span>
             <h3 style="font-size:1.1875rem; margin-bottom:6px;">Instant Self-Serve Software ZIP — Preview Included Files</h3>
             <p style="font-size:0.875rem; margin:0;">
-              Every Gumroad checkout immediately unlocks a local software bundle (zero cloud uploads, 30-day money-back guarantee) alongside your turnkey remediation entitlement—or test our open-source Python 3 stdlib CLI quick-checkers first at <strong>$0+</strong>.
+              Every Gumroad checkout immediately unlocks a local software bundle (zero cloud uploads, 30-day money-back guarantee; use code <strong><code>EARLY50</code></strong> for <strong>50% off</strong> the first 10 orders)—or test our open-source Python 3 stdlib CLI quick-checkers &amp; spreadsheets first at <strong>$0+</strong>.
             </p>
           </div>
           <div class="cta-group" style="margin-top:0;">
             <a id="btn-free-starter-kit" class="btn btn-primary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/l/compliance-starter-kit?wanted=true" target="_blank" rel="noopener">Download Free Open-Source CLI Starter Kit ($0+)</a>
+            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.3.0/Free-1099K-and-PPWR-Spreadsheet-Templates.zip" target="_blank" rel="noopener">Free 1099-K &amp; PPWR Sheets (.xlsx)</a>
             <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.2.0/pdfua-ada-media-scanner.zip" target="_blank" rel="noopener">WordPress Scanner Plugin (.zip)</a>
-            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/tag/v1.2.0" target="_blank" rel="noopener">GitHub Release v1.2.0 &rarr;</a>
+            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/tag/v1.3.0" target="_blank" rel="noopener">GitHub Release v1.3.0 &rarr;</a>
             <a class="btn btn-secondary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/affiliates" target="_blank" rel="noopener">Earn 40% Affiliate Commission</a>
           </div>
         </div>
@@ -699,7 +721,9 @@
           <li><a href="section-508-pdf-checker/">Section 508 PDF Checker</a></li>
           <li><a href="packproof/">PackProof EU (PPWR)</a></li>
           <li><a href="tools/whatnot-ledger/">ClearStream Ledger</a></li>
+          <li><a href="tools/tiktok-1099k/">TikTok, eBay &amp; Etsy 1099-K</a></li>
           <li><a href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.2.0/pdfua-ada-media-scanner.zip" target="_blank" rel="noopener">WordPress PDF/UA Scanner</a></li>
+          <li><a href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.3.0/pdfua-ada-page-scanner-firefox-mv3.zip" target="_blank" rel="noopener">Firefox PDF/UA Extension</a></li>
           <li><a href="https://dev.to/pdfuapartnerdesk" target="_blank" rel="noopener">Engineering Guides (Dev.to)</a></li>
         </ul>
       </div>

@@ -224,12 +224,13 @@
       const brief = btn.getAttribute("data-copy-brief") || "";
       const statusId = btn.getAttribute("data-copy-status-id") || "";
       const fallbackId = btn.getAttribute("data-copy-fallback-id") || "";
+      const copiedLabel = btn.getAttribute("data-copy-label") || "Copied brief & email!";
       copyWithFeedback(
         brief,
         statusId ? document.getElementById(statusId) : null,
         fallbackId ? document.getElementById(fallbackId) : null,
         btn,
-        "Copied brief & email!"
+        copiedLabel
       );
     });
   });
@@ -317,6 +318,31 @@
         navigator.clipboard.writeText(cmdText).then(onPipCopied).catch(onPipCopied);
       } else {
         onPipCopied();
+      }
+    });
+  }
+
+  const npmCopyBtn = document.getElementById("btn-copy-npm-tgz");
+  if (npmCopyBtn) {
+    npmCopyBtn.addEventListener("click", () => {
+      const npmEl = document.getElementById("npm-tgz-snippet");
+      const statusEl = document.getElementById("ci-yaml-copy-status");
+      const cmdText = npmEl ? npmEl.textContent : "";
+      if (!cmdText) return;
+      const onNpmCopied = () => {
+        if (statusEl) {
+          statusEl.textContent = "Copied npm install command for pdfua-ada-scanner v1.3.0 CLI to clipboard.";
+          statusEl.classList.add("visible");
+        }
+        const orig = npmCopyBtn.getAttribute("data-orig-label") || npmCopyBtn.textContent;
+        npmCopyBtn.setAttribute("data-orig-label", orig);
+        npmCopyBtn.textContent = "Copied npm command!";
+        setTimeout(() => { npmCopyBtn.textContent = orig; }, 2200);
+      };
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+        navigator.clipboard.writeText(cmdText).then(onNpmCopied).catch(onNpmCopied);
+      } else {
+        onNpmCopied();
       }
     });
   }

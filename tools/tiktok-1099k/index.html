@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TikTok Shop US, eBay &amp; Etsy 1099-K to QuickBooks Online &amp; Xero Clearing Converter</title>
+<meta name="description" content="100% local browser &amp; Python CLI converter reconciling TikTok Shop US, eBay Managed Payments, and Etsy 2026 Form 1099-K settlement CSVs into balanced QBO &amp; Xero 1050 Platform Clearing journals.">
+<link rel="canonical" href="https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/">
+<link rel="stylesheet" href="../../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "ClearStream Multi-Channel — TikTok Shop US, eBay & Etsy 1099-K to QBO & Xero Clearing Kit", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Windows, macOS, Linux", "url": "https://hadesloc.github.io/pdfua-partner-desk/tools/tiktok-1099k/", "offers": {"@type": "Offer", "price": "79.00", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does this converter upload client TikTok Shop, eBay, or Etsy CSVs to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. 100% of CSV parsing and journal generation runs locally inside your browser (and via our zero-dependency Python 3.10+ stdlib CLI in the downloadable ZIP). Zero rows or seller PII leave your machine."}}, {"@type": "Question", "name": "How does it handle Marketplace Facilitator sales tax under IRC § 6050W?", "acceptedAnswer": {"@type": "Answer", "text": "TikTok Shop US, eBay Managed Payments, and Etsy collect and remit state sales tax as Marketplace Facilitators. The converter excludes facilitator-remitted tax from gross revenue lines while documenting the exact IRC § 6050W tie-out against Form 1099-K Box 1a."}}, {"@type": "Question", "name": "How do I claim 50% off with promo code EARLY50?", "acceptedAnswer": {"@type": "Answer", "text": "Click Order $79 Clearing Suite (or Copy Code EARLY50) and enter EARLY50 at Gumroad checkout to lock in $39.50 (50% off for the first 10 firms), backed by our 30-day money-back guarantee."}}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../../">
+      <span class="brand-mark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></span>
+      <span>ClearStream Multi-Channel</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#converter" class="nav-hide-mobile">CSV converter</a>
+      <a href="#self-serve-zip" class="nav-hide-mobile">Included files</a>
+      <a href="../whatnot-ledger/" class="nav-hide-mobile">Whatnot 1099-K</a>
+      <a href="../../" class="nav-hide-xs">Partner Desk</a>
+      <a href="https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit?wanted=true" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Get Suite ($39.50 w/ EARLY50)</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content" tabindex="-1">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">TikTok Shop US &middot; eBay Managed Payments &middot; Etsy &middot; 0 Bytes Uploaded</span>
+      <h1>TikTok Shop, eBay &amp; Etsy 1099-K payouts reconciled to QBO &amp; Xero.</h1>
+      <p class="hero-lead">
+        Convert Seller Center, Managed Payments, and Payment Account CSVs locally in your browser into cent-balanced <code>1050 Platform Clearing</code> journals—splitting referral fees, creator affiliate commissions, FBT/carrier labels, refunds, and IRC &sect; 6050W facilitator sales-tax exclusions.
+      </p>
+      <div class="cta-group" style="margin-top:var(--sp-4);">
+        <a id="btn-tt-hero-buy79" class="btn btn-primary" href="https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit?wanted=true" target="_blank" rel="noopener">Order $79 Clearing Suite ($39.50 w/ EARLY50)</a>
+        <button type="button" id="btn-copy-early50" class="btn btn-secondary" data-copy-brief="EARLY50" data-copy-label="Copied EARLY50!" data-copy-status-id="tt-promo-toast">Copy 50% Off Code (EARLY50)</button>
+        <a class="btn btn-secondary" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.3.0/Free-1099K-and-PPWR-Spreadsheet-Templates.zip" target="_blank" rel="noopener">Free 2026 1099-K Workbook (.xlsx)</a>
+      </div>
+      <div id="tt-promo-toast" class="copy-toast" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section" id="converter" style="padding-block:var(--sp-6);">
+    <div class="container">
+      <div class="card" id="tt-early50-card" style="margin-bottom:var(--sp-4); background:var(--pass-soft); border-color:var(--pass-bdr);">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;">
+          <div style="max-width:66ch;">
+            <span class="status-pill status-pass" style="margin-bottom:6px;">First 10 Bookkeeping Firms &amp; Sellers &middot; 50% Off</span>
+            <h2 style="font-size:1.25rem; margin-bottom:4px;">Launch Code <code>EARLY50</code>: Lock in the Full $79 Suite for $39.50</h2>
+            <p style="font-size:0.875rem; margin:0;">
+              Includes the offline browser converter, <code>reconcile_multichannel_1099k.py</code> CLI, balanced QBO &amp; Xero journal templates, and 2026 Form 1099-K CPA tie-out workpapers—backed by a 30-day money-back guarantee. CPA or educator? <a href="https://pdfuapartnerdesk.gumroad.com/affiliates" target="_blank" rel="noopener">Earn 40% ($31.60/sale) as an Affiliate Partner</a>.
+            </p>
+          </div>
+          <div class="cta-group" style="margin-top:0;">
+            <a class="btn btn-primary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit/EARLY50?wanted=true" target="_blank" rel="noopener">Auto-Apply EARLY50 ($79 &rarr; $39.50)</a>
+            <a class="btn btn-secondary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/affiliates" target="_blank" rel="noopener">Join 40% Affiliate Program</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="eyebrow">100% Client-Side Journal Engine &middot; Zero Cloud Uploads</span>
+        <h2 style="font-size:1.375rem; margin-bottom:8px;">Interactive Multi-Channel 1099-K to QBO &amp; Xero Converter</h2>
+        <p style="font-size:0.9375rem; margin-bottom:16px;">
+          Test a pre-loaded 2026 settlement batch below in 1 click, or choose your own TikTok Shop US, eBay, or Etsy CSV file to inspect balanced <code>1050 Platform Clearing</code> entries and download import-ready CSVs.
+        </p>
+
+        <div class="cta-group" style="margin-top:0; margin-bottom:18px;">
+          <button type="button" id="btn-tt-sample-tiktok" class="btn btn-secondary btn-sm">Demo: TikTok Shop US</button>
+          <button type="button" id="btn-tt-sample-ebay" class="btn btn-secondary btn-sm">Demo: eBay Managed Payments</button>
+          <button type="button" id="btn-tt-sample-etsy" class="btn btn-secondary btn-sm">Demo: Etsy Payment Account</button>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:18px;">
+          <div>
+            <label for="tt-channel-select" style="display:block; font-weight:600; margin-bottom:6px;">Marketplace Channel</label>
+            <select id="tt-channel-select" style="width:100%; padding:10px; border:1px solid var(--border-strong); border-radius:8px; background:var(--surface); color:var(--text);">
+              <option value="auto">Auto-Detect (TikTok Shop / eBay / Etsy)</option>
+              <option value="TikTok Shop US">TikTok Shop US</option>
+              <option value="eBay Managed Payments">eBay Managed Payments</option>
+              <option value="Etsy Payment Account">Etsy Payment Account</option>
+            </select>
+          </div>
+          <div>
+            <label for="tt-csv-upload" style="display:block; font-weight:600; margin-bottom:6px;">Select Settlement / Payout CSV File</label>
+            <input id="tt-csv-upload" type="file" accept=".csv,text/csv" style="width:100%; padding:8px; border:1px solid var(--border-strong); border-radius:8px; background:var(--surface); color:var(--text);">
+          </div>
+        </div>
+
+        <div class="kpi-grid" style="margin-bottom:18px;">
+          <div class="audit-metric">
+            <div class="kpi-lbl">Form 1099-K Box 1a Gross</div>
+            <div id="tt-kpi-box1a" class="kpi-val">$14,820.00</div>
+            <div class="kpi-sub">Gross merchandise + shipping</div>
+          </div>
+          <div class="audit-metric">
+            <div class="kpi-lbl">IRC &sect; 6050W Tax Excluded</div>
+            <div id="tt-kpi-tax" class="kpi-val accent">$1,185.60</div>
+            <div class="kpi-sub">Facilitator sales tax remitted</div>
+          </div>
+          <div class="audit-metric">
+            <div class="kpi-lbl">1050 Clearing Net Payout</div>
+            <div id="tt-kpi-net" class="kpi-val">$10,844.60</div>
+            <div class="kpi-sub">Matches bank deposit batch</div>
+          </div>
+          <div class="audit-metric">
+            <div class="kpi-lbl">Unexplained Variance</div>
+            <div id="tt-kpi-variance" class="kpi-val pass">$0.00</div>
+            <div class="kpi-sub">Debits == Credits verified</div>
+          </div>
+        </div>
+
+        <div class="cta-group" style="margin-top:0; margin-bottom:16px;">
+          <button type="button" id="btn-tt-convert" class="btn btn-primary btn-sm">Convert &amp; Verify Balance</button>
+          <button type="button" id="btn-tt-dl-qbo" class="btn btn-secondary btn-sm">Download QBO Journal CSV</button>
+          <button type="button" id="btn-tt-dl-xero" class="btn btn-secondary btn-sm">Download Xero Manual Journal CSV</button>
+        </div>
+
+        <h3 style="font-size:1.0625rem; margin-bottom:8px;">Balanced Journal &amp; Tie-Out Output</h3>
+        <pre id="tt-output-log" class="ci-code-pre" aria-live="polite">Loading sample TikTok Shop US settlement batch...</pre>
+      </div>
+
+      <div class="card" id="self-serve-zip" style="margin-top:var(--sp-5);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div style="max-width:64ch;">
+            <span class="eyebrow">24/7 Instant ZIP Download &middot; 30-Day Money-Back Guarantee</span>
+            <h2 style="font-size:1.3125rem; margin-bottom:6px;">Instant Self-Serve Software ZIP — Preview Included Files</h2>
+            <p style="font-size:0.875rem; margin:0;">
+              Download the complete multi-channel Python CLI + zero-install offline HTML suite immediately after Gumroad checkout (use <strong><code>EARLY50</code></strong> for 50% off &rarr; <strong>$39.50</strong>), or test our open-source CLI &amp; formula workbook at <strong>$0+</strong>.
+            </p>
+          </div>
+          <div class="cta-group" style="margin-top:0;">
+            <a id="btn-tt-free-starter" class="btn btn-primary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/l/compliance-starter-kit?wanted=true" target="_blank" rel="noopener">Download Free Open-Source CLI Starter Kit ($0+)</a>
+            <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.3.0/Free-1099K-and-PPWR-Spreadsheet-Templates.zip" target="_blank" rel="noopener">Free 1099-K Workbook (.xlsx)</a>
+            <a class="btn btn-secondary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/l/tiktok-1099k-clearing-kit?wanted=true" target="_blank" rel="noopener">Instant $79 Suite ZIP ($39.50 w/ EARLY50)</a>
+            <a class="btn btn-secondary btn-sm" href="https://www.fiverr.com/s/P4wNLkA" target="_blank" rel="noopener">Fiverr Escrow Gig</a>
+            <a class="btn btn-secondary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/affiliates" target="_blank" rel="noopener">40% Affiliate Program</a>
+          </div>
+        </div>
+        <details class="faq-item" id="tiktok-zip-details" style="margin-top:14px;">
+          <summary>Inspect exact files inside $79 Multi-Channel Suite ZIP, Free .xlsx Workbook &amp; $0+ Starter Kit</summary>
+          <div class="faq-body">
+            <ul class="feature-list" style="margin-top:8px;">
+              <li><strong>$79 Multi-Channel Suite (<code>ClearStream-TikTok-eBay-Etsy-1099K-QBO-Xero-Suite-79.zip</code>):</strong> <code>reconcile_multichannel_1099k.py</code> (Decimal-exact Python 3.10+ stdlib CLI), <code>multichannel-1099k-offline-converter.html</code>, sample TikTok Shop US / eBay / Etsy CSVs, balanced <code>QuickBooks-Online-Journal-Entry.csv</code>, <code>Xero-Manual-Journal.csv</code>, &amp; IRC &sect; 6050W workpaper.</li>
+              <li><strong>Free Formula Workbook (<code>Free-1099K-and-PPWR-Spreadsheet-Templates.zip</code>):</strong> 3-tab OpenXML <code>2026-Multichannel-1099K-Variance-Reconciler-Template.xlsx</code> + Google Sheets CSV formulas.</li>
+              <li><strong>$0+ Open Starter Kit (<code>Open-Compliance-Starter-CLI-Kit-v1.0.zip</code>):</strong> <code>whatnot_1099k_variance_check.py</code>, sample balanced QBO journal CSV, &amp; compliance quick-checkers.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="card" id="tiktok-cpa-inquiry" style="margin-top:var(--sp-5);">
+        <h2 style="font-size:1.25rem; margin-bottom:6px;">Multi-client CPA firm or custom Chart of Accounts mapping?</h2>
+        <p style="font-size:0.875rem; margin-bottom:14px;">
+          Reconciling dozens of TikTok Shop US, Shopify, Amazon, eBay, or Etsy storefronts across QuickBooks Online or Xero? Open a pre-addressed email or copy our CPA onboarding brief in 1 click.
+        </p>
+        <div class="cta-group" style="margin-top:0;">
+          <a id="btn-tt-cpa-mailto" class="btn btn-primary btn-sm" href="mailto:halocrypto101%40gmail.com?subject=ClearStream%20Multi-Channel%201099-K%20Suite%20%E2%80%94%20CPA%20/%20Practice%20Inquiry&amp;body=Hello%20ClearStream%20Ledger%20Desk%2C%0A%0APlease%20share%20multi-client%20CPA%20/%20bookkeeping%20onboarding%20details%20for%20the%20TikTok%20Shop%20US%2C%20eBay%20%26%20Etsy%201099-K%20Clearing%20Suite%3A%0AFirm%20/%20Seller%20Practice%3A%0ATarget%20Ledger%3A%20%5BQuickBooks%20Online%20/%20Xero%5D%0AChannels%20Managed%3A%20%5BTikTok%20Shop%20US%20/%20eBay%20/%20Etsy%5D%0A">Email CPA / Multi-Shop Inquiry</a>
+          <button type="button" id="btn-tt-copy-cpa" class="btn btn-secondary btn-sm" data-copy-brief="To: halocrypto101@gmail.com
+Subject: ClearStream Multi-Channel 1099-K Suite — CPA / Practice Inquiry
+
+Hello ClearStream Ledger Desk,
+
+Please share multi-client CPA / bookkeeping onboarding details for the TikTok Shop US, eBay &amp; Etsy 1099-K Clearing Suite:
+Firm / Seller Practice:
+Target Ledger: [QuickBooks Online / Xero]
+Channels Managed: [TikTok Shop US / eBay / Etsy]
+" data-copy-status-id="tt-cpa-copy-toast">Copy CPA brief &amp; email (halocrypto101@gmail.com)</button>
+          <a class="btn btn-secondary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/affiliates" target="_blank" rel="noopener">Earn 40% Partner Commission</a>
+        </div>
+        <div id="tt-cpa-copy-toast" class="copy-toast" role="status" aria-live="polite"></div>
+      </div>
+
+      <div style="margin-top:var(--sp-6);">
+        <span class="eyebrow">FAQ</span>
+        <h2 style="font-size:1.5rem; margin-bottom:16px;">Frequently asked questions</h2>
+        <div class="faq-wrap">
+        <details class="faq-item" open><summary>Does this converter upload client TikTok Shop, eBay, or Etsy CSVs to a server?</summary><div class="faq-body"><p>No. 100% of CSV parsing and journal generation runs locally inside your browser (and via our zero-dependency Python 3.10+ stdlib CLI in the downloadable ZIP). Zero rows or seller PII leave your machine.</p></div></details>
+        <details class="faq-item"><summary>How does it handle Marketplace Facilitator sales tax under IRC § 6050W?</summary><div class="faq-body"><p>TikTok Shop US, eBay Managed Payments, and Etsy collect and remit state sales tax as Marketplace Facilitators. The converter excludes facilitator-remitted tax from gross revenue lines while documenting the exact IRC § 6050W tie-out against Form 1099-K Box 1a.</p></div></details>
+        <details class="faq-item"><summary>How do I claim 50% off with promo code EARLY50?</summary><div class="faq-body"><p>Click Order $79 Clearing Suite (or Copy Code EARLY50) and enter EARLY50 at Gumroad checkout to lock in $39.50 (50% off for the first 10 firms), backed by our 30-day money-back guarantee.</p></div></details>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:0; padding-top:0;">
+      <span><strong>Loc Nguyen — PDF/UA Partner Desk</strong> &middot; <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a> &middot; <a href="../../">Home</a> &middot; <a href="../whatnot-ledger/">Whatnot 1099-K</a> &middot; <a href="https://pdfuapartnerdesk.gumroad.com/affiliates" target="_blank" rel="noopener">40% Affiliate Program</a> &middot; <a href="../../privacy/">Privacy</a> &middot; <a href="../../terms/">Terms</a></span>
+      <span>Self-serve bookkeeping formatting software — not affiliated with TikTok, ByteDance, eBay, Etsy, Intuit, or Xero, and not CPA, tax, or legal advice.</span>
+    </div>
+  </div>
+</footer>
+<script src="../../assets/site.js"></script>
+<script src="./app.js"></script>
+<script src="https://gumroad.com/js/gumroad.js" defer></script>
+</body>
+</html>
