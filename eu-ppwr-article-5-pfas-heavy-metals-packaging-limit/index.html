@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EU PPWR Article 5 PFAS &amp; Heavy Metals Packaging Limits Calculator (Aug 12, 2026)</title>
+<meta name="description" content="Verify packaging lab reports against EU PPWR (Regulation 2025/40) Article 5(4) heavy metals (&lt;=100 mg/kg) and Article 5(5) food-contact PFAS limits (25 ppb / 250 ppb / 50 ppm) effective August 12, 2026.">
+<link rel="canonical" href="https://hadesloc.github.io/pdfua-partner-desk/eu-ppwr-article-5-pfas-heavy-metals-packaging-limit/">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "EU PPWR Article 5 PFAS & Heavy Metals Packaging Limits Calculator (Aug 12, 2026)", "description": "Verify packaging lab reports against EU PPWR (Regulation 2025/40) Article 5(4) heavy metals (<=100 mg/kg) and Article 5(5) food-contact PFAS limits (25 ppb / 250 ppb / 50 ppm) effective August 12, 2026.", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Windows, macOS, Linux", "url": "https://hadesloc.github.io/pdfua-partner-desk/eu-ppwr-article-5-pfas-heavy-metals-packaging-limit/", "offers": {"@type": "Offer", "price": "24.50", "priceCurrency": "EUR", "url": "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack?wanted=true"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why do supplier lab reports cause unit-conversion errors on PFAS vs. heavy metals?", "acceptedAnswer": {"@type": "Answer", "text": "Heavy metal test reports typically report in mg/kg (ppm), whereas targeted PFAS LC-MS/MS reports often report in ug/kg (ppb) or ng/g. Confusing ppm and ppb creates a 1,000x threshold error—which PackProof normalizes deterministically."}}, {"@type": "Question", "name": "How is 'ND' (Not Detected) handled when summing Pb + Cd + Hg + Cr(VI)?", "acceptedAnswer": {"@type": "Answer", "text": "PackProof checks both lower-bound (ND = 0) and conservative upper-bound (ND = Method Detection Limit / LOQ) sums so compliance engineers immediately spot high-LOQ screening reports that could exceed 100 mg/kg."}}, {"@type": "Question", "name": "Can I automate Article 5 BOM checks in CI/CD or supplier portals?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Run npx packproof-ppwr-cli ./packaging-bom.json --json in Node.js or use ppwr_art5_threshold_check.py from our $0+ Open Compliance CLI Starter Kit."}}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../">
+      <span class="brand-mark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="m9 15 2 2 4-4"></path></svg></span>
+      <span>PDF/UA Partner Desk</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="../" class="nav-hide-mobile">PDF/UA Checker</a>
+      <a href="../packproof/" class="nav-hide-mobile">EU PPWR</a>
+      <a href="../tools/tiktok-1099k/" class="nav-hide-mobile">TikTok/eBay/Etsy 1099-K</a>
+      <a href="../tools/whatnot-ledger/" class="nav-hide-xs">Whatnot 1099-K</a>
+      <a href="https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack?wanted=true" target="_blank" rel="noopener" class="btn btn-primary btn-sm">50% Off (EARLY50)</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content" tabindex="-1">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Substance Restrictions · EU 2025/40 Art. 5(4) &amp; Art. 5(5)</span>
+      <h1>EU PPWR Article 5 PFAS &amp; heavy metals packaging limits.</h1>
+      <p class="hero-lead">Check supplier SGS, Intertek, TÜV, Eurofins, and CNAS test reports against the August 12, 2026 EU PPWR Article 5 substance thresholds—covering both the 100 mg/kg four-heavy-metals sum and the three-tier food-contact PFAS limits.</p>
+      <div class="cta-group" style="margin-top:var(--sp-4);">
+        <a class="btn btn-primary" href="../packproof/">Run Free Article 5 PFAS &amp; Heavy Metal Checker</a>
+        <a class="btn btn-secondary" href="https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack?wanted=true" target="_blank" rel="noopener">Order €49 PackProof Software Kit (Code EARLY50 = 50% Off)</a>
+        <button type="button" class="btn btn-secondary btn-sm" data-copy-brief="EARLY50" data-copy-status-id="w5-hero-copy-status" data-copy-label="Copied EARLY50!">Copy Code EARLY50</button>
+        <a class="btn btn-secondary btn-sm" href="https://www.upwork.com/services/product/development-it-eu-ppwr-2025-40-annex-vii-and-viii-packaging-compliance-software-kit-2121979889077843579" target="_blank" rel="noopener">Order via Upwork Escrow Catalog</a>
+        <a class="btn btn-secondary btn-sm" href="https://www.fiverr.com/s/EmryKb8" target="_blank" rel="noopener">Order via Fiverr PPWR Escrow Gig</a>
+      </div>
+      <p id="w5-hero-copy-status" class="kpi-sub" role="status" aria-live="polite" style="margin-top:8px; margin-bottom:0;"></p>
+      <p class="kpi-sub" style="margin-top:8px; margin-bottom:0; font-size:0.8125rem;">100% deterministic mathematical unit-conversion &amp; threshold software — not laboratory testing, legal advice, or regulatory certification.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-block:var(--sp-6);">
+    <div class="container">
+      <div>
+        <span class="eyebrow">Deterministic Engineering Architecture</span>
+        <h2 style="font-size:1.5rem; margin-bottom:14px;">Exact quantitative limits under Regulation (EU) 2025/40 Article 5 (Aug 12, 2026)</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3 style="font-size:1.0625rem; margin-bottom:8px;">Art. 5(4): &lt;= 100 mg/kg Heavy Metals Sum</h3>
+            <p class="kpi-sub" style="margin:0; font-size:0.875rem; line-height:1.55;">The sum of concentration levels of Lead (Pb), Cadmium (Cd), Mercury (Hg), and Hexavalent Chromium (Cr(VI)) in packaging or homogeneous packaging components must not exceed 100 mg/kg (ppm).</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:1.0625rem; margin-bottom:8px;">Art. 5(5): 25 ppb &amp; 250 ppb Targeted PFAS</h3>
+            <p class="kpi-sub" style="margin:0; font-size:0.875rem; line-height:1.55;">Food-contact packaging cannot be placed on the EU market on or after August 12, 2026 if it contains &gt;= 25 ppb of any single targeted PFAS (non-polymeric) or &gt;= 250 ppb sum of targeted PFAS.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:1.0625rem; margin-bottom:8px;">Art. 5(5): 50 ppm Total Fluorine / Polymeric PFAS</h3>
+            <p class="kpi-sub" style="margin:0; font-size:0.875rem; line-height:1.55;">Total PFAS including polymeric PFAS in food-contact packaging is capped below 50 ppm (50 mg/kg); if total fluorine exceeds 50 mg F/kg, proof of PFAS vs. non-PFAS fluorine content is required.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:var(--sp-6); overflow-x:auto;">
+        <h2 style="font-size:1.25rem; margin-bottom:10px;">EU PPWR Article 5 Substance Restriction Threshold Reference &amp; Unit Conversions</h2>
+        <table class="data-table" style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr><th scope="col">PPWR Provision</th><th scope="col">Substance Scope</th><th scope="col">Statutory Threshold</th><th scope="col">Unit Equivalents Checked by CLI</th></tr>
+          </thead>
+          <tbody>
+              <tr><th scope="row" style="font-weight:600;">Article 5(4)</th><td>Pb + Cd + Hg + Cr(VI) sum (all packaging)</td><td>&lt;= 100 mg/kg</td><td>100 ppm == 0.01% w/w per homogeneous component</td></tr>
+              <tr><th scope="row" style="font-weight:600;">Article 5(5)(a)</th><td>Any single targeted PFAS (food-contact, excl. polymeric)</td><td>&lt; 25 ppb</td><td>0.025 mg/kg == 25 ug/kg == 0.025 ppm</td></tr>
+              <tr><th scope="row" style="font-weight:600;">Article 5(5)(b)</th><td>Sum of targeted PFAS (food-contact, w/ precursor step)</td><td>&lt; 250 ppb</td><td>0.25 mg/kg == 250 ug/kg == 0.25 ppm</td></tr>
+              <tr><th scope="row" style="font-weight:600;">Article 5(5)(c)</th><td>Total PFAS incl. polymeric PFAS (food-contact)</td><td>&lt; 50 ppm</td><td>50 mg/kg == 0.005% w/w (Total F &gt; 50 mg/kg triggers proof)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" id="w5-cli-and-checkout" style="margin-top:var(--sp-6);">
+        <span class="eyebrow">Zero-Install CLI + Multi-Rail Instant Checkout (EARLY50 = 50% Off First 10 Orders)</span>
+        <h2 style="font-size:1.3125rem; margin-bottom:8px;">Run via npx CLI, test free tools, or checkout via Gumroad, Upwork &amp; Fiverr</h2>
+        <p style="font-size:0.875rem; margin-top:0; margin-bottom:12px;">
+          Run our open-source CLI locally with zero cloud uploads, download the <strong>$0+ Open Compliance Starter Kit</strong>, or unlock the full offline software ZIP (apply promo code <strong><code>EARLY50</code></strong> at Gumroad checkout for <strong>50% off</strong> the first 10 orders; 30-day money-back guarantee). Prefer marketplace escrow? Order directly on Upwork Project Catalog or Fiverr.
+        </p>
+        <pre class="ci-code-pre" style="margin-top:0; margin-bottom:12px;"><code id="w5-npx-code">npx packproof-ppwr-cli ./packaging-bom.json --json</code></pre>
+        <div class="cta-group">
+          <button type="button" class="btn btn-secondary btn-sm" data-copy-brief="npx packproof-ppwr-cli ./packaging-bom.json --json" data-copy-status-id="w5-cli-copy-status" data-copy-label="Copied npx command!">Copy npx Command</button>
+          <a class="btn btn-primary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack?wanted=true" target="_blank" rel="noopener">Order €49 PackProof Software Kit (Code EARLY50 = 50% Off)</a>
+          <a class="btn btn-secondary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/l/ppwr-oem-factory-pack?wanted=true" target="_blank" rel="noopener">€99 OEM Multi-SKU Factory Pack</a>
+          <a class="btn btn-secondary btn-sm" href="https://github.com/hadesloc/pdfua-ada-checker/releases/download/v1.3.0/Free-1099K-and-PPWR-Spreadsheet-Templates.zip">Download Free PPWR Threshold Matrix (.xlsx)</a>
+          <a class="btn btn-secondary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/l/compliance-starter-kit?wanted=true" target="_blank" rel="noopener">Free Open CLI Starter Kit ($0+)</a>
+          <a class="btn btn-secondary btn-sm" href="https://www.upwork.com/services/product/development-it-eu-ppwr-2025-40-annex-vii-and-viii-packaging-compliance-software-kit-2121979889077843579" target="_blank" rel="noopener">Order via Upwork Escrow Catalog</a>
+          <a class="btn btn-secondary btn-sm" href="https://www.fiverr.com/s/EmryKb8" target="_blank" rel="noopener">Order via Fiverr PPWR Escrow Gig</a>
+          <a class="btn btn-secondary btn-sm" href="https://www.producthunt.com/products/pdf-ua-partner-desk-compliance-suite?launch=pdf-ua-partner-desk-compliance-suite" target="_blank" rel="noopener">Product Hunt Nov 16 Launch &nearr;</a>
+          <a class="btn btn-secondary btn-sm" href="https://pdfuapartnerdesk.gumroad.com/affiliates" target="_blank" rel="noopener">40% Affiliate Program</a>
+        </div>
+        <p id="w5-cli-copy-status" class="kpi-sub" role="status" aria-live="polite" style="margin-top:8px; margin-bottom:0;"></p>
+      </div>
+
+      <div style="margin-top:var(--sp-6);">
+        <span class="eyebrow">FAQ</span>
+        <h2 style="font-size:1.5rem; margin-bottom:16px;">Frequently asked questions</h2>
+        <div class="faq-wrap">
+          <details class="faq-item" open><summary>Why do supplier lab reports cause unit-conversion errors on PFAS vs. heavy metals?</summary><div class="faq-answer">Heavy metal test reports typically report in mg/kg (ppm), whereas targeted PFAS LC-MS/MS reports often report in ug/kg (ppb) or ng/g. Confusing ppm and ppb creates a 1,000x threshold error—which PackProof normalizes deterministically.</div></details>
+          <details class="faq-item"><summary>How is &#x27;ND&#x27; (Not Detected) handled when summing Pb + Cd + Hg + Cr(VI)?</summary><div class="faq-answer">PackProof checks both lower-bound (ND = 0) and conservative upper-bound (ND = Method Detection Limit / LOQ) sums so compliance engineers immediately spot high-LOQ screening reports that could exceed 100 mg/kg.</div></details>
+          <details class="faq-item"><summary>Can I automate Article 5 BOM checks in CI/CD or supplier portals?</summary><div class="faq-answer">Yes. Run npx packproof-ppwr-cli ./packaging-bom.json --json in Node.js or use ppwr_art5_threshold_check.py from our $0+ Open Compliance CLI Starter Kit.</div></details>
+        </div>
+      </div>
+
+      <div class="callout-panel" style="margin-top:var(--sp-6);">
+        <h2 style="font-size:1.3125rem; margin-bottom:8px;">Need a complimentary sample check or multi-seat agency quote?</h2>
+        <p style="margin-bottom:14px; font-size:0.9375rem; max-width:68ch;">Test our free browser validator right now, or email a non-confidential sample CSV / PDF for a complimentary 24-hour engineering verification. (100% deterministic mathematical unit-conversion &amp; threshold software — not laboratory testing, legal advice, or regulatory certification.)</p>
+        <div class="cta-group">
+          <a class="btn btn-primary" href="../packproof/">Run Free Article 5 PFAS &amp; Heavy Metal Checker</a>
+          <a class="btn btn-secondary" href="mailto:halocrypto101%40gmail.com?subject=Software%20Question%20/%20Free%20Sample%20Check%20%E2%80%94%20EU%20PPWR%20Article%205%20PFAS%20%26%20Heavy%20Metals%20Packaging%20Limits%20Cal&amp;body=Hello%20PDF/UA%20Partner%20Desk%2C%0A%0AWe%20visited%20https%3A//hadesloc.github.io/pdfua-partner-desk/eu-ppwr-article-5-pfas-heavy-metals-packaging-limit/%20and%20have%20a%20quick%20software%20/%20sample%20check%20question%3A%0A-%20Organization%20/%20Practice%3A%0A-%20Workflow%20/%20File%20Type%3A%0A">Email Engineering Desk</a>
+          <button type="button" class="btn btn-secondary" data-copy-brief="To: halocrypto101@gmail.com
+Subject: Software Question / Free Sample Check — EU PPWR Article 5 PFAS &amp; Heavy Metals Packaging Limits Cal
+
+Hello PDF/UA Partner Desk,
+
+We visited https://hadesloc.github.io/pdfua-partner-desk/eu-ppwr-article-5-pfas-heavy-metals-packaging-limit/ and have a quick software / sample check question:
+- Organization / Practice:
+- Workflow / File Type:
+" data-copy-status-id="w5-inq-copy-status" data-copy-label="Copied inquiry & email!">Copy Brief &amp; Email (halocrypto101@gmail.com)</button>
+          <a class="btn btn-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform" target="_blank" rel="noopener">Partner Intake Form</a>
+        </div>
+        <p id="w5-inq-copy-status" class="kpi-sub" role="status" aria-live="polite" style="margin-top:8px; margin-bottom:0;"></p>
+      </div>
+
+      <div class="card" style="margin-top:var(--sp-6);">
+        <h2 style="font-size:1.125rem; margin-bottom:10px;">Related Compliance &amp; Reconciliation Guides</h2>
+        <ul class="feature-list" style="margin-top:0; border-top:0; padding-top:0;">
+          <li><a href="../tiktok-shop-1099-k-quickbooks-reconciliation/">TikTok Shop 1099-K to QuickBooks Online &amp; Xero Reconciliation Kit (2026 Settlement CSV)</a></li>
+          <li><a href="../whatnot-1099-k-tax-calculator-qbo-xero/">Whatnot 1099-K Tax Variance Calculator &amp; QuickBooks / Xero Converter (2026)</a></li>
+          <li><a href="../ebay-etsy-1099-k-clearing-account-template/">eBay Managed Payments &amp; Etsy 1099-K Clearing Account Template (QBO, Xero &amp; Excel)</a></li>
+          <li><a href="../eu-ppwr-annex-viii-declaration-of-conformity-template/">EU PPWR Annex VIII Declaration of Conformity Template &amp; Generator (Regulation 2025/40)</a></li>
+          <li><a href="../wordpress-ada-title-ii-pdf-media-library-audit/">WordPress ADA Title II PDF Media Library Audit Plugin &amp; CLI (28 CFR Part 35)</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:0; padding-top:0;">
+      <span><strong>Loc Nguyen — PDF/UA Partner Desk</strong> &middot; <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a> &middot; <a href="../">Home</a> &middot; <a href="../packproof/">PackProof EU</a> &middot; <a href="../tools/tiktok-1099k/">TikTok/eBay/Etsy 1099-K</a> &middot; <a href="../tools/whatnot-ledger/">Whatnot 1099-K</a> &middot; <a href="../privacy/">Privacy</a> &middot; <a href="../terms/">Terms &amp; SLA</a></span>
+      <span>100% deterministic mathematical unit-conversion &amp; threshold software — not laboratory testing, legal advice, or regulatory certification.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script src="https://gumroad.com/js/gumroad.js" defer></script>
+</body>
+</html>
