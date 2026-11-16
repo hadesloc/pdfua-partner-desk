@@ -11,7 +11,7 @@
     columnMap: {},
     analysis: null,
     checkoutConfig: {
-      whatnotCatchup99Url: "https://pdfuapartnerdesk.gumroad.com/l/whatnot-clearing-journal?wanted=true",
+      whatnotCatchup99Url: "https://pdfuapartnerdesk.gumroad.com/l/whatnot-clearing-journal/EARLY50?wanted=true",
       whatnotSellerPro45Url: "",
       whatnotCpa129Url: "",
       fallbackFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform",

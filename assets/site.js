@@ -1,9 +1,9 @@
 (function () {
   const rates = {
-    simple: { wholesale: 2.0, retail: 5.0 },
-    tables: { wholesale: 3.0, retail: 8.0 },
-    ocr: { wholesale: 3.5, retail: 9.0 },
-    forms: { wholesale: 6.5, retail: 15.0 }
+    simple: { retail: 5.0 },
+    tables: { retail: 8.0 },
+    ocr: { retail: 9.0 },
+    forms: { retail: 15.0 }
   };
 
   const fields = ["simple", "tables", "ocr", "forms"];
@@ -80,7 +80,6 @@
 
   function recalc() {
     let pages = 0;
-    let rawWholesale = 0;
     let rawRetail = 0;
     const vals = {};
     fields.forEach((k) => {
@@ -88,15 +87,24 @@
       const count = numEl ? Math.max(0, parseInt(numEl.value || "0", 10) || 0) : 0;
       vals[k] = count;
       pages += count;
-      rawWholesale += count * rates[k].wholesale;
       rawRetail += count * rates[k].retail;
     });
 
-    const partnerMinApplied = pages > 0 && rawWholesale < 35.0;
     const retailMinApplied = pages > 0 && rawRetail < 60.0;
-    const wholesale = pages > 0 ? Math.max(35.0, rawWholesale) : 0.0;
     const retail = pages > 0 ? Math.max(60.0, rawRetail) : 0.0;
-    const profit = Math.max(0, retail - wholesale);
+    let softwareCost = 0.0;
+    let tierNote = "No license needed ($0.00)";
+    if (pages >= 1 && pages <= 15) {
+      softwareCost = 9.50;
+      tierNote = "Studio Solo v1.5.0 w/ EARLY50 (reg. $19 · unlimited local PDFs)";
+    } else if (pages > 15 && pages <= 150) {
+      softwareCost = 32.50;
+      tierNote = "Studio Agency v1.5.0 w/ EARLY50 (reg. $65 · multi-folder batch + white-label reports)";
+    } else if (pages > 150) {
+      softwareCost = 97.50;
+      tierNote = "Studio Commercial v1.5.0 w/ EARLY50 (reg. $195 · multi-seat + CI/SaaS source)";
+    }
+    const profit = Math.max(0, retail - softwareCost);
     const marginPct = retail > 0 ? ((profit / retail) * 100).toFixed(1) : "0.0";
 
     const setTxt = (id, text) => {
@@ -105,23 +113,21 @@
     };
     setTxt("out-pages", pages.toLocaleString("en-US") + (pages === 1 ? " page" : " pages"));
     setTxt("out-retail", fmt(retail));
-    setTxt("out-wholesale", fmt(wholesale));
+    setTxt("out-wholesale", fmt(softwareCost));
     setTxt("out-profit", fmt(profit));
-    setTxt("out-margin", marginPct + "% net agency profit margin");
+    setTxt("out-margin", marginPct + "% software savings / agency margin");
 
     const retailNoteEl = document.getElementById("out-retail-note");
     if (retailNoteEl) {
       retailNoteEl.textContent = retailMinApplied
-        ? "$60.00 retail minimum applied ($5–$15/pg)"
-        : "US market $5–$15/pg ($60 retail min)";
+        ? "$60.00 manual vendor minimum applied ($5–$15/pg)"
+        : "Industry manual outsourcing ($5–$15/pg, $60 min)";
       retailNoteEl.className = retailMinApplied ? "min-badge" : "summary-subnote";
     }
     const wholesaleNoteEl = document.getElementById("out-wholesale-note");
     if (wholesaleNoteEl) {
-      wholesaleNoteEl.textContent = partnerMinApplied
-        ? "$35.00 partner minimum applied ($2–$6.50/pg)"
-        : "White-label $2–$6.50/pg ($35 partner min)";
-      wholesaleNoteEl.className = partnerMinApplied ? "min-badge" : "summary-subnote";
+      wholesaleNoteEl.textContent = tierNote;
+      wholesaleNoteEl.className = pages > 0 ? "min-badge" : "summary-subnote";
     }
 
     const fastNoteEl = document.getElementById("calc-fast-checkout-note");
@@ -129,23 +135,23 @@
     const btn65 = document.getElementById("btn-calc-gumroad-65");
     const btn195 = document.getElementById("btn-calc-gumroad-195");
     if (fastNoteEl) {
-      if (pages >= 1 && pages <= 5) {
-        fastNoteEl.textContent = "Instant card checkout match: $19 Express Fix (1–5 pages, 24h)";
+      if (pages >= 1 && pages <= 15) {
+        fastNoteEl.textContent = "Recommended instant ZIP (EARLY50 auto-applied): Studio Solo v1.5.0 ($9.50)";
         if (btn19) { btn19.classList.add("btn-primary"); btn19.classList.remove("btn-secondary"); }
         if (btn65) { btn65.classList.add("btn-secondary"); btn65.classList.remove("btn-primary"); }
         if (btn195) { btn195.classList.add("btn-secondary"); btn195.classList.remove("btn-primary"); }
-      } else if (pages > 0 && pages <= 12 && vals.tables === 0 && vals.ocr === 0 && vals.forms === 0) {
-        fastNoteEl.textContent = "Instant card checkout match: $65 Starter (up to 12 text pages)";
+      } else if (pages > 15 && pages <= 150) {
+        fastNoteEl.textContent = "Recommended instant ZIP (EARLY50 auto-applied): Studio Agency v1.5.0 ($32.50)";
         if (btn19) { btn19.classList.add("btn-secondary"); btn19.classList.remove("btn-primary"); }
         if (btn65) { btn65.classList.add("btn-primary"); btn65.classList.remove("btn-secondary"); }
         if (btn195) { btn195.classList.add("btn-secondary"); btn195.classList.remove("btn-primary"); }
-      } else if (pages > 0 && pages <= 30 && vals.ocr === 0 && vals.forms === 0) {
-        fastNoteEl.textContent = "Instant card checkout match: $195 Standard (up to 30 report/table pages)";
+      } else if (pages > 150) {
+        fastNoteEl.textContent = "Recommended instant ZIP (EARLY50 auto-applied): Studio Commercial v1.5.0 ($97.50)";
         if (btn19) { btn19.classList.add("btn-secondary"); btn19.classList.remove("btn-primary"); }
         if (btn195) { btn195.classList.add("btn-primary"); btn195.classList.remove("btn-secondary"); }
         if (btn65) { btn65.classList.add("btn-secondary"); btn65.classList.remove("btn-primary"); }
       } else {
-        fastNoteEl.textContent = "1-click card checkout for single pilot packages:";
+        fastNoteEl.textContent = "1-click instant ZIP download (50% off w/ EARLY50 auto-applied):";
         if (btn19) { btn19.classList.add("btn-secondary"); btn19.classList.remove("btn-primary"); }
         if (btn65) { btn65.classList.add("btn-secondary"); btn65.classList.remove("btn-primary"); }
         if (btn195) { btn195.classList.add("btn-secondary"); btn195.classList.remove("btn-primary"); }
@@ -154,20 +160,21 @@
 
     const mailBtn = document.getElementById("btn-calc-email");
     const emailAddr = (mailBtn && mailBtn.getAttribute("data-email")) || "halocrypto101@gmail.com";
-    const rawSubject = "White-Label PDF/UA Quote & Free 24h Sample (" + pages + " pages — " + fmt(wholesale) + " wholesale)";
+    const rawSubject = "PDF Accessibility Studio v1.5.0 — In-House ROI & License Question (" + pages + " pages)";
     const rawBody = [
-      "Hi Loc,",
+      "Hello PDF/UA Partner Desk,",
       "",
-      "Please lock in this white-label partner quote and run our complimentary 24-hour proof sample:",
-      "- Simple Text ($2.00/pg): " + vals.simple + " pages",
-      "- Structured Tables ($3.00/pg): " + vals.tables + " pages",
-      "- Scanned OCR ($3.50/pg): " + vals.ocr + " pages",
-      "- Fillable AcroForms ($6.50/pg): " + vals.forms + " pages",
-      "- Total Volume: " + pages + " pages",
-      "- Partner Wholesale Cost ($35 min): " + fmt(wholesale) + (partnerMinApplied ? " ($35 partner minimum applied)" : ""),
-      "- US Market Retail Billing ($60 min): " + fmt(retail) + " (Net Agency Profit: " + fmt(profit) + " / " + marginPct + "%)",
+      "We modeled our PDF backlog in the In-House Software Savings & Agency Margin Calculator:",
+      "- Simple Text ($5.00/pg manual benchmark): " + vals.simple + " pages",
+      "- Structured Tables ($8.00/pg manual benchmark): " + vals.tables + " pages",
+      "- Scanned OCR ($9.00/pg manual benchmark): " + vals.ocr + " pages",
+      "- Fillable AcroForms ($15.00/pg manual benchmark): " + vals.forms + " pages",
+      "- Total Backlog Modeled: " + pages + " pages",
+      "- Est. Manual Outsourcing / Client Retail Value: " + fmt(retail),
+      "- PDF Accessibility Studio v1.5.0 License (EARLY50 50% off): " + fmt(softwareCost) + " (" + tierNote + ")",
+      "- Net In-House Software Savings / Agency Margin: " + fmt(profit) + " (" + marginPct + "%)",
       "",
-      "Sample PDF URL or Client Domain: "
+      "Question / Team Seat Count: "
     ].join("\n");
 
     currentQuoteBrief = "To: " + emailAddr + "\nSubject: " + rawSubject + "\n\n" + rawBody;

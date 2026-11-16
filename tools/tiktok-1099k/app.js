@@ -114,8 +114,8 @@
       });
     });
 
-    qboCsvData = qbo.join("\n") + "\n";
-    xeroCsvData = xero.join("\n") + "\n";
+    qboCsvData = qbo.slice(0, 4).join("\n") + "\n";
+    xeroCsvData = xero.slice(0, 4).join("\n") + "\n";
 
     var elBox = document.getElementById("tt-kpi-box1a");
     var elTax = document.getElementById("tt-kpi-tax");
@@ -132,6 +132,7 @@
     if (btnXero) btnXero.disabled = false;
 
     if (log) {
+      var totalLines = Math.max(0, qbo.length - 1);
       log.textContent = [
         "Channel Reconciled: " + ch + " (" + rows.length + " settlement batches)",
         "2026 Form 1099-K Box 1a Gross: " + fmtUsd(totBox1a),
@@ -139,8 +140,8 @@
         "1050 Platform Clearing Net Deposit Match: " + fmtUsd(totNet),
         "Journal Balance Check: Debits " + fmtUsd(totDr) + " == Credits " + fmtUsd(totCr) + " (Variance: $0.00)",
         "",
-        "--- Sample QuickBooks Online Journal Preview ---",
-        qbo.slice(0, 10).join("\n")
+        "--- Free 3-Row Journal Preview (Showing 3 of " + totalLines + " balanced lines; unlock full offline batch export below) ---",
+        qbo.slice(0, 4).join("\n")
       ].join("\n");
     }
   }

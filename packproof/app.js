@@ -6,7 +6,7 @@
 
   const state = {
     checkoutConfig: {
-      ppwrStarter49Url: "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack?wanted=true",
+      ppwrStarter49Url: "https://pdfuapartnerdesk.gumroad.com/l/ppwr-annex8-starter-pack/EARLY50?wanted=true",
       ppwrGrowth69Url: "",
       ppwrPro129Url: "",
       fallbackFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform",
@@ -314,15 +314,15 @@
       var href = auditMailto ? (auditMailto.getAttribute("href") || "") : "";
       var qIdx = href.indexOf("?");
       var params = new URLSearchParams(qIdx >= 0 ? href.slice(qIdx + 1) : "");
-      var payload = "To: " + email + "\nSubject: " + (params.get("subject") || "Free 1-PDF Lab Report Article 5 Sanity Audit ($0)") + "\n\n" + (params.get("body") || "");
+      var payload = "To: " + email + "\nSubject: " + (params.get("subject") || "PackProof EU Software Question") + "\n\n" + (params.get("body") || "");
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(payload).then(function () {
-          if (auditStatus) auditStatus.textContent = "Copied $0 lab audit brief & email (" + email + ") to clipboard.";
+          if (auditStatus) auditStatus.textContent = "Copied software inquiry brief & email (" + email + ") to clipboard.";
         }).catch(function () {
-          if (auditStatus) auditStatus.textContent = "Email 1 lab PDF directly to " + email + " for your free 24h audit.";
+          if (auditStatus) auditStatus.textContent = "Email your software inquiry directly to " + email + ".";
         });
       } else if (auditStatus) {
-        auditStatus.textContent = "Email 1 lab PDF directly to " + email + " for your free 24h audit.";
+        auditStatus.textContent = "Email your software inquiry directly to " + email + ".";
       }
     });
   });

@@ -131,40 +131,37 @@
     }
 
     let tierLabel = "Born-Digital Text & Headings";
-    let wRate = 2.0, rRate = 5.0;
+    let rRate = 5.0;
     if (formCount > 0) {
       tierLabel = "Interactive Fillable AcroForms";
-      wRate = 6.5; rRate = 15.0;
+      rRate = 15.0;
     } else if (likelyScanned) {
       tierLabel = "Scanned OCR + Searchable PDF/UA";
-      wRate = 3.5; rRate = 9.0;
+      rRate = 9.0;
     } else if (tableCount > 0) {
       tierLabel = "Structured Data Tables & Reports";
-      wRate = 3.0; rRate = 8.0;
+      rRate = 8.0;
     }
-    const wholesaleTotal = Math.max(35.0, Math.round(pages * wRate * 100) / 100);
-    const retailTotal = Math.max(65.0, Math.round(pages * rRate * 100) / 100);
-    let fixedUsd = wholesaleTotal;
-    if (formCount === 0 && !likelyScanned && pages <= 5) fixedUsd = 19.0;
-    else if (formCount === 0 && !likelyScanned && tableCount === 0 && pages <= 12) fixedUsd = 65.0;
-    else if (formCount === 0 && !likelyScanned && pages <= 30) fixedUsd = 195.0;
-    else if ((likelyScanned && pages <= 35) || (formCount > 0 && pages <= 25)) fixedUsd = 390.0;
+    const retailTotal = Math.max(60.0, Math.round(pages * rRate * 100) / 100);
+    let licenseUsd = 9.50;
+    if (pages > 150) licenseUsd = 97.50;
+    else if (pages > 15) licenseUsd = 32.50;
 
     const failedRules = findings.length;
     const failedChecks = findings.reduce((acc, f) => acc + (f.failed_checks || 1), 0);
     const isCompliant = failedRules === 0 && isTagged && hasPdfUaId;
 
     const clausesList = findings.map((f) => f.clause).join(", ") || "None";
-    const subject = "Fix PDF/UA-1 Issues — " + filename + " (" + pages + " pages)";
+    const subject = "PDF Accessibility Studio v1.5.0 Question — " + filename + " (" + pages + " pages)";
     const bodyLines = [
-      "Hi Loc,",
+      "Hello PDF/UA Partner Desk,",
       "",
-      "I ran '" + filename + "' (" + pages + " pages) through the Free PDF/UA & ADA Title II Checker.",
+      "I inspected '" + filename + "' (" + pages + " pages) in the Free PDF/UA & ADA Title II Checker:",
       "- Detected Tier: " + tierLabel,
       "- Failed Clauses: " + clausesList,
-      "- Partner Wholesale Quote: " + fmt(wholesaleTotal) + " (or Turnkey Package: " + fmt(fixedUsd) + ")",
+      "- Self-Serve Studio License (EARLY50 50% off): " + fmt(licenseUsd) + " (vs. " + fmt(retailTotal) + " est. manual vendor cost)",
       "",
-      "Please share turnaround details (or run a free 24h sample proof)."
+      "Pre-sales software / CI question: "
     ].join("\n");
     const mailtoUrl = "mailto:" + encodeURIComponent(cfg.email) +
       "?subject=" + encodeURIComponent(subject) +
@@ -195,13 +192,12 @@
       quote: {
         pages: pages,
         tier_label: tierLabel,
-        wholesale_total_usd: wholesaleTotal,
+        software_license_usd: licenseUsd,
         retail_total_usd: retailTotal,
-        agency_net_margin_usd: Math.max(0, retailTotal - wholesaleTotal),
-        fixed_package_usd: fixedUsd
+        in_house_savings_usd: Math.max(0, retailTotal - licenseUsd)
       },
       cta: {
-        upwork_catalog_url: fixedUsd <= 19 && cfg.checkout19 ? cfg.checkout19 : (fixedUsd <= 65 && cfg.checkout65 ? cfg.checkout65 : (fixedUsd <= 195 && cfg.checkout195 ? cfg.checkout195 : cfg.upworkUrl)),
+        upwork_catalog_url: licenseUsd <= 9.50 && cfg.checkout19 ? cfg.checkout19 : (licenseUsd <= 32.50 && cfg.checkout65 ? cfg.checkout65 : (cfg.checkout195 || cfg.upworkUrl)),
         google_form_url: cfg.formUrl,
         mailto_url: mailtoUrl
       }
@@ -215,9 +211,9 @@
       upworkUrl: root.getAttribute("data-upwork-url") || "https://www.upwork.com/services/product/2120536307204819908",
       fiverrUrl: root.getAttribute("data-fiverr-url") || "https://www.fiverr.com/s/L34o2B0",
       freelancerUrl: root.getAttribute("data-freelancer-url") || "https://www.freelancer.com/service/pdf/ada-title-ii-wcag-aa-and-pdf-ua-remediation",
-      checkout19: root.getAttribute("data-checkout19-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages?wanted=true",
-      checkout65: root.getAttribute("data-checkout65-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages?wanted=true",
-      checkout195: root.getAttribute("data-checkout195-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-30-pages?wanted=true",
+      checkout19: root.getAttribute("data-checkout19-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true",
+      checkout65: root.getAttribute("data-checkout65-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages/EARLY50?wanted=true",
+      checkout195: root.getAttribute("data-checkout195-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-30-pages/EARLY50?wanted=true",
       email: root.getAttribute("data-email") || "halocrypto101@gmail.com"
     };
 
@@ -233,26 +229,25 @@
     const leadContextEl = root.querySelector(".chk-lead-context");
     let currentLeadBrief = [
       "To: " + cfg.email,
-      "Subject: Free Clause Report + 1 Remediated Sample Page ($0)",
+      "Subject: PDF Accessibility Studio v1.5.0 — Technical / CI Integration Question",
       "",
-      "Hi Loc,",
+      "Hello PDF/UA Partner Desk,",
       "",
-      "Please send a free veraPDF 1.30.3 clause report + 1 remediated sample page ($0 cost):",
-      "- PDF Filename or Public URL: ",
-      "- Organization / Agency: ",
-      "- Target Deadline: "
+      "We tested our PDF in the free online checker and have a quick question about running PDF Accessibility Studio v1.5.0 locally:",
+      "- PDF Type / Page Count: ",
+      "- Organization / Team: "
     ].join("\n");
 
     if (leadCopyBtn) {
       leadCopyBtn.addEventListener("click", () => {
         const done = () => {
           if (leadToastEl) {
-            leadToastEl.textContent = "Copied $0 sample & clause-report request (" + cfg.email + ") — paste into Gmail, Outlook Web, or Slack and attach your PDF.";
+            leadToastEl.textContent = "Copied pre-sales software brief (" + cfg.email + ") — paste into Gmail, Outlook Web, or Slack.";
             leadToastEl.classList.add("visible");
           }
           const orig = leadCopyBtn.getAttribute("data-orig-label") || leadCopyBtn.textContent;
           leadCopyBtn.setAttribute("data-orig-label", orig);
-          leadCopyBtn.textContent = "Copied $0 request & email!";
+          leadCopyBtn.textContent = "Copied inquiry & email!";
           setTimeout(() => { leadCopyBtn.textContent = orig; }, 2200);
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -272,16 +267,16 @@
     if (demoBtn) {
       demoBtn.addEventListener("click", () => {
         errEl.style.display = "none";
-        const demoSubject = "Fix PDF/UA-1 Issues — FY2026-Municipal-Fee-Schedule.pdf (14 pages)";
+        const demoSubject = "PDF Accessibility Studio v1.5.0 — FY2026-Municipal-Fee-Schedule.pdf (14 pages)";
         const demoBody = [
-          "Hi Loc,",
+          "Hello PDF/UA Partner Desk,",
           "",
-          "I ran 'FY2026-Municipal-Fee-Schedule.pdf' (14 pages) through the Free PDF/UA & ADA Title II Checker.",
+          "I inspected 'FY2026-Municipal-Fee-Schedule.pdf' (14 pages) in the Free PDF/UA & ADA Title II Checker.",
           "- Detected Tier: Structured Data Tables & Reports",
-          "- Failed Clauses: 6.2 / 7.1, 5, 7.5, 7.18.3",
-          "- Partner Wholesale Quote: $42.00 (or Turnkey Package: $195.00)",
+          "- Failed Clauses: 6.2 / 7.1, 5, 7.5, 7.3",
+          "- Self-Serve License (EARLY50 50% off): $9.50 Solo / $32.50 Agency (vs. $112.00 est. manual outsourcing)",
           "",
-          "Please share turnaround details (or run a free 24h sample proof)."
+          "Pre-sales software question: "
         ].join("\n");
         renderData({
           filename: "FY2026-Municipal-Fee-Schedule.pdf",
@@ -311,7 +306,7 @@
               title: "Untagged PDF — Missing Logical Structure Tree (/StructTreeRoot)",
               wcag: "WCAG 2.1 SC 1.3.1 Info & Relationships · 1.3.2 Meaningful Sequence (Level A)",
               failed_checks: 68,
-              impact: "Screen readers (NVDA, JAWS, VoiceOver) cannot distinguish headings, fee tables, or running headers/footers."
+              impact: "Screen readers cannot distinguish headings, fee tables, or running headers/footers."
             },
             {
               clause: "7.5",
@@ -341,13 +336,12 @@
           quote: {
             pages: 14,
             tier_label: "Structured Data Tables & Reports",
-            wholesale_total_usd: 42.0,
+            software_license_usd: 9.50,
             retail_total_usd: 112.0,
-            agency_net_margin_usd: 70.0,
-            fixed_package_usd: 195.0
+            in_house_savings_usd: 102.50
           },
           cta: {
-            upwork_catalog_url: cfg.checkout195 || cfg.upworkUrl,
+            upwork_catalog_url: cfg.checkout19 || cfg.upworkUrl,
             google_form_url: cfg.formUrl,
             mailto_url: "mailto:" + encodeURIComponent(cfg.email) + "?subject=" + encodeURIComponent(demoSubject) + "&body=" + encodeURIComponent(demoBody)
           }
@@ -372,7 +366,7 @@
       errEl.style.display = "none";
       resEl.style.display = "none";
       if (file.size > MAX_BYTES) {
-        errEl.innerHTML = "<strong>File exceeds 20 MB free checker cap.</strong> <a href='" + esc(cfg.formUrl) + "' target='_blank' rel='noopener'>Submit larger PDFs via our sample intake form &rarr;</a>";
+        errEl.innerHTML = "<strong>File exceeds 20 MB browser upload cap.</strong> <a href='" + esc(cfg.checkout19) + "' target='_blank' rel='noopener'>Run unlimited file sizes locally with PDF Accessibility Studio Solo v1.5.0 ($9.50 w/ EARLY50) &rarr;</a>";
         errEl.style.display = "block";
         return;
       }
@@ -411,16 +405,20 @@
     function renderData(d) {
       const q = d.quote || {};
       const st = d.structure || {};
-      const effectivePkgUsd = (q.pages >= 1 && q.pages <= 5 && !st.likely_scanned_ocr && (st.form_fields_total || 0) === 0)
-        ? 19.0
-        : q.fixed_package_usd;
-      let checkoutHref = (effectivePkgUsd <= 19 && cfg.checkout19)
+      const pagesCount = Number(q.pages || st.pages || 1);
+      const effectiveLicUsd = pagesCount <= 15 ? 9.50 : (pagesCount <= 150 ? 32.50 : 97.50);
+      const estManualUsd = Number(q.retail_total_usd || Math.max(60.0, pagesCount * 8.0));
+      let checkoutHref = effectiveLicUsd <= 9.50
         ? cfg.checkout19
-        : ((effectivePkgUsd <= 65 && cfg.checkout65)
-          ? cfg.checkout65
-          : ((effectivePkgUsd <= 195 && cfg.checkout195) ? cfg.checkout195 : ((d.cta && d.cta.upwork_catalog_url) || cfg.upworkUrl)));
-      if (checkoutHref && checkoutHref.indexOf("gumroad.com/l/") !== -1 && checkoutHref.indexOf("wanted=") === -1) {
-        checkoutHref += (checkoutHref.indexOf("?") === -1 ? "?" : "&") + "wanted=true";
+        : (effectiveLicUsd <= 32.50 ? cfg.checkout65 : cfg.checkout195);
+      if (checkoutHref && checkoutHref.indexOf("gumroad.com/l/") !== -1) {
+        if (checkoutHref.indexOf("compliance-starter-kit") === -1 && checkoutHref.indexOf("/EARLY50") === -1) {
+          const parts = checkoutHref.split("?");
+          checkoutHref = parts[0].replace(/\/+$/, "") + "/EARLY50" + (parts[1] ? "?" + parts[1] : "");
+        }
+        if (checkoutHref.indexOf("wanted=") === -1) {
+          checkoutHref += (checkoutHref.indexOf("?") === -1 ? "?" : "&") + "wanted=true";
+        }
       }
 
       const checks = [
@@ -430,46 +428,42 @@
         [st.has_title && st.display_doc_title, "Document title & DisplayDocTitle"],
         [(st.figures_missing_alt || 0) === 0, "Figures alt text (" + (st.figures_missing_alt || 0) + " missing /Alt)"],
         [(st.form_fields_missing_tu || 0) === 0, "Form tooltips (" + (st.form_fields_total || 0) + " fields, " + (st.form_fields_missing_tu || 0) + " missing /TU)"],
-        [!st.likely_scanned_ocr, st.likely_scanned_ocr ? "Scanned image PDF (needs OCR)" : "Searchable text layer present"],
-        [!st.is_cryptographically_signed, st.is_cryptographically_signed ? "Signature lock detected" : "Lossless remediation ready"]
+        [!st.likely_scanned_ocr, st.likely_scanned_ocr ? "Scanned image PDF (needs RapidOCR 3 Tr)" : "Searchable text layer present"],
+        [!st.is_cryptographically_signed, st.is_cryptographically_signed ? "Signature lock detected" : "Local auto-tag repair ready"]
       ];
 
       const clausesSummary = (d.findings || []).map((f) => f.clause).join(", ") || "None";
-      const leadSubj = "Free Clause Report + 1 Remediated Sample Page ($0) — " + d.filename + " (" + d.failed_rules + " failed rules)";
+      const leadSubj = "PDF Accessibility Studio v1.5.0 Question — " + d.filename + " (" + d.failed_rules + " failed rules)";
       const leadBody = [
-        "Hi Loc,",
+        "Hello PDF/UA Partner Desk,",
         "",
-        "Please send the full veraPDF 1.30.3 clause report + 1 remediated sample page ($0 cost) for:",
-        "- Scanned File: " + d.filename + " (" + q.pages + " pages)",
+        "We ran '" + d.filename + "' (" + pagesCount + " pages) in the free checker and have a software / CI workflow question:",
         "- Diagnostic Result: " + d.failed_rules + " failed rules / " + Number(d.failed_checks || 0) + " failed checks (Clauses: " + clausesSummary + ")",
         "- Detected Tier: " + (q.tier_label || "Standard"),
-        "",
-        "I have attached the PDF (or public URL) to this email."
+        "- Question: "
       ].join("\n");
       currentLeadBrief = "To: " + cfg.email + "\nSubject: " + leadSubj + "\n\n" + leadBody;
       if (leadMailtoEl) {
         leadMailtoEl.setAttribute("href", "mailto:" + encodeURIComponent(cfg.email) + "?subject=" + encodeURIComponent(leadSubj) + "&body=" + encodeURIComponent(leadBody));
       }
       if (leadContextEl) {
-        leadContextEl.textContent = "Ready for '" + d.filename + "' (" + d.failed_rules + " failed rules across " + q.pages + "p): get a full clause breakdown + 1 remediated sample page at 0 failed rules ($0 cost) within 24h.";
+        leadContextEl.textContent = "Inspected '" + d.filename + "' (" + d.failed_rules + " failed rules across " + pagesCount + "p): auto-tag and repair unlimited PDFs locally on your own machine with PDF Accessibility Studio v1.5.0 ($9.50 Solo / $32.50 Agency w/ EARLY50).";
       }
 
       const copyBriefText = [
         "To: " + cfg.email,
-        "Subject: Fix PDF/UA-1 Issues — " + d.filename + " (" + q.pages + " pages)",
+        "Subject: PDF Accessibility Studio v1.5.0 ROI Summary — " + d.filename + " (" + pagesCount + " pages)",
         "",
-        "Hi Loc,",
-        "",
-        "Please lock in our remediation quote or run a complimentary 24-hour proof sample:",
-        "- File: " + d.filename + " (" + q.pages + " pages)",
+        "Diagnostic Summary:",
+        "- File: " + d.filename + " (" + pagesCount + " pages)",
         "- Detected Tier: " + (q.tier_label || "Standard"),
         "- Failed Clauses: " + clausesSummary + " (" + d.failed_rules + " rules / " + Number(d.failed_checks || 0) + " checks)",
-        "- Agency Wholesale Quote: " + fmt(q.wholesale_total_usd) + " (US Retail Value: " + fmt(q.retail_total_usd) + ")",
-        "- Fixed Turnkey Option: " + fmt(effectivePkgUsd)
+        "- Est. Manual Outsourcing Cost ($5–$15/pg): " + fmt(estManualUsd),
+        "- PDF Accessibility Studio v1.5.0 License (EARLY50 50% off): " + fmt(effectiveLicUsd) + " (unlimited local PDFs)"
       ].join("\n");
 
       const issuesHtml = (!d.findings || d.findings.length === 0)
-        ? "<div class='chk-issue' style='border-left-color:var(--pass-ink);'><strong style='color:var(--pass-ink);'>0 automated structural rule failures detected</strong><p style='margin-top:4px; font-size:0.875rem;'>Verify semantic alt-text accuracy and screen-reader reading order in NVDA prior to publication.</p></div>"
+        ? "<div class='chk-issue' style='border-left-color:var(--pass-ink);'><strong style='color:var(--pass-ink);'>0 automated structural rule failures detected</strong><p style='margin-top:4px; font-size:0.875rem;'>Follow the included OPERATOR-QA.md post-automation checklist (human_review: PENDING) for your team's final reading-order and alt-text review before publication.</p></div>"
         : d.findings.map((f) =>
             "<div class='chk-issue'>" +
               "<div style='display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center;'>" +
@@ -477,7 +471,7 @@
                 "<span class='status-pill " + (f.severity === "CRITICAL" ? "status-fail" : "status-neutral") + "'>" + esc(f.severity) + " &middot; " + Number(f.failed_checks || 1).toLocaleString("en-US") + " checks</span>" +
               "</div>" +
               "<div class='mono' style='color:var(--accent-ink); margin-top:4px; font-size:0.8125rem;'>" + esc(f.wcag) + "</div>" +
-              "<p style='margin-top:6px; font-size:0.875rem;'><strong>Screen-reader impact:</strong> " + esc(f.impact) + "</p>" +
+              "<p style='margin-top:6px; font-size:0.875rem;'><strong>Assistive-tech impact:</strong> " + esc(f.impact) + "</p>" +
             "</div>"
           ).join("");
 
@@ -486,33 +480,33 @@
           "<div style='display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center;'>" +
             "<div>" +
               "<span class='status-pill " + (d.is_compliant ? "status-pass" : "status-fail") + "'>" + (d.is_compliant ? "Pass · PDF/UA-1" : "Non-compliant · " + d.failed_rules + " failed rules") + "</span>" +
-              "<h3 style='margin-top:8px;'>" + esc(d.filename) + " (" + q.pages + (q.pages === 1 ? " page" : " pages") + ")</h3>" +
+              "<h3 style='margin-top:8px;'>" + esc(d.filename) + " (" + pagesCount + (pagesCount === 1 ? " page" : " pages") + ")</h3>" +
               "<div class='mono' style='color:var(--text-muted); font-size:0.75rem; margin-top:2px;'>" + esc(d.engine) + "</div>" +
             "</div>" +
             "<button type='button' class='btn btn-secondary btn-sm chk-dl-btn'>Download HTML report</button>" +
           "</div>" +
           "<div class='kpi-grid'>" +
             "<div class='audit-metric'><div class='kpi-lbl'>Failed rules</div><div class='kpi-val " + (d.is_compliant ? "pass" : "fail") + "'>" + d.failed_rules + "</div><div class='kpi-sub'>" + Number(d.failed_checks || 0).toLocaleString("en-US") + " failed checks</div></div>" +
-            "<div class='audit-metric'><div class='kpi-lbl'>Document tier</div><div class='kpi-val' style='font-size:1.05rem;'>" + esc(q.tier_label) + "</div><div class='kpi-sub'>" + q.pages + " total pages</div></div>" +
-            "<div class='audit-metric'><div class='kpi-lbl'>Turnkey package</div><div class='kpi-val accent'>" + fmt(effectivePkgUsd) + "</div><div class='kpi-sub'>veraPDF 1.30.3 + NVDA QA</div></div>" +
-            "<div class='audit-metric'><div class='kpi-lbl'>Agency wholesale</div><div class='kpi-val'>" + fmt(q.wholesale_total_usd) + "</div><div class='kpi-sub'>Typical US retail: " + fmt(q.retail_total_usd) + "</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Document tier</div><div class='kpi-val' style='font-size:1.05rem;'>" + esc(q.tier_label || "Standard PDF") + "</div><div class='kpi-sub'>" + pagesCount + " total pages</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Studio v1.5.0 (EARLY50)</div><div class='kpi-val accent'>" + fmt(effectiveLicUsd) + "</div><div class='kpi-sub'>Unlimited local PDFs + Web UI</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Manual vendor cost</div><div class='kpi-val'>" + fmt(estManualUsd) + "</div><div class='kpi-sub'>Save " + fmt(Math.max(0, estManualUsd - effectiveLicUsd)) + " in-house</div></div>" +
           "</div>" +
           "<div class='chk-grid'>" + checks.map(([ok, lbl]) => "<div class='chk-badge'><strong style='color:" + (ok ? "var(--pass-ink)" : "var(--fail-ink)") + ";'>" + (ok ? "Pass:" : "Issue:") + "</strong> " + esc(lbl) + "</div>").join("") + "</div>" +
           "<div class='callout-panel' style='margin-top:16px;'>" +
-            "<h4 style='font-size:1.0625rem; margin-bottom:6px;'>Remediate '" + esc(d.filename) + "' (" + q.pages + "p) — " + fmt(effectivePkgUsd) + " turnkey or " + fmt(q.wholesale_total_usd) + " wholesale</h4>" +
-            "<p style='font-size:0.875rem; margin-bottom:14px;'>Delivered with pixel-identical visual layout, 0 failed ISO 14289-1 rules in veraPDF 1.30.3, NVDA reading-order QA, and SHA-256 manifest. $19 Express Fix available for 1–5p PDFs.</p>" +
+            "<h4 style='font-size:1.0625rem; margin-bottom:6px;'>Auto-tag &amp; repair '" + esc(d.filename) + "' locally — " + fmt(effectiveLicUsd) + " one-time (50% off w/ EARLY50)</h4>" +
+            "<p style='font-size:0.875rem; margin-bottom:14px;'>Download <strong>PDF Accessibility Studio v1.5.0</strong> instantly: runs local <code>pdfa11y</code> auto-tagging, <code>CIDSet</code>/<code>ToUnicode</code> font repair, offline RapidOCR <code>3 Tr</code> text layer, local Web UI, GitHub Action CI gate, and an honest <code>OPERATOR-QA.md</code> post-automation checklist (<code>human_review: PENDING</code>) for unlimited PDFs on your own machine.</p>" +
             "<div class='cta-group'>" +
-              "<a class='btn btn-primary' href='" + esc(checkoutHref) + "' target='_blank' rel='noopener'>Order remediation (" + fmt(effectivePkgUsd) + ")</a>" +
-              "<a class='btn btn-secondary' href='" + esc(cfg.checkout19) + "' target='_blank' rel='noopener'>$19 Express (1–5p)</a>" +
-              "<a class='btn btn-secondary' href='" + esc((d.cta && d.cta.mailto_url) || ("mailto:" + cfg.email)) + "'>Email wholesale quote</a>" +
-              "<button type='button' class='btn btn-secondary chk-copy-quote-btn'>Copy quote brief &amp; email</button>" +
+              "<a class='btn btn-primary' href='" + esc(checkoutHref) + "' target='_blank' rel='noopener'>Download Studio v1.5.0 (" + fmt(effectiveLicUsd) + " w/ EARLY50)</a>" +
+              "<a class='btn btn-secondary' href='" + esc(cfg.checkout19) + "' target='_blank' rel='noopener'>Studio Solo ($9.50 w/ EARLY50)</a>" +
+              "<a class='btn btn-secondary' href='" + esc(cfg.checkout65) + "' target='_blank' rel='noopener'>Studio Agency ($32.50 w/ EARLY50)</a>" +
+              "<button type='button' class='btn btn-secondary chk-copy-quote-btn'>Copy diagnostic summary</button>" +
             "</div>" +
             "<div class='copy-toast chk-copy-toast' role='status' aria-live='polite'></div>" +
-            (checkoutHref && checkoutHref.indexOf("gumroad.com") !== -1 ? "<div class='checkout-caption' style='text-align:left; margin-top:8px;'>Secure instant card checkout by Gumroad</div>" : "") +
-            "<div class='escrow-strip'><span>Marketplace escrow rails:</span>" +
-              "<a class='escrow-pill' href='" + esc(cfg.fiverrUrl) + "' target='_blank' rel='noopener'>Fiverr Escrow</a>" +
-              "<a class='escrow-pill' href='" + esc(cfg.freelancerUrl) + "' target='_blank' rel='noopener'>Freelancer Escrow</a>" +
+            (checkoutHref && checkoutHref.indexOf("gumroad.com") !== -1 ? "<div class='checkout-caption' style='text-align:left; margin-top:8px;'>Instant 24/7 ZIP download via Gumroad (EARLY50 50% off auto-applied · 30-day money-back guarantee)</div>" : "") +
+            "<div class='escrow-strip'><span>Marketplace software catalogs:</span>" +
               "<a class='escrow-pill' href='" + esc(cfg.upworkUrl) + "' target='_blank' rel='noopener'>Upwork Catalog</a>" +
+              "<a class='escrow-pill' href='" + esc(cfg.fiverrUrl) + "' target='_blank' rel='noopener'>Fiverr Gig</a>" +
+              "<a class='escrow-pill' href='" + esc(cfg.freelancerUrl) + "' target='_blank' rel='noopener'>Freelancer</a>" +
             "</div>" +
           "</div>" +
           "<h4 style='margin:20px 0 8px; font-size:0.9375rem;'>Diagnostic clause findings</h4>" +
@@ -526,11 +520,11 @@
         copyQuoteBtn.addEventListener("click", () => {
           const done = () => {
             if (copyToastEl) {
-              copyToastEl.textContent = "Copied diagnostic quote & " + cfg.email + " — paste into Gmail, Outlook Web, or Slack.";
+              copyToastEl.textContent = "Copied diagnostic ROI summary (" + cfg.email + ") — paste into Gmail, Outlook Web, or Slack.";
               copyToastEl.classList.add("visible");
             }
-            copyQuoteBtn.textContent = "Copied quote & email!";
-            setTimeout(() => { copyQuoteBtn.textContent = "Copy quote brief & email"; }, 2200);
+            copyQuoteBtn.textContent = "Copied summary!";
+            setTimeout(() => { copyQuoteBtn.textContent = "Copy diagnostic summary"; }, 2200);
           };
           if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(copyBriefText).then(done).catch(() => {});
@@ -548,9 +542,9 @@
           const docHtml = "<!doctype html><html lang='en'><head><meta charset='utf-8'><title>PDF/UA-1 Audit — " + esc(d.filename) + "</title>" +
             "<style>body{font-family:sans-serif;max-width:920px;margin:32px auto;padding:0 20px;color:#0f172a;line-height:1.5}table{width:100%;border-collapse:collapse;margin:18px 0}th,td{border:1px solid #cbd5e1;padding:10px;text-align:left;vertical-align:top}th{background:#f1f5f9}</style></head><body>" +
             "<h1>ADA Title II &amp; ISO 14289-1 (PDF/UA-1) Diagnostic Report</h1>" +
-            "<p><strong>Document:</strong> " + esc(d.filename) + " (" + q.pages + " pages) &middot; <strong>Quote:</strong> " + fmt(q.wholesale_total_usd) + " Agency Wholesale / " + fmt(q.fixed_package_usd) + " Direct</p>" +
-            "<table><thead><tr><th scope='col'>Clause</th><th scope='col'>Issue &amp; WCAG Criterion</th><th scope='col'>User Impact</th></tr></thead><tbody>" + rows + "</tbody></table>" +
-            "<p><strong>Remediation Desk:</strong> Loc Nguyen — PDF/UA Partner Desk (" + esc(cfg.email) + ")</p></body></html>";
+            "<p><strong>Document:</strong> " + esc(d.filename) + " (" + pagesCount + " pages) &middot; <strong>Self-Serve Software License (EARLY50):</strong> " + fmt(effectiveLicUsd) + " (vs. " + fmt(estManualUsd) + " est. manual vendor cost)</p>" +
+            "<table><thead><tr><th scope='col'>Clause</th><th scope='col'>Issue &amp; WCAG Criterion</th><th scope='col'>Assistive-Tech Impact</th></tr></thead><tbody>" + rows + "</tbody></table>" +
+            "<p><strong>Software Suite:</strong> PDF/UA Partner Desk (" + esc(cfg.email) + ") — Deterministic automated software; not legal advice.</p></body></html>";
           const blob = new Blob([docHtml], { type: "text/html;charset=utf-8" });
           const a = document.createElement("a");
           a.href = URL.createObjectURL(blob);
