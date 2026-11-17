@@ -1,0 +1,11 @@
+{
+  "manifest": {
+    "version": "1.6.0",
+    "url": "https://github.com/hadesloc/pdfua-partner-desk/releases/download/v1.6.0/PDFAccessibilityStudio-Setup-1.6.0.exe",
+    "sha256": "5ad2c3ed6fd12a793c20daa243abf467fdeea481a5498546947e4ff5073dc27c",
+    "size": 165098485,
+    "notes": "One-click installer, license activation, auto-update",
+    "published_at": "2026-11-17T02:40:04+00:00"
+  },
+  "signature": "2rfWj+KKKtEwPcJez8RtzB0a7RqjzZpGlDLKsb9lDZlo1ce7e9lJ1r5sOifCNTXroqJjHEbvytqI5r8fOQqGCw=="
+}
