@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 Public-Sector PDF/UA-1 Benchmark Report (31 PDFs, 228 Pages) — PDF/UA Partner Desk</title>
+<meta name="description" content="Reproducible veraPDF 1.30.3 benchmark across 31 real .gov, .edu, AcroForm, and scanned PDFs (228 pages): 212 to 0 failed rules and 57,205 to 0 failed checks with 100% pixel preservation.">
+<link rel="canonical" href="https://hadesloc.github.io/pdfua-partner-desk/benchmark-report-2026/">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "2026 In-the-Wild Public-Sector PDF Accessibility Benchmark (31 Real PDFs, 228 Pages)", "description": "Clause-by-clause ISO 14289-1 (PDF/UA-1) benchmark across real .gov, .edu, AcroForm, scanned ordinance, and EU commercial PDFs verified with veraPDF 1.30.3.", "url": "https://hadesloc.github.io/pdfua-partner-desk/benchmark-report-2026/", "author": {"@type": "Person", "name": "Loc Nguyen"}}</script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../">
+      <span class="brand-mark" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.5H4a1.5 1.5 0 0 0-1.5 1.5v10A1.5 1.5 0 0 0 4 14.5h8a1.5 1.5 0 0 0 1.5-1.5V6L9 1.5z"/><path d="M5.5 9.5l1.8 1.8 3.4-3.6"/></svg></span>
+      <span>PDF/UA Partner Desk</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="../#free-checker" class="nav-hide-mobile">Free checker</a>
+      <a href="../#pricing" class="nav-hide-xs">Studio v1.6.1</a>
+      <a href="https://github.com/hadesloc/pdfua-partner-desk/releases/download/v1.6.1/PDFAccessibilityStudio-Setup-1.6.1.exe" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Free Trial (&le;5p)</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content" tabindex="-1">
+  <section class="page-hero">
+    <div class="container" style="max-width:920px;">
+      <span class="eyebrow">Reproducible Research &amp; Benchmark Dataset &middot; veraPDF 1.30.3 (ISO 14289-1:2014)</span>
+      <h1>2026 In-the-Wild PDF Accessibility Benchmark: 31 Real Public PDFs, 228 Pages</h1>
+      <p class="hero-lead">Measured across real U.S. municipal portals (<code>.gov</code>), higher-education handbooks (<code>.edu</code>), interactive AcroForms, scanned city ordinances, and EU hardware datasheets using deterministic local auto-tagging (<code>pdfa11y</code>) and <code>veraPDF 1.30.3</code>.</p>
+      <div class="cta-group">
+        <a class="btn btn-primary" href="https://github.com/hadesloc/pdfua-partner-desk/releases/download/v1.6.1/PDFAccessibilityStudio-Setup-1.6.1.exe" target="_blank" rel="noopener">Try Studio v1.6.1 Free (&le;5p)</a>
+        <a class="btn btn-secondary" href="../#free-checker">Run Free Online Validator</a>
+        <a class="btn btn-secondary" href="https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true" target="_blank" rel="noopener">Solo License ($9.50 w/ EARLY50)</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="kpi-grid" style="margin-bottom:var(--sp-5);">
+        <div class="audit-metric">
+          <div class="kpi-lbl">Real PDFs Tested</div>
+          <div class="kpi-val pass">31 / 31</div>
+          <div class="kpi-sub">228 total pages &middot; 0 crashes</div>
+        </div>
+        <div class="audit-metric">
+          <div class="kpi-lbl">Failed PDF/UA-1 Rules</div>
+          <div class="kpi-val pass">212 &rarr; 0</div>
+          <div class="kpi-sub">100.0% automated rule resolution</div>
+        </div>
+        <div class="audit-metric">
+          <div class="kpi-lbl">Failed Clause Checks</div>
+          <div class="kpi-val accent">57,205 &rarr; 0</div>
+          <div class="kpi-sub">Verified via veraPDF 1.30.3</div>
+        </div>
+        <div class="audit-metric">
+          <div class="kpi-lbl">Visual Layout Fidelity</div>
+          <div class="kpi-val pass">31 / 31</div>
+          <div class="kpi-sub">100% pixel-identical rendering</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:var(--sp-5);">
+        <h2 style="font-size:1.25rem; margin-bottom:10px;">Segment-by-Segment Benchmark Breakdown</h2>
+        <div style="overflow-x:auto;">
+          <table class="audit-table">
+            <thead>
+              <tr>
+                <th scope="col">Segment</th>
+                <th scope="col">Corpus Category</th>
+                <th scope="col">Docs</th>
+                <th scope="col">Pages</th>
+                <th scope="col">Failed Rules (Before &rarr; After)</th>
+                <th scope="col">Visual Pixels Preserved</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>A</strong></td><td>Municipal &amp; State Portals (<code>.gov</code>)</td><td>7</td><td>86</td><td>44 &rarr; 0</td><td>7 / 7</td></tr>
+              <tr><td><strong>B</strong></td><td>Higher-Education Handbooks &amp; Syllabi (<code>.edu</code>)</td><td>7</td><td>59</td><td>49 &rarr; 0</td><td>7 / 7</td></tr>
+              <tr><td><strong>C</strong></td><td>Interactive Fillable AcroForms (<code>opm.gov</code>, <code>seattle.gov</code>, <code>.edu</code>)</td><td>7</td><td>11</td><td>58 &rarr; 0</td><td>7 / 7</td></tr>
+              <tr><td><strong>D</strong></td><td>Scanned Raster Ordinances (RapidOCR <code>3 Tr</code>)</td><td>5</td><td>24</td><td>23 &rarr; 0</td><td>5 / 5</td></tr>
+              <tr><td><strong>E</strong></td><td>Commercial / EU EAA Hardware Datasheets</td><td>5</td><td>48</td><td>38 &rarr; 0</td><td>5 / 5</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:var(--sp-5);">
+        <h2 style="font-size:1.25rem; margin-bottom:10px;">Additional 15-Agency Public Portfolio Sample (5,384 Pages)</h2>
+        <p style="font-size:0.9375rem;">Across an expanded audit sample of 15 U.S. digital agency public-sector client portfolios totaling <strong>5,384 pages</strong> (<code>oakwoodohio.gov</code>, <code>dublinohiousa.gov</code>, <code>cityofseaside.us</code>, and peers), baseline scans flagged missing <code>/StructTreeRoot</code>, <code>pdfuaid:part=1</code> XMP identifiers, table <code>/Scope</code>, and subset font <code>CIDSet</code> metrics across every sampled backlog. All 15 representative deliverables passed <code>veraPDF 1.30.3</code> with <strong>0 failed rules</strong> and <strong>100% pixel preservation</strong>.</p>
+      </div>
+
+      <div class="callout-panel">
+        <h2 style="font-size:1.125rem; margin-bottom:8px;">Honest Machine-vs-Human Scope Notice</h2>
+        <p style="font-size:0.875rem; margin-bottom:12px;">Passing <code>veraPDF 1.30.3</code> (<code>0 failed rules</code>) proves ISO 14289-1 machine syntax conformance—not full human semantic usability under WCAG 2.1 AA. Every Studio QA bundle initializes <code>OPERATOR-QA.md</code> with <code>human_review: PENDING</code> so your reviewer verifies reading order, descriptive <code>&lt;Figure&gt;</code> alt text, color contrast, and NVDA/PAC 2026 playback before publishing.</p>
+        <div class="cta-group">
+          <a class="btn btn-primary" href="https://github.com/hadesloc/pdfua-partner-desk/releases/download/v1.6.1/PDFAccessibilityStudio-Setup-1.6.1.exe" target="_blank" rel="noopener">Download Free Windows Trial (&le;5p)</a>
+          <a class="btn btn-secondary" href="https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages/EARLY50?wanted=true" target="_blank" rel="noopener">Studio Agency ($32.50 w/ EARLY50)</a>
+          <a class="btn btn-secondary" href="mailto:halocrypto101@gmail.com">Press / Benchmark Inquiry</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:0; padding-top:0;">
+      <span><strong>Loc Nguyen — PDF/UA Partner Desk</strong> &middot; <a href="mailto:halocrypto101@gmail.com">halocrypto101@gmail.com</a> &middot; <a href="../">Home</a> &middot; <a href="../privacy/">Privacy</a> &middot; <a href="../terms/">Terms</a></span>
+      <span>Reproducible local software benchmark — not legal counsel or WCAG certification.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+<script src="https://gumroad.com/js/gumroad.js" defer></script>
+</body>
+</html>

@@ -152,7 +152,7 @@
     const isCompliant = failedRules === 0 && isTagged && hasPdfUaId;
 
     const clausesList = findings.map((f) => f.clause).join(", ") || "None";
-    const subject = "PDF Accessibility Studio v1.5.0 Question — " + filename + " (" + pages + " pages)";
+    const subject = "PDF Accessibility Studio v1.6.1 Question — " + filename + " (" + pages + " pages)";
     const bodyLines = [
       "Hello PDF/UA Partner Desk,",
       "",
@@ -214,6 +214,7 @@
       checkout19: root.getAttribute("data-checkout19-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true",
       checkout65: root.getAttribute("data-checkout65-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages/EARLY50?wanted=true",
       checkout195: root.getAttribute("data-checkout195-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-30-pages/EARLY50?wanted=true",
+      trialInstallerUrl: root.getAttribute("data-trial-installer-url") || "https://github.com/hadesloc/pdfua-partner-desk/releases/latest",
       email: root.getAttribute("data-email") || "halocrypto101@gmail.com"
     };
 
@@ -229,11 +230,11 @@
     const leadContextEl = root.querySelector(".chk-lead-context");
     let currentLeadBrief = [
       "To: " + cfg.email,
-      "Subject: PDF Accessibility Studio v1.5.0 — Technical / CI Integration Question",
+      "Subject: PDF Accessibility Studio v1.6.1 — Technical / CI Integration Question",
       "",
       "Hello PDF/UA Partner Desk,",
       "",
-      "We tested our PDF in the free online checker and have a quick question about running PDF Accessibility Studio v1.5.0 locally:",
+      "We tested our PDF in the free online checker and have a quick question about running PDF Accessibility Studio v1.6.1 locally:",
       "- PDF Type / Page Count: ",
       "- Organization / Team: "
     ].join("\n");
@@ -267,7 +268,7 @@
     if (demoBtn) {
       demoBtn.addEventListener("click", () => {
         errEl.style.display = "none";
-        const demoSubject = "PDF Accessibility Studio v1.5.0 — FY2026-Municipal-Fee-Schedule.pdf (14 pages)";
+        const demoSubject = "PDF Accessibility Studio v1.6.1 — FY2026-Municipal-Fee-Schedule.pdf (14 pages)";
         const demoBody = [
           "Hello PDF/UA Partner Desk,",
           "",
@@ -366,14 +367,20 @@
       errEl.style.display = "none";
       resEl.style.display = "none";
       if (file.size > MAX_BYTES) {
-        errEl.innerHTML = "<strong>File exceeds 20 MB browser upload cap.</strong> <a href='" + esc(cfg.checkout19) + "' target='_blank' rel='noopener'>Run unlimited file sizes locally with PDF Accessibility Studio Solo v1.5.0 ($9.50 w/ EARLY50) &rarr;</a>";
+        errEl.innerHTML = "<strong>File exceeds 20 MB browser upload cap.</strong> <a href='" + esc(cfg.trialInstallerUrl) + "' target='_blank' rel='noopener'>Try the Free Windows Trial (&le;5 pages free)</a> or <a href='" + esc(cfg.checkout19) + "' target='_blank' rel='noopener'>unlock Studio Solo v1.6.1 ($9.50 w/ EARLY50) &rarr;</a>";
         errEl.style.display = "block";
         return;
       }
+      statusEl.textContent = "Waking veraPDF 1.30.3 cloud validator & analyzing your PDF (first wake-up can take ~12–25s)…";
       statusEl.style.display = "block";
+      let coldHintTimer = null;
       try {
         let data = null;
+        let usedLocalFallback = false;
         if (cfg.apiUrl) {
+          coldHintTimer = setTimeout(() => {
+            statusEl.textContent = "Cloud validator is still waking from idle — finishing ISO 14289-1 checks (or run at 0s latency locally on Windows with our Free ≤5-page Trial)…";
+          }, 7000);
           try {
             const ctrl = new AbortController();
             const timer = setTimeout(() => ctrl.abort(), 55000);
@@ -388,13 +395,19 @@
           } catch (_) {
             data = null;
           }
+          if (coldHintTimer) clearTimeout(coldHintTimer);
         }
         if (!data) {
+          usedLocalFallback = true;
           const buf = await file.arrayBuffer();
           data = localInspectPdfBuffer(buf, file.name || "document.pdf", cfg);
+          if (cfg.apiUrl) {
+            data.engine = "In-Browser Structural PDF/UA-1 Inspector (Cloud veraPDF timed out — zero-upload local scan)";
+          }
         }
-        renderData(data);
+        renderData(data, usedLocalFallback);
       } catch (err) {
+        if (coldHintTimer) clearTimeout(coldHintTimer);
         errEl.textContent = "Validation error: " + (err && err.message ? err.message : String(err));
         errEl.style.display = "block";
       } finally {
@@ -402,7 +415,7 @@
       }
     }
 
-    function renderData(d) {
+    function renderData(d, usedLocalFallback) {
       const q = d.quote || {};
       const st = d.structure || {};
       const pagesCount = Number(q.pages || st.pages || 1);
@@ -433,7 +446,7 @@
       ];
 
       const clausesSummary = (d.findings || []).map((f) => f.clause).join(", ") || "None";
-      const leadSubj = "PDF Accessibility Studio v1.5.0 Question — " + d.filename + " (" + d.failed_rules + " failed rules)";
+      const leadSubj = "PDF Accessibility Studio v1.6.1 Question — " + d.filename + " (" + d.failed_rules + " failed rules)";
       const leadBody = [
         "Hello PDF/UA Partner Desk,",
         "",
@@ -447,19 +460,19 @@
         leadMailtoEl.setAttribute("href", "mailto:" + encodeURIComponent(cfg.email) + "?subject=" + encodeURIComponent(leadSubj) + "&body=" + encodeURIComponent(leadBody));
       }
       if (leadContextEl) {
-        leadContextEl.textContent = "Inspected '" + d.filename + "' (" + d.failed_rules + " failed rules across " + pagesCount + "p): auto-tag and repair unlimited PDFs locally on your own machine with PDF Accessibility Studio v1.5.0 ($9.50 Solo / $32.50 Agency w/ EARLY50).";
+        leadContextEl.textContent = "Inspected '" + d.filename + "' (" + d.failed_rules + " failed rules across " + pagesCount + "p): test full Auto-Fix free on ≤5-page PDFs with our Windows installer, or unlock unlimited pages with Studio v1.6.1 ($9.50 Solo / $32.50 Agency w/ EARLY50).";
       }
 
       const copyBriefText = [
         "To: " + cfg.email,
-        "Subject: PDF Accessibility Studio v1.5.0 ROI Summary — " + d.filename + " (" + pagesCount + " pages)",
+        "Subject: PDF Accessibility Studio v1.6.1 ROI Summary — " + d.filename + " (" + pagesCount + " pages)",
         "",
         "Diagnostic Summary:",
         "- File: " + d.filename + " (" + pagesCount + " pages)",
         "- Detected Tier: " + (q.tier_label || "Standard"),
         "- Failed Clauses: " + clausesSummary + " (" + d.failed_rules + " rules / " + Number(d.failed_checks || 0) + " checks)",
         "- Est. Manual Outsourcing Cost ($5–$15/pg): " + fmt(estManualUsd),
-        "- PDF Accessibility Studio v1.5.0 License (EARLY50 50% off): " + fmt(effectiveLicUsd) + " (unlimited local PDFs)"
+        "- PDF Accessibility Studio v1.6.1 License (EARLY50 50% off): " + fmt(effectiveLicUsd) + " (unlimited local PDFs)"
       ].join("\n");
 
       const issuesHtml = (!d.findings || d.findings.length === 0)
@@ -488,15 +501,16 @@
           "<div class='kpi-grid'>" +
             "<div class='audit-metric'><div class='kpi-lbl'>Failed rules</div><div class='kpi-val " + (d.is_compliant ? "pass" : "fail") + "'>" + d.failed_rules + "</div><div class='kpi-sub'>" + Number(d.failed_checks || 0).toLocaleString("en-US") + " failed checks</div></div>" +
             "<div class='audit-metric'><div class='kpi-lbl'>Document tier</div><div class='kpi-val' style='font-size:1.05rem;'>" + esc(q.tier_label || "Standard PDF") + "</div><div class='kpi-sub'>" + pagesCount + " total pages</div></div>" +
-            "<div class='audit-metric'><div class='kpi-lbl'>Studio v1.5.0 (EARLY50)</div><div class='kpi-val accent'>" + fmt(effectiveLicUsd) + "</div><div class='kpi-sub'>Unlimited local PDFs + Web UI</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Studio v1.6.1 (EARLY50)</div><div class='kpi-val accent'>" + fmt(effectiveLicUsd) + "</div><div class='kpi-sub'>Free trial ≤5p · Unlimited w/ key</div></div>" +
             "<div class='audit-metric'><div class='kpi-lbl'>Manual vendor cost</div><div class='kpi-val'>" + fmt(estManualUsd) + "</div><div class='kpi-sub'>Save " + fmt(Math.max(0, estManualUsd - effectiveLicUsd)) + " in-house</div></div>" +
           "</div>" +
           "<div class='chk-grid'>" + checks.map(([ok, lbl]) => "<div class='chk-badge'><strong style='color:" + (ok ? "var(--pass-ink)" : "var(--fail-ink)") + ";'>" + (ok ? "Pass:" : "Issue:") + "</strong> " + esc(lbl) + "</div>").join("") + "</div>" +
           "<div class='callout-panel' style='margin-top:16px;'>" +
-            "<h4 style='font-size:1.0625rem; margin-bottom:6px;'>Auto-tag &amp; repair '" + esc(d.filename) + "' locally — " + fmt(effectiveLicUsd) + " one-time (50% off w/ EARLY50)</h4>" +
-            "<p style='font-size:0.875rem; margin-bottom:14px;'>Download <strong>PDF Accessibility Studio v1.5.0</strong> instantly: runs local <code>pdfa11y</code> auto-tagging, <code>CIDSet</code>/<code>ToUnicode</code> font repair, offline RapidOCR <code>3 Tr</code> text layer, local Web UI, GitHub Action CI gate, and an honest <code>OPERATOR-QA.md</code> post-automation checklist (<code>human_review: PENDING</code>) for unlimited PDFs on your own machine.</p>" +
+            "<h4 style='font-size:1.0625rem; margin-bottom:6px;'>Auto-tag &amp; repair '" + esc(d.filename) + "' locally — Free ≤5p Trial or " + fmt(effectiveLicUsd) + " (EARLY50)</h4>" +
+            "<p style='font-size:0.875rem; margin-bottom:14px;'>" + (pagesCount <= 5 ? "<strong>Good news: '" + esc(d.filename) + "' is " + pagesCount + " page(s), so it qualifies for our 100% Free Windows Trial</strong> (full Auto-Fix, OCR, Forms &amp; export on ≤5-page PDFs). " : "") + "Run <strong>PDF Accessibility Studio v1.6.1</strong> locally on Windows for <code>pdfa11y</code> auto-tagging, <code>CIDSet</code>/<code>ToUnicode</code> font repair, offline RapidOCR <code>3 Tr</code>, and <code>veraPDF 1.30.3</code> validation.</p>" +
             "<div class='cta-group'>" +
-              "<a class='btn btn-primary' href='" + esc(checkoutHref) + "' target='_blank' rel='noopener'>Download Studio v1.5.0 (" + fmt(effectiveLicUsd) + " w/ EARLY50)</a>" +
+              "<a class='btn btn-primary' href='" + esc(pagesCount <= 5 ? cfg.trialInstallerUrl : checkoutHref) + "' target='_blank' rel='noopener'>" + (pagesCount <= 5 ? "Download Free Windows Trial (≤5p Free)" : "Unlock Studio v1.6.1 (" + fmt(effectiveLicUsd) + " w/ EARLY50)") + "</a>" +
+              "<a class='btn btn-secondary' href='" + esc(cfg.trialInstallerUrl) + "' target='_blank' rel='noopener'>Free Windows Installer (≤5p Trial)</a>" +
               "<a class='btn btn-secondary' href='" + esc(cfg.checkout19) + "' target='_blank' rel='noopener'>Studio Solo ($9.50 w/ EARLY50)</a>" +
               "<a class='btn btn-secondary' href='" + esc(cfg.checkout65) + "' target='_blank' rel='noopener'>Studio Agency ($32.50 w/ EARLY50)</a>" +
               "<button type='button' class='btn btn-secondary chk-copy-quote-btn'>Copy diagnostic summary</button>" +

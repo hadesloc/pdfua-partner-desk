@@ -7,7 +7,7 @@
 <meta name="description" content="Plain-English engineering guide to the U.S. DOJ 28 CFR Part 35 ADA Title II web and PDF accessibility deadlines (April 24, 2026 &amp; April 26, 2027) with a free instant PDF compliance checker.">
 <link rel="canonical" href="https://hadesloc.github.io/pdfua-partner-desk/ada-title-ii-april-2026-pdf-deadline/">
 <link rel="stylesheet" href="../assets/site.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "ADA Title II April 2026 & April 2027 PDF Accessibility Deadline Guide (28 CFR Part 35)", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Windows, macOS, Linux", "url": "https://hadesloc.github.io/pdfua-partner-desk/ada-title-ii-april-2026-pdf-deadline/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which PDFs must be remediated vs. archived under 28 CFR Part 35?", "acceptedAnswer": {"@type": "Answer", "text": "Active agendas, budgets, permits, fee schedules, enrollment packets, policies, and forms used to participate in or apply for public programs require WCAG 2.1 Level AA accessibility. Preexisting documents qualify for the narrow archive exception only if kept exclusively in a clearly labeled archive area, unmodified since the compliance date, and not used for active civic services."}}, {"@type": "Question", "name": "Why target ISO 14289-1 (PDF/UA-1) alongside WCAG 2.1 Level AA?", "acceptedAnswer": {"@type": "Answer", "text": "WCAG 2.1 Level AA defines functional accessibility (alt text, info & relationships, focus order, contrast, titles, language), while ISO 14289-1 (PDF/UA-1) defines exact PDF tag, table scope, font, and form widget bindings so assistive technologies read the PDF reliably."}}, {"@type": "Question", "name": "Can agencies and public teams run PDF Accessibility Studio offline?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Studio v1.5.0 runs 100% locally on your own workstation with zero cloud uploads, outputting repaired PDFs, veraPDF 1.30.3 reports, SHA-256 manifests, and an honest OPERATOR-QA.md post-automation checklist (human_review: PENDING) for your team's final sign-off."}}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "ADA Title II April 2026 & April 2027 PDF Accessibility Deadline Guide (28 CFR Part 35)", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Windows, macOS, Linux", "url": "https://hadesloc.github.io/pdfua-partner-desk/ada-title-ii-april-2026-pdf-deadline/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which PDFs must be remediated vs. archived under 28 CFR Part 35?", "acceptedAnswer": {"@type": "Answer", "text": "Active agendas, budgets, permits, fee schedules, enrollment packets, policies, and forms used to participate in or apply for public programs require WCAG 2.1 Level AA accessibility. Preexisting documents qualify for the narrow archive exception only if kept exclusively in a clearly labeled archive area, unmodified since the compliance date, and not used for active civic services."}}, {"@type": "Question", "name": "Why target ISO 14289-1 (PDF/UA-1) alongside WCAG 2.1 Level AA?", "acceptedAnswer": {"@type": "Answer", "text": "WCAG 2.1 Level AA defines functional accessibility (alt text, info & relationships, focus order, contrast, titles, language), while ISO 14289-1 (PDF/UA-1) defines exact PDF tag, table scope, font, and form widget bindings so assistive technologies read the PDF reliably."}}, {"@type": "Question", "name": "Can agencies and public teams run PDF Accessibility Studio offline?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Studio v1.6.0 runs 100% locally on your own workstation with zero cloud uploads, outputting repaired PDFs, veraPDF 1.30.3 reports, SHA-256 manifests, and an honest OPERATOR-QA.md post-automation checklist (human_review: PENDING) for your team's final sign-off."}}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -48,6 +48,7 @@
      data-checkout19-url="https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true"
      data-checkout65-url="https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages/EARLY50?wanted=true"
      data-checkout195-url="https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-30-pages/EARLY50?wanted=true"
+     data-trial-installer-url="https://github.com/hadesloc/pdfua-partner-desk/releases/download/v1.6.1/PDFAccessibilityStudio-Setup-1.6.1.exe"
      data-email="halocrypto101@gmail.com">
   <div class="section-head">
     <span class="eyebrow">Free online validator</span>
@@ -70,17 +71,18 @@
     <button type="button" class="preset-btn chk-demo-btn">Preview sample municipal audit (14p)</button>
     <span><a href="https://pdfua-ada-checker.onrender.com" target="_blank" rel="noopener">Standalone validator &nearr;</a></span>
   </div>
-  <div class="chk-status" role="status" aria-live="polite">Running veraPDF 1.30.3 inspection (first check after idle may take ~20 seconds)&hellip;</div>
+  <div class="chk-status" role="status" aria-live="polite">Running veraPDF 1.30.3 inspection (first check after idle may take ~15–25 seconds)&hellip;</div>
   <div class="chk-error" role="alert"></div>
   <div class="chk-results" style="display:none;"></div>
   <div class="callout-panel" data-pdfua-lead-capture style="margin-top:20px;">
     <span class="eyebrow">100% Local Self-Serve Software &middot; Zero Cloud Uploads</span>
-    <h3 style="font-size:1.125rem; margin-bottom:6px;">Test Free Open CLI Starter Kit ($0+) or Unlock PDF Accessibility Studio v1.5.0 ($9.50 w/ EARLY50)</h3>
-    <p class="chk-lead-context" style="font-size:0.875rem; margin-bottom:14px;">Start with our MIT open-source CLI quick-checkers at <strong>$0+</strong>, or download <strong>PDF Accessibility Studio Solo v1.5.0</strong> (<strong>$9.50</strong> w/ <code>EARLY50</code>, reg. $19) to auto-tag unlimited PDFs, repair <code>CIDSet</code>/<code>ToUnicode</code> fonts, add offline RapidOCR <code>3 Tr</code> text layers, and generate an honest <code>OPERATOR-QA.md</code> checklist (<code>human_review: PENDING</code>) on your own machine.</p>
+    <h3 style="font-size:1.125rem; margin-bottom:6px;">Try Studio v1.6.1 Free (&le;5 Pages) or Unlock Unlimited PDFs ($9.50 w/ EARLY50)</h3>
+    <p class="chk-lead-context" style="font-size:0.875rem; margin-bottom:14px;">Test full Auto-Fix, OCR &amp; export free on PDFs up to 5 pages with our Windows installer, grab our MIT CLI quick-checkers at <strong>$0+</strong>, or unlock <strong>PDF Accessibility Studio Solo v1.6.1</strong> (<strong>$9.50</strong> w/ <code>EARLY50</code>, reg. $19) for unlimited pages on your own machine.</p>
     <div class="cta-group">
-      <a class="btn btn-primary" href="https://pdfuapartnerdesk.gumroad.com/l/compliance-starter-kit?wanted=true" target="_blank" rel="noopener">Download Free Open CLI Starter Kit ($0+)</a>
-      <a class="btn btn-secondary" href="https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true" target="_blank" rel="noopener">Unlock Studio Solo v1.5.0 ($9.50 w/ EARLY50)</a>
-      <a class="btn btn-secondary chk-lead-mailto" href="mailto:halocrypto101%40gmail.com?subject=PDF%20Accessibility%20Studio%20v1.5.0%20%E2%80%94%20Technical%20/%20CI%20Integration%20Question&amp;body=Hello%20PDF/UA%20Partner%20Desk%2C%0A%0AWe%20tested%20our%20PDF%20in%20the%20free%20online%20checker%20and%20have%20a%20quick%20question%20about%20running%20PDF%20Accessibility%20Studio%20v1.5.0%20locally%3A%0A-%20PDF%20Type%20/%20Page%20Count%3A%0A-%20Organization%20/%20Team%3A%0A">Email Software / CI Question</a>
+      <a class="btn btn-primary" href="https://github.com/hadesloc/pdfua-partner-desk/releases/download/v1.6.1/PDFAccessibilityStudio-Setup-1.6.1.exe" target="_blank" rel="noopener">Download Free Windows Trial (&le;5p Free)</a>
+      <a class="btn btn-secondary" href="https://pdfuapartnerdesk.gumroad.com/l/compliance-starter-kit?wanted=true" target="_blank" rel="noopener">Download Free Open CLI Starter Kit ($0+)</a>
+      <a class="btn btn-secondary" href="https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true" target="_blank" rel="noopener">Unlock Studio Solo v1.6.1 ($9.50 w/ EARLY50)</a>
+      <a class="btn btn-secondary chk-lead-mailto" href="mailto:halocrypto101%40gmail.com?subject=PDF%20Accessibility%20Studio%20v1.6.1%20%E2%80%94%20Technical%20/%20CI%20Integration%20Question&amp;body=Hello%20PDF/UA%20Partner%20Desk%2C%0A%0AWe%20tested%20our%20PDF%20in%20the%20free%20online%20checker%20and%20have%20a%20quick%20question%20about%20running%20PDF%20Accessibility%20Studio%20v1.6.1%20locally%3A%0A-%20PDF%20Type%20/%20Page%20Count%3A%0A-%20Organization%20/%20Team%3A%0A">Email Software / CI Question</a>
       <button type="button" class="btn btn-secondary chk-lead-copy">Copy software inquiry &amp; email</button>
     </div>
     <div class="copy-toast chk-lead-toast" role="status" aria-live="polite"></div>
@@ -101,7 +103,7 @@
             <div class="kpi-sub">Townships &lt;50k and special district governments (transit, water, park, school districts) are in active preparation windows now.</div>
           </div>
           <div class="card">
-            <div class="kpi-lbl">Self-Serve Studio v1.5.0</div>
+            <div class="kpi-lbl">Self-Serve Studio v1.6.0</div>
             <div class="kpi-val">$9.50–$97.50</div>
             <div class="kpi-sub">50% off w/ <code>EARLY50</code> vs. $5–$15/pg manual outsourcing—auto-tag unlimited PDFs locally with 100% pixel-identical layouts.</div>
           </div>
@@ -267,8 +269,8 @@
       <div class="card" id="storefront-self-serve-preview" style="margin-top:var(--sp-4); margin-bottom:var(--sp-4);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
           <div style="max-width:64ch;">
-            <span class="eyebrow">24/7 Instant ZIP Fulfillment &middot; Code EARLY50 Auto-Applied (50% Off)</span>
-            <h3 style="font-size:1.1875rem; margin-bottom:6px;">Instant Self-Serve Software ZIP — Preview Included Files</h3>
+            <span class="eyebrow">Instant software download &middot; Code EARLY50 Auto-Applied (50% Off)</span>
+            <h3 style="font-size:1.1875rem; margin-bottom:6px;">Self-Serve Software — Preview Included Files</h3>
             <p style="font-size:0.875rem; margin:0;">
               Every Gumroad checkout immediately unlocks a 100% local software bundle (zero cloud uploads, unlimited pages, 30-day money-back guarantee; <strong><code>EARLY50</code></strong> 50% off auto-applied)—or test our open-source Python 3 stdlib CLI quick-checkers &amp; spreadsheets first at <strong>$0+</strong>.
             </p>
@@ -286,13 +288,13 @@
         </div>
         <pre class="ci-code-pre" tabindex="0" style="margin-top:12px; margin-bottom:0;"><code>npx pdfua-ada-scanner ./public/docs</code></pre>
         <details class="faq-item" id="storefront-zip-details" style="margin-top:14px;">
-          <summary>Inspect exact files inside each instant-download v1.5.0 ZIP ($0+ / $9.50 / $32.50 / $97.50 w/ EARLY50)</summary>
+          <summary>Inspect exact files inside each software package ($0+ / $9.50 / $32.50 / $97.50 w/ EARLY50)</summary>
           <div class="faq-body">
             <ul class="feature-list" style="margin-top:8px;">
               <li><strong>$0+ Open Compliance Starter Kit (<code>Open-Compliance-Starter-CLI-Kit-v1.0.zip</code>):</strong> <code>pdfua_quick_audit.py</code>, <code>ppwr_art5_threshold_check.py</code>, <code>whatnot_1099k_variance_check.py</code>, 0-error PDF/UA specimen, &amp; balanced QBO CSV.</li>
-              <li><strong>$9.50 Studio Solo w/ EARLY50 (<code>PDF-Accessibility-Studio-Solo-v1.5.0.zip</code>, reg. $19):</strong> Full local <code>pdfa11y</code> auto-tagging, <code>CIDSet</code>/<code>ToUnicode</code> font repair, RapidOCR <code>3 Tr</code> layer, local Web UI, GitHub Action CI gate, &amp; <code>OPERATOR-QA.md</code> (<code>human_review: PENDING</code>) — unlimited local PDFs.</li>
-              <li><strong>$32.50 Studio Agency w/ EARLY50 (<code>PDF-Accessibility-Studio-Agency-v1.5.0.zip</code>, reg. $65):</strong> Adds Multi-Folder Batch Runner, White-Label Audit/ROI HTML Report Generator, WordPress Media Scanner, &amp; Firefox MV3 Extension — unlimited pages.</li>
-              <li><strong>$97.50 Studio Commercial w/ EARLY50 (<code>PDF-Accessibility-Studio-Commercial-v1.5.0.zip</code>, reg. $195):</strong> Multi-Seat / Internal CI/SaaS Commercial Source License + All Compliance Suites.</li>
+              <li><strong>$9.50 Studio Solo w/ EARLY50 (Windows installer, reg. $19):</strong> Full local <code>pdfa11y</code> auto-tagging, <code>CIDSet</code>/<code>ToUnicode</code> font repair, RapidOCR <code>3 Tr</code> layer, local Web UI, GitHub Action CI gate, &amp; <code>OPERATOR-QA.md</code> (<code>human_review: PENDING</code>) — unlimited local PDFs.</li>
+              <li><strong>$32.50 Studio Agency w/ EARLY50 (software license, reg. $65):</strong> Adds Multi-Folder Batch Runner, White-Label Audit/ROI HTML Report Generator, WordPress Media Scanner, &amp; Firefox MV3 Extension — unlimited pages.</li>
+              <li><strong>$97.50 Studio Commercial w/ EARLY50 (software license, reg. $195):</strong> Multi-Seat / Internal CI/SaaS Commercial Source License + All Compliance Suites.</li>
             </ul>
           </div>
         </details>
@@ -302,7 +304,7 @@
         <div class="calc-layout">
           <div>
             <h2>In-house software savings &amp; agency margin calculator</h2>
-            <p style="font-size:0.875rem; margin:4px 0 14px;">Enter page counts across the 4 document tiers to compare industry manual outsourcing ($5–$15/pg, $60 min) against running <strong>PDF Accessibility Studio v1.5.0</strong> locally on your own workstation ($9.50 Solo / $32.50 Agency w/ <code>EARLY50</code>).</p>
+            <p style="font-size:0.875rem; margin:4px 0 14px;">Enter page counts across the 4 document tiers to compare industry manual outsourcing ($5–$15/pg, $60 min) against running <strong>PDF Accessibility Studio v1.6.1</strong> locally on your own workstation ($9.50 Solo / $32.50 Agency w/ <code>EARLY50</code>).</p>
 
             <div class="preset-row" role="group" aria-label="Sample PDF backlog presets">
               <button type="button" class="preset-btn" data-preset="4,0,0,0" aria-pressed="false">Single PDF (4p)</button>
@@ -372,12 +374,12 @@
               <strong id="out-retail">$950.00</strong>
             </div>
             <div class="summary-line">
-              <span>Studio v1.5.0 license (EARLY50)<span id="out-wholesale-note" class="min-badge">Studio Agency v1.5.0 w/ EARLY50 (reg. $65 · multi-folder batch + white-label reports)</span></span>
+              <span>Studio v1.6.1 license (EARLY50)<span id="out-wholesale-note" class="min-badge">Studio Agency v1.6.1 w/ EARLY50 (reg. $65 · multi-folder batch + white-label reports)</span></span>
               <strong id="out-wholesale">$32.50</strong>
             </div>
 
             <div style="margin-top:16px; display:flex; flex-direction:column; gap:8px;">
-              <a class="btn btn-primary btn-block" id="btn-calc-email" data-email="halocrypto101@gmail.com" href="mailto:halocrypto101%40gmail.com?subject=PDF%20Accessibility%20Studio%20v1.5.0%20%E2%80%94%20Pre-Sales%20/%20Multi-Seat%20Question&amp;body=Hello%20PDF/UA%20Partner%20Desk%2C%0A%0AWe%20have%20a%20pre-sales%20or%20multi-seat%20licensing%20question%20about%20PDF%20Accessibility%20Studio%20v1.5.0%3A%0A%0AOrganization%20/%20Agency%3A%0AApprox.%20PDF%20Backlog%20or%20CI%20Workflow%3A%0A" style="white-space:normal; text-align:center;">Email Multi-Seat / Pre-Sales Question</a>
+              <a class="btn btn-primary btn-block" id="btn-calc-email" data-email="halocrypto101@gmail.com" href="mailto:halocrypto101%40gmail.com?subject=PDF%20Accessibility%20Studio%20v1.6.1%20%E2%80%94%20Pre-Sales%20/%20Multi-Seat%20Question&amp;body=Hello%20PDF/UA%20Partner%20Desk%2C%0A%0AWe%20have%20a%20pre-sales%20or%20multi-seat%20licensing%20question%20about%20PDF%20Accessibility%20Studio%20v1.6.1%3A%0A%0AOrganization%20/%20Agency%3A%0AApprox.%20PDF%20Backlog%20or%20CI%20Workflow%3A%0A" style="white-space:normal; text-align:center;">Email Multi-Seat / Pre-Sales Question</a>
               <button type="button" class="btn btn-secondary btn-block" id="btn-calc-copy">Copy ROI summary &amp; email</button>
             </div>
             <div id="calc-copy-status" class="copy-toast" role="status" aria-live="polite"></div>
@@ -386,7 +388,7 @@
               <textarea id="calc-copy-textarea" readonly></textarea>
             </div>
 
-            <div class="rail-divider" id="calc-fast-checkout-note">Recommended instant ZIP (EARLY50 auto-applied): Studio Agency v1.5.0 ($32.50)</div>
+            <div class="rail-divider" id="calc-fast-checkout-note">Recommended license (EARLY50 auto-applied): Studio Agency v1.6.1 ($32.50)</div>
             <div class="rail-grid-3">
               <a class="btn btn-secondary" id="btn-calc-gumroad-19" href="https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true" target="_blank" rel="noopener">Solo $9.50 (w/ EARLY50)</a>
               <a class="btn btn-primary" id="btn-calc-gumroad-65" href="https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages/EARLY50?wanted=true" target="_blank" rel="noopener">Agency $32.50 (w/ EARLY50)</a>
@@ -410,13 +412,13 @@
         <div class="faq-wrap">
           <details class="faq-item" open><summary>Which PDFs must be remediated vs. archived under 28 CFR Part 35?</summary><div class="faq-answer">Active agendas, budgets, permits, fee schedules, enrollment packets, policies, and forms used to participate in or apply for public programs require WCAG 2.1 Level AA accessibility. Preexisting documents qualify for the narrow archive exception only if kept exclusively in a clearly labeled archive area, unmodified since the compliance date, and not used for active civic services.</div></details>
           <details class="faq-item"><summary>Why target ISO 14289-1 (PDF/UA-1) alongside WCAG 2.1 Level AA?</summary><div class="faq-answer">WCAG 2.1 Level AA defines functional accessibility (alt text, info &amp; relationships, focus order, contrast, titles, language), while ISO 14289-1 (PDF/UA-1) defines exact PDF tag, table scope, font, and form widget bindings so assistive technologies read the PDF reliably.</div></details>
-          <details class="faq-item"><summary>Can agencies and public teams run PDF Accessibility Studio offline?</summary><div class="faq-answer">Yes. Studio v1.5.0 runs 100% locally on your own workstation with zero cloud uploads, outputting repaired PDFs, veraPDF 1.30.3 reports, SHA-256 manifests, and an honest OPERATOR-QA.md post-automation checklist (human_review: PENDING) for your team&#x27;s final sign-off.</div></details>
+          <details class="faq-item"><summary>Can agencies and public teams run PDF Accessibility Studio offline?</summary><div class="faq-answer">Yes. Studio v1.6.0 runs 100% locally on your own workstation with zero cloud uploads, outputting repaired PDFs, veraPDF 1.30.3 reports, SHA-256 manifests, and an honest OPERATOR-QA.md post-automation checklist (human_review: PENDING) for your team&#x27;s final sign-off.</div></details>
         </div>
       </div>
 
       <div class="callout-panel" style="margin-top:var(--sp-6);">
         <h2 style="font-size:1.375rem; margin-bottom:8px;">Ready to auto-tag your PDF backlog locally?</h2>
-        <p style="margin-bottom:18px; font-size:0.9375rem; max-width:68ch;">Download <strong>PDF Accessibility Studio v1.5.0</strong> instantly (50% off w/ <code>EARLY50</code> auto-applied) and repair unlimited PDFs offline with pixel-identical layouts, <code>veraPDF 1.30.3</code> CI gates, and our 30-day money-back guarantee.</p>
+        <p style="margin-bottom:18px; font-size:0.9375rem; max-width:68ch;">Download <strong>PDF Accessibility Studio v1.6.0</strong> instantly (50% off w/ <code>EARLY50</code> auto-applied) and repair unlimited PDFs offline with pixel-identical layouts, <code>veraPDF 1.30.3</code> CI gates, and our 30-day money-back guarantee.</p>
         <div class="cta-group">
           <a class="btn btn-primary" href="https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true" target="_blank" rel="noopener">Unlock Studio Solo ($9.50 w/ EARLY50)</a>
           <a class="btn btn-secondary" href="../#pricing">Compare Solo / Agency / Commercial ($9.50 / $32.50 / $97.50)</a>

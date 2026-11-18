@@ -96,13 +96,13 @@
     let tierNote = "No license needed ($0.00)";
     if (pages >= 1 && pages <= 15) {
       softwareCost = 9.50;
-      tierNote = "Studio Solo v1.5.0 w/ EARLY50 (reg. $19 · unlimited local PDFs)";
+      tierNote = "Studio Solo v1.6.1 w/ EARLY50 (reg. $19 · unlimited local PDFs)";
     } else if (pages > 15 && pages <= 150) {
       softwareCost = 32.50;
-      tierNote = "Studio Agency v1.5.0 w/ EARLY50 (reg. $65 · multi-folder batch + white-label reports)";
+      tierNote = "Studio Agency v1.6.1 w/ EARLY50 (reg. $65 · multi-folder batch + white-label reports)";
     } else if (pages > 150) {
       softwareCost = 97.50;
-      tierNote = "Studio Commercial v1.5.0 w/ EARLY50 (reg. $195 · multi-seat + CI/SaaS source)";
+      tierNote = "Studio Commercial v1.6.1 w/ EARLY50 (reg. $195 · multi-seat + CI/SaaS source)";
     }
     const profit = Math.max(0, retail - softwareCost);
     const marginPct = retail > 0 ? ((profit / retail) * 100).toFixed(1) : "0.0";
@@ -136,22 +136,22 @@
     const btn195 = document.getElementById("btn-calc-gumroad-195");
     if (fastNoteEl) {
       if (pages >= 1 && pages <= 15) {
-        fastNoteEl.textContent = "Recommended instant ZIP (EARLY50 auto-applied): Studio Solo v1.5.0 ($9.50)";
+        fastNoteEl.textContent = "Recommended license (EARLY50 auto-applied): Studio Solo v1.6.1 ($9.50)";
         if (btn19) { btn19.classList.add("btn-primary"); btn19.classList.remove("btn-secondary"); }
         if (btn65) { btn65.classList.add("btn-secondary"); btn65.classList.remove("btn-primary"); }
         if (btn195) { btn195.classList.add("btn-secondary"); btn195.classList.remove("btn-primary"); }
       } else if (pages > 15 && pages <= 150) {
-        fastNoteEl.textContent = "Recommended instant ZIP (EARLY50 auto-applied): Studio Agency v1.5.0 ($32.50)";
+        fastNoteEl.textContent = "Recommended license (EARLY50 auto-applied): Studio Agency v1.6.1 ($32.50)";
         if (btn19) { btn19.classList.add("btn-secondary"); btn19.classList.remove("btn-primary"); }
         if (btn65) { btn65.classList.add("btn-primary"); btn65.classList.remove("btn-secondary"); }
         if (btn195) { btn195.classList.add("btn-secondary"); btn195.classList.remove("btn-primary"); }
       } else if (pages > 150) {
-        fastNoteEl.textContent = "Recommended instant ZIP (EARLY50 auto-applied): Studio Commercial v1.5.0 ($97.50)";
+        fastNoteEl.textContent = "Recommended license (EARLY50 auto-applied): Studio Commercial v1.6.1 ($97.50)";
         if (btn19) { btn19.classList.add("btn-secondary"); btn19.classList.remove("btn-primary"); }
         if (btn195) { btn195.classList.add("btn-primary"); btn195.classList.remove("btn-secondary"); }
         if (btn65) { btn65.classList.add("btn-secondary"); btn65.classList.remove("btn-primary"); }
       } else {
-        fastNoteEl.textContent = "1-click instant ZIP download (50% off w/ EARLY50 auto-applied):";
+        fastNoteEl.textContent = "1-click instant download (50% off w/ EARLY50 auto-applied):";
         if (btn19) { btn19.classList.add("btn-secondary"); btn19.classList.remove("btn-primary"); }
         if (btn65) { btn65.classList.add("btn-secondary"); btn65.classList.remove("btn-primary"); }
         if (btn195) { btn195.classList.add("btn-secondary"); btn195.classList.remove("btn-primary"); }
@@ -160,7 +160,7 @@
 
     const mailBtn = document.getElementById("btn-calc-email");
     const emailAddr = (mailBtn && mailBtn.getAttribute("data-email")) || "halocrypto101@gmail.com";
-    const rawSubject = "PDF Accessibility Studio v1.5.0 — In-House ROI & License Question (" + pages + " pages)";
+    const rawSubject = "PDF Accessibility Studio v1.6.1 — In-House ROI & License Question (" + pages + " pages)";
     const rawBody = [
       "Hello PDF/UA Partner Desk,",
       "",
@@ -171,7 +171,7 @@
       "- Fillable AcroForms ($15.00/pg manual benchmark): " + vals.forms + " pages",
       "- Total Backlog Modeled: " + pages + " pages",
       "- Est. Manual Outsourcing / Client Retail Value: " + fmt(retail),
-      "- PDF Accessibility Studio v1.5.0 License (EARLY50 50% off): " + fmt(softwareCost) + " (" + tierNote + ")",
+      "- PDF Accessibility Studio v1.6.1 License (EARLY50 50% off): " + fmt(softwareCost) + " (" + tierNote + ")",
       "- Net In-House Software Savings / Agency Margin: " + fmt(profit) + " (" + marginPct + "%)",
       "",
       "Question / Team Seat Count: "
