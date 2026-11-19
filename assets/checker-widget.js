@@ -206,28 +206,42 @@
 
   document.querySelectorAll("[data-pdfua-checker]").forEach((root) => {
     const cfg = {
-      apiUrl: (root.getAttribute("data-checker-api") || "").trim(),
+      apiUrl: (root.getAttribute("data-checker-api") || "https://pdfua-ada-checker.onrender.com").trim(),
       formUrl: root.getAttribute("data-form-url") || "",
       upworkUrl: root.getAttribute("data-upwork-url") || "https://www.upwork.com/services/product/2120536307204819908",
       fiverrUrl: root.getAttribute("data-fiverr-url") || "https://www.fiverr.com/s/L34o2B0",
+      fiverrDfyUrl: root.getAttribute("data-fiverr-dfy-url") || "https://www.fiverr.com/pdfua_partner/remediate-pdf-documents-for-ada-title-ii-wcag-aa-and-pdf-ua-accessibility",
       freelancerUrl: root.getAttribute("data-freelancer-url") || "https://www.freelancer.com/service/pdf/ada-title-ii-wcag-aa-and-pdf-ua-remediation",
       checkout19: root.getAttribute("data-checkout19-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true",
       checkout65: root.getAttribute("data-checkout65-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages/EARLY50?wanted=true",
       checkout195: root.getAttribute("data-checkout195-url") || "https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-30-pages/EARLY50?wanted=true",
       trialInstallerUrl: root.getAttribute("data-trial-installer-url") || "https://github.com/hadesloc/pdfua-partner-desk/releases/latest",
-      email: root.getAttribute("data-email") || "halocrypto101@gmail.com"
+      email: root.getAttribute("data-email") || "halocrypto101@gmail.com",
+      pilotEmail: root.getAttribute("data-pilot-email") || "drtheloc@gmail.com"
     };
 
     const dz = root.querySelector(".chk-dropzone");
     const inp = root.querySelector(".chk-file-input");
     const demoBtn = root.querySelector(".chk-demo-btn");
+    const previewFixBtn = root.querySelector(".chk-preview-fix-btn");
     const statusEl = root.querySelector(".chk-status");
     const errEl = root.querySelector(".chk-error");
     const resEl = root.querySelector(".chk-results");
+    const previewResEl = root.querySelector(".chk-preview-results");
     const leadMailtoEl = root.querySelector(".chk-lead-mailto");
     const leadCopyBtn = root.querySelector(".chk-lead-copy");
     const leadToastEl = root.querySelector(".chk-lead-toast");
     const leadContextEl = root.querySelector(".chk-lead-context");
+    let pendingAction = (root.getAttribute("data-default-mode") || "check").trim();
+    let lastSelectedFile = null;
+    let healthPinged = false;
+    const apiBase = (cfg.apiUrl || "https://pdfua-ada-checker.onrender.com").replace(/\/+$/, "");
+
+    function warmCloudEngine() {
+      if (!apiBase || healthPinged) return;
+      healthPinged = true;
+      fetch(apiBase + "/api/health", { mode: "cors", cache: "no-store" }).catch(() => {});
+    }
     let currentLeadBrief = [
       "To: " + cfg.email,
       "Subject: PDF Accessibility Studio v1.6.1 — Technical / CI Integration Question",
@@ -261,8 +275,22 @@
 
     if (!dz || !inp) return;
 
-    if (cfg.apiUrl) {
-      fetch(cfg.apiUrl.replace(/\/+$/, "") + "/api/health", { mode: "cors", cache: "no-store" }).catch(() => {});
+    root.addEventListener("focusin", warmCloudEngine, { once: true });
+    root.addEventListener("mouseenter", warmCloudEngine, { once: true });
+    dz.addEventListener("dragenter", warmCloudEngine, { once: true });
+
+    if (previewFixBtn) {
+      previewFixBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        warmCloudEngine();
+        if (lastSelectedFile) {
+          runPreviewFix(lastSelectedFile);
+        } else {
+          pendingAction = "preview-fix";
+          inp.value = "";
+          inp.click();
+        }
+      });
     }
 
     if (demoBtn) {
@@ -350,18 +378,161 @@
       });
     }
 
-    dz.addEventListener("click", () => inp.click());
-    dz.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); inp.click(); } });
+    dz.addEventListener("click", () => {
+      warmCloudEngine();
+      pendingAction = (root.getAttribute("data-default-mode") || "check").trim();
+      inp.value = "";
+      inp.click();
+    });
+    dz.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        warmCloudEngine();
+        pendingAction = (root.getAttribute("data-default-mode") || "check").trim();
+        inp.value = "";
+        inp.click();
+      }
+    });
     dz.addEventListener("dragover", (e) => { e.preventDefault(); dz.classList.add("dragover"); });
     dz.addEventListener("dragleave", () => dz.classList.remove("dragover"));
     dz.addEventListener("drop", (e) => {
       e.preventDefault();
       dz.classList.remove("dragover");
-      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+      warmCloudEngine();
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+        const dropped = e.dataTransfer.files[0];
+        lastSelectedFile = dropped;
+        if ((root.getAttribute("data-default-mode") || "check").trim() === "preview-fix") {
+          runPreviewFix(dropped);
+        } else {
+          handleFile(dropped);
+        }
+      }
     });
     inp.addEventListener("change", () => {
-      if (inp.files && inp.files[0]) handleFile(inp.files[0]);
+      warmCloudEngine();
+      if (inp.files && inp.files[0]) {
+        const chosen = inp.files[0];
+        lastSelectedFile = chosen;
+        if (pendingAction === "preview-fix") {
+          runPreviewFix(chosen);
+        } else {
+          handleFile(chosen);
+        }
+      }
     });
+
+    async function runPreviewFix(file) {
+      errEl.style.display = "none";
+      if (previewResEl) previewResEl.style.display = "none";
+      if (file.size > MAX_BYTES) {
+        errEl.innerHTML = "<strong>File exceeds 20 MB browser upload cap.</strong> <a href='" + esc(cfg.trialInstallerUrl) + "' target='_blank' rel='noopener'>Try the Free Windows Trial (&le;5 pages free)</a> or email <a href='mailto:" + esc(cfg.pilotEmail) + "'>" + esc(cfg.pilotEmail) + "</a>.";
+        errEl.style.display = "block";
+        return;
+      }
+      warmCloudEngine();
+      statusEl.textContent = "Waking veraPDF 1.30.3 cloud engine (~20-35s on cold start) & running 2-page PDF/UA-1 Auto-Fix Preview…";
+      statusEl.style.display = "block";
+      let coldHintTimer = setTimeout(() => {
+        statusEl.textContent = "Waking veraPDF 1.30.3 cloud engine (~20-35s on cold start) — applying structural repairs & verifying Before -> After counts…";
+      }, 9000);
+      try {
+        const form = new FormData();
+        form.append("file", file, file.name || "document.pdf");
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 65000);
+        const resp = await fetch(apiBase + "/api/preview-fix", {
+          method: "POST",
+          headers: { "X-Filename": encodeURIComponent(file.name || "document.pdf") },
+          body: form,
+          signal: ctrl.signal
+        });
+        clearTimeout(timer);
+        const data = await resp.json();
+        if (!resp.ok) {
+          throw new Error(data.error || ("Preview repair failed (" + resp.status + ")"));
+        }
+        renderPreviewFix(data);
+      } catch (err) {
+        const msg = err && err.name === "AbortError"
+          ? "Cloud engine timed out waking from idle (>65s). Click 'Auto-Fix First 2 Pages Free' once more now that Render is warm, or run locally at 0s latency with our Free Windows Trial."
+          : (err && err.message ? err.message : String(err));
+        errEl.innerHTML = "<strong>2-Page Preview Auto-Fix Notice:</strong> " + esc(msg);
+        errEl.style.display = "block";
+      } finally {
+        clearTimeout(coldHintTimer);
+        statusEl.style.display = "none";
+      }
+    }
+
+    function renderPreviewFix(d) {
+      if (!previewResEl) return;
+      const u = d.upgrade_ctas || {};
+      const soloHref = u.solo_early50_url || cfg.checkout19;
+      const agencyHref = u.agency_early50_url || cfg.checkout65;
+      const fiverrHref = u.fiverr_dfy_url || cfg.fiverrDfyUrl;
+      const pilotEmail = u.contact_email || cfg.pilotEmail;
+      const mailtoHref = u.mailto_url || ("mailto:" + encodeURIComponent(pilotEmail) + "?subject=" + encodeURIComponent("Full PDF/UA-1 Remediation Pilot — " + (d.download_filename || "document.pdf")));
+      const dlName = d.download_filename || "document-2p-preview-accessible.pdf";
+      const fixes = Array.isArray(d.fixes_applied) ? d.fixes_applied : [];
+      const fixesHtml = fixes.length
+        ? "<ul class='feature-list' style='margin-top:10px;'>" + fixes.map((fx) => "<li>" + esc(fx) + "</li>").join("") + "</ul>"
+        : "<p style='margin-top:8px; font-size:0.875rem;'>Document structure was already compliant on the preview pages.</p>";
+      const badgeCls = d.verapdf_compliant ? "status-pass" : (d.after_failed_rules < d.before_failed_rules ? "status-neutral" : "status-fail");
+      const badgeTxt = d.verapdf_compliant
+        ? "Pass · 0 failed veraPDF 1.30.3 rules (2-page preview)"
+        : "Live Preview Repaired · " + d.before_failed_rules + " -> " + d.after_failed_rules + " failed rules";
+
+      previewResEl.innerHTML =
+        "<div class='card' style='margin-top:20px; border-color:var(--pass-border);'>" +
+          "<div style='display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center;'>" +
+            "<div>" +
+              "<span class='status-pill " + badgeCls + "'>" + esc(badgeTxt) + "</span>" +
+              "<h3 style='margin-top:8px;'>" + esc(dlName) + "</h3>" +
+              "<div class='mono' style='color:var(--text-muted); font-size:0.75rem; margin-top:2px;'>" + (d.verapdf_ready ? "Live veraPDF 1.30.3 Before -> After Proof" : "Structural Preview Proof") + " &middot; Files retained: " + (d.files_retained || 0) + "</div>" +
+            "</div>" +
+            "<button type='button' class='btn btn-primary chk-dl-preview-pdf'>Download Fixed 2-Page Preview PDF</button>" +
+          "</div>" +
+          "<div class='kpi-grid'>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>veraPDF Failed Rules</div><div class='kpi-val " + (d.verapdf_compliant ? "pass" : "accent") + "'>" + d.before_failed_rules + " &rarr; " + d.after_failed_rules + "</div><div class='kpi-sub'>" + (d.verapdf_compliant ? "100% PDF/UA-1 compliant preview" : "Reduced live in veraPDF 1.30.3") + "</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Failed Clause Checks</div><div class='kpi-val " + (d.after_failed_checks === 0 ? "pass" : "accent") + "'>" + Number(d.before_failed_checks || 0).toLocaleString("en-US") + " &rarr; " + Number(d.after_failed_checks || 0).toLocaleString("en-US") + "</div><div class='kpi-sub'>ISO 14289-1 machine checks</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Pages Repaired</div><div class='kpi-val'>" + d.pages_processed + " / " + d.total_source_pages + "</div><div class='kpi-sub'>" + (d.truncated_to_preview ? "Truncated to 2-page free preview" : "Full document within 2p preview") + "</div></div>" +
+            "<div class='audit-metric'><div class='kpi-lbl'>Zero Retention</div><div class='kpi-val pass'>0 Retained</div><div class='kpi-sub'>Deleted immediately on server</div></div>" +
+          "</div>" +
+          "<h4 style='margin:16px 0 4px; font-size:0.9375rem;'>Structural fixes applied to your 2-page preview</h4>" +
+          fixesHtml +
+          "<div class='callout-panel' style='margin-top:16px;'>" +
+            "<h4 style='font-size:1.0625rem; margin-bottom:6px;'>Need all " + d.total_source_pages + " page(s) fixed (plus RapidOCR, Tables, AcroForms &amp; Batch CLI)?</h4>" +
+            "<p style='font-size:0.875rem; margin-bottom:14px;'>Unlock <strong>PDF Accessibility Studio v1.6.1</strong> offline on Windows at <strong>50% off w/ EARLY50</strong> (Solo <strong>$9.50</strong> vs. $19 list &middot; Agency <strong>$32.50</strong> vs. $65 list &middot; Commercial <strong>$97.50</strong> vs. $195 list), or book Done-For-You remediation.</p>" +
+            "<div class='cta-group'>" +
+              "<a class='btn btn-primary' href='" + esc(soloHref) + "' target='_blank' rel='noopener'>Studio Solo ($9.50 w/ EARLY50)</a>" +
+              "<a class='btn btn-secondary' href='" + esc(agencyHref) + "' target='_blank' rel='noopener'>Studio Agency ($32.50 w/ EARLY50)</a>" +
+              "<a class='btn btn-secondary' href='" + esc(fiverrHref) + "' target='_blank' rel='noopener'>Done-For-You Fiverr ($45 / 15p)</a>" +
+              "<a class='btn btn-secondary' href='" + esc(mailtoHref) + "'>Direct B2B Pilot (" + esc(pilotEmail) + ")</a>" +
+            "</div>" +
+          "</div>" +
+        "</div>";
+
+      previewResEl.style.display = "block";
+      const dlPdfBtn = previewResEl.querySelector(".chk-dl-preview-pdf");
+      if (dlPdfBtn && d.preview_pdf_base64) {
+        dlPdfBtn.addEventListener("click", () => {
+          const binStr = atob(d.preview_pdf_base64);
+          const bytes = new Uint8Array(binStr.length);
+          for (let i = 0; i < binStr.length; i++) bytes[i] = binStr.charCodeAt(i);
+          const blob = new Blob([bytes], { type: "application/pdf" });
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = blobUrl;
+          a.download = dlName;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
+        });
+      }
+      previewResEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
     async function handleFile(file) {
       errEl.style.display = "none";
@@ -371,7 +542,7 @@
         errEl.style.display = "block";
         return;
       }
-      statusEl.textContent = "Waking veraPDF 1.30.3 cloud validator & analyzing your PDF (first wake-up can take ~12–25s)…";
+      statusEl.textContent = "Waking veraPDF 1.30.3 cloud engine (~20-35s on cold start) & analyzing your PDF…";
       statusEl.style.display = "block";
       let coldHintTimer = null;
       try {
@@ -379,12 +550,12 @@
         let usedLocalFallback = false;
         if (cfg.apiUrl) {
           coldHintTimer = setTimeout(() => {
-            statusEl.textContent = "Cloud validator is still waking from idle — finishing ISO 14289-1 checks (or run at 0s latency locally on Windows with our Free ≤5-page Trial)…";
-          }, 7000);
+            statusEl.textContent = "Waking veraPDF 1.30.3 cloud engine (~20-35s on cold start) — finishing ISO 14289-1 checks (instant local browser fallback if unreachable)…";
+          }, 8000);
           try {
             const ctrl = new AbortController();
-            const timer = setTimeout(() => ctrl.abort(), 55000);
-            const resp = await fetch(cfg.apiUrl.replace(/\/+$/, "") + "/api/check", {
+            const timer = setTimeout(() => ctrl.abort(), 60000);
+            const resp = await fetch(apiBase + "/api/check", {
               method: "POST",
               headers: { "Content-Type": "application/pdf", "X-Filename": encodeURIComponent(file.name || "document.pdf") },
               body: file,
@@ -496,7 +667,10 @@
               "<h3 style='margin-top:8px;'>" + esc(d.filename) + " (" + pagesCount + (pagesCount === 1 ? " page" : " pages") + ")</h3>" +
               "<div class='mono' style='color:var(--text-muted); font-size:0.75rem; margin-top:2px;'>" + esc(d.engine) + "</div>" +
             "</div>" +
-            "<button type='button' class='btn btn-secondary btn-sm chk-dl-btn'>Download HTML report</button>" +
+            "<div class='cta-group' style='margin-top:0;'>" +
+              "<button type='button' class='btn btn-primary btn-sm chk-inline-preview-fix-btn'>Auto-Fix First 2 Pages Free</button>" +
+              "<button type='button' class='btn btn-secondary btn-sm chk-dl-btn'>Download HTML report</button>" +
+            "</div>" +
           "</div>" +
           "<div class='kpi-grid'>" +
             "<div class='audit-metric'><div class='kpi-lbl'>Failed rules</div><div class='kpi-val " + (d.is_compliant ? "pass" : "fail") + "'>" + d.failed_rules + "</div><div class='kpi-sub'>" + Number(d.failed_checks || 0).toLocaleString("en-US") + " failed checks</div></div>" +
@@ -528,6 +702,19 @@
         "</div>";
 
       resEl.style.display = "block";
+      const inlineFixBtn = resEl.querySelector(".chk-inline-preview-fix-btn");
+      if (inlineFixBtn) {
+        inlineFixBtn.addEventListener("click", () => {
+          warmCloudEngine();
+          if (lastSelectedFile) {
+            runPreviewFix(lastSelectedFile);
+          } else {
+            pendingAction = "preview-fix";
+            inp.value = "";
+            inp.click();
+          }
+        });
+      }
       const copyQuoteBtn = resEl.querySelector(".chk-copy-quote-btn");
       const copyToastEl = resEl.querySelector(".chk-copy-toast");
       if (copyQuoteBtn) {

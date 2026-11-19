@@ -41,38 +41,45 @@
     <div class="container">
       <div data-pdfua-checker
      data-checker-api="https://pdfua-ada-checker.onrender.com"
+     data-default-mode="check"
      data-form-url="https://docs.google.com/forms/d/e/1FAIpQLSfC50VFJdc55ug-sNpJON59JL9By6yIuRe8qysotQLX1cNtFA/viewform"
      data-upwork-url="https://www.upwork.com/services/product/2120536307204819908"
      data-fiverr-url="https://www.fiverr.com/s/L34o2B0"
+     data-fiverr-dfy-url="https://www.fiverr.com/pdfua_partner/remediate-pdf-documents-for-ada-title-ii-wcag-aa-and-pdf-ua-accessibility"
      data-freelancer-url="https://www.freelancer.com/service/pdf/ada-title-ii-wcag-aa-and-pdf-ua-remediation"
      data-checkout19-url="https://pdfuapartnerdesk.gumroad.com/l/pdfua-express-5-pages/EARLY50?wanted=true"
      data-checkout65-url="https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-12-pages/EARLY50?wanted=true"
      data-checkout195-url="https://pdfuapartnerdesk.gumroad.com/l/pdfua-remediation-30-pages/EARLY50?wanted=true"
      data-trial-installer-url="https://github.com/hadesloc/pdfua-partner-desk/releases/download/v1.6.1/PDFAccessibilityStudio-Setup-1.6.1.exe"
-     data-email="halocrypto101@gmail.com">
+     data-email="halocrypto101@gmail.com"
+     data-pilot-email="drtheloc@gmail.com">
   <div class="section-head">
-    <span class="eyebrow">Free online validator</span>
+    <span class="eyebrow">Free online validator &amp; live 2-page auto-fix preview</span>
     <h2>Test any municipal, school, or university PDF</h2>
-    <p>Upload a PDF up to 20 MB for an instant clause-by-clause readiness check and local auto-tag software ROI estimate. Uploaded files are deleted immediately after analysis.</p>
+    <p>Upload a PDF up to 20 MB to run a full ISO 14289-1 audit or live 2-page PDF/UA-1 structural auto-fix preview with Before -&gt; After veraPDF proof and 1-click PDF download. Zero file retention.</p>
   </div>
   <input type="file" class="chk-file-input" accept="application/pdf,.pdf" aria-label="Select PDF file up to 20 megabytes" tabindex="-1" style="display:none">
-  <div class="chk-dropzone" tabindex="0" role="button" aria-label="Upload a PDF up to 20 megabytes for instant PDF/UA-1 validation">
+  <div class="chk-dropzone" tabindex="0" role="button" aria-label="Upload a PDF up to 20 megabytes for instant PDF/UA-1 validation or 2-page auto-fix preview">
     <div class="chk-icon" aria-hidden="true">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
     </div>
-    <div class="chk-title">Drop a PDF here, or click to browse</div>
-    <p class="chk-sub">Evaluates structural tags, document language, heading order, image alt text, table headers, form tooltips, and scanned text layers.</p>
-    <span class="btn btn-primary">Select PDF file</span>
+    <div class="chk-title">Drop a PDF here, or click to select a file</div>
+    <p class="chk-sub">Runs live veraPDF 1.30.3 checks (or instant local browser fallback) and repairs PDF/UA-1 metadata, /Lang, /DisplayDocTitle, /MarkInfo, /Tabs /S, /CIDSet, link labels, and structure tags on the first 2 pages free.</p>
+    <span class="btn btn-secondary">Select PDF to Validate (Max 20 MB)</span>
+  </div>
+  <div class="cta-group" style="justify-content:center; margin-top:14px;">
+    <button type="button" class="btn btn-primary chk-preview-fix-btn">Auto-Fix First 2 Pages Free (Live veraPDF Proof)</button>
+    <button type="button" class="btn btn-secondary chk-demo-btn">Preview sample municipal audit (14p)</button>
   </div>
   <div class="chk-meta-strip">
     <span>veraPDF 1.30.3 engine</span>
     <span>Zero file retention</span>
     <span>Max 20 MB &middot; No sign-up</span>
-    <button type="button" class="preset-btn chk-demo-btn">Preview sample municipal audit (14p)</button>
     <span><a href="https://pdfua-ada-checker.onrender.com" target="_blank" rel="noopener">Standalone validator &nearr;</a></span>
   </div>
-  <div class="chk-status" role="status" aria-live="polite">Running veraPDF 1.30.3 inspection (first check after idle may take ~15–25 seconds)&hellip;</div>
+  <div class="chk-status" role="status" aria-live="polite">Waking veraPDF 1.30.3 cloud engine (~20-35s on cold start)&hellip;</div>
   <div class="chk-error" role="alert"></div>
+  <div class="chk-preview-results" style="display:none;"></div>
   <div class="chk-results" style="display:none;"></div>
   <div class="callout-panel" data-pdfua-lead-capture style="margin-top:20px;">
     <span class="eyebrow">100% Local Self-Serve Software &middot; Zero Cloud Uploads</span>
